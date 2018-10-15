@@ -7,6 +7,8 @@ import LogoComponent from '../../components/LogoComponent';
 import Menu from '../../components/SideMenu'
 import NavBar from '../../components/NavBar';
 import actions from '../../redux/dashboard/action';
+import DashHelper from "../../service/dashboard";
+
 import { colors } from '../../settings/constant'
 import { Icon, ListItem, Button } from 'react-native-elements';
 import Modal from 'react-native-modal'
@@ -29,7 +31,8 @@ class DashBoard extends Component {
   
     this.state = {
        data:[],
-       isModalVisible: false
+       isModalVisible: false,
+       selectedItem: {}
     }
     this.onMenuItemSelected = this.onMenuItemSelected.bind(this)
     this.updateMenuState = this.updateMenuState.bind(this)
@@ -68,7 +71,7 @@ class DashBoard extends Component {
       const item = {
         key: 'Make Check in call',
         type: param['check-in-call'][0].notification_type_data[0].n_type_disp_message,
-        data: param['check-in-call'][0].customer_data
+        data: param['check-in-call']
       }
       data.push(item);
     }
@@ -76,7 +79,7 @@ class DashBoard extends Component {
       const item = {
         key: 'Make New Booking',
         type: param['new-booking'][0].notification_type_data[0].n_type_disp_message,
-        data: param['new-booking'][0].customer_data
+        data: param['new-booking']
       }
       data.push(item);
     }
@@ -84,7 +87,7 @@ class DashBoard extends Component {
       const item = {
         key: 'Make request payment',
         type: param['request-payment'][0].notification_type_data[0].n_type_disp_message,
-        data: param['request-payment'][0].customer_data
+        data: param['request-payment']
       }
       data.push(item);
     }
@@ -92,7 +95,7 @@ class DashBoard extends Component {
       const item = {
         key: 'Make English Request Payment',
         type: param['request-payment-eng'][0].notification_type_data[0].n_type_disp_message,
-        data: param['request-payment-eng'][0].customer_data
+        data: param['request-payment-eng']
       }
       data.push(item);
     } 
@@ -100,7 +103,7 @@ class DashBoard extends Component {
       const item = {
         key: 'Make review contract',
         type: param['review-contract'][0].notification_type_data[0].n_type_disp_message,
-        data: param['review-contract'][0].customer_data
+        data: param['review-contract']
       }
       data.push(item);
     }
@@ -108,7 +111,7 @@ class DashBoard extends Component {
       const item = {
         key: 'Make Worksheet Updated',
         type: param['worksheet-updated'][0].notification_type_data[0].n_type_disp_message,
-        data: param['worksheet-updated'][0].customer_data
+        data: param['worksheet-updated']
       }
       data.push(item);
     }
@@ -116,16 +119,53 @@ class DashBoard extends Component {
       const item = {
         key: 'Make English Worksheet Updated',
         type: param['worksheet-updated-eng'][0].notification_type_data[0].n_type_disp_message,
-        data: param['worksheet-updated-eng'][0].customer_data
+        data: param['worksheet-updated-eng']
       }
       data.push(item);
     }
     return data
   }
 
-  _toggleModal(){
+  _toggleModal = (item) => {
+    this.setState({selectedItem: item});
     this.setState({isModalVisible: !this.state.isModalVisible});
   } 
+  
+  MarkNewBookingCallingComplete = (item) => {
+    console.log(item);
+    const param = {
+      photog_id: this.props.user.photog_id,
+      cust_id: item.customer_data[0].cust_id,
+      n_id: item.customer_data[0].n_id,
+      odr_id: item.order_data[0].odr_id
+    }
+    const param_get= {
+      photog_id: this.props.user.photog_id
+    }
+    
+    DashHelper.markNewBookingCallComplete(param, () => {
+      this._toggleModal(this.state.selectedItem);
+      this.props.dispatch(actions.getDashboard(param_get))
+    });
+  }
+
+  MarkPhotoShootCallComplete = (item) => {
+    const param = {
+      photog_id: this.props.user.photog_id,
+      cust_id: item.customer_data[0].cust_id,
+      n_id: item.customer_data[0].n_id,
+      odr_id: item.order_data[0].odr_id
+    }
+
+    const param_get= {
+      photog_id: this.props.user.photog_id
+    }
+    
+    DashHelper.markPhotoshootCallComplete(param, () => {
+      this._toggleModal(this.state.selectedItem);
+      this.props.dispatch(actions.getDashboard(param_get))
+    });
+  }
 
   renderItemSection(item){
     return(
@@ -139,9 +179,9 @@ class DashBoard extends Component {
         }}
       >
         <View style={{flex: 7}}>
-          <Text style={{fontSize: 15}}>{item.cust_fname + " " + item.cust_lname}</Text>
-          <Text style={{fontSize:13, color: colors.fontGrayColor}}>{item.cust_addr1 + " " + item.cust_city + ", " + item.cust_state + " " + item.cust_zip}</Text>
-          <Text style={{fontSize:13, color: colors.fontGrayColor}}>{item.cust_wed_date}</Text>
+          <Text style={{fontSize: 15}}>{item.customer_data[0].cust_fname + " " + item.customer_data[0].cust_lname}</Text>
+          <Text style={{fontSize:13, color: colors.fontGrayColor}}>{item.customer_data[0].cust_addr1 + " " + item.customer_data[0].cust_city + ", " + item.customer_data[0].cust_state + " " + item.customer_data[0].cust_zip}</Text>
+          <Text style={{fontSize:13, color: colors.fontGrayColor}}>{item.customer_data[0].cust_wed_date}</Text>
         </View>
         <View style = {{flex: 4, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
           <TouchableOpacity
@@ -164,7 +204,7 @@ class DashBoard extends Component {
             <Text style={{marginLeft:5, color: colors.white, fontSize:13}}>CALL</Text>
           </TouchableOpacity>
           <TouchableOpacity 
-            onPress={() => this._toggleModal()} 
+            onPress={() => this._toggleModal(item)} 
           >
             <Icon 
               name="dots-three-vertical"
@@ -179,7 +219,7 @@ class DashBoard extends Component {
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
               <View style={styles.modal}>
                 <View style={{height:30,justifyContent: "center", alignItems: "flex-end", paddingTop: 5, paddingRight: 5}}>
-                  <TouchableOpacity onPress={this._toggleModal}>
+                  <TouchableOpacity onPress={()=>this._toggleModal(this.state.selectedItem)}>
                     <Icon
                       type="entypo"
                       name="circle-with-cross"
@@ -191,7 +231,10 @@ class DashBoard extends Component {
                 <View style={{flex: 1}}>
                   <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{fontSize:22}}>
-                      {item.cust_fname + " " + item.cust_lname}
+                      {
+                        this.state.selectedItem.customer_data ?
+                          this.state.selectedItem.customer_data[0].cust_fname + " " + this.state.selectedItem.customer_data[0].cust_lname : ""
+                      }
                     </Text>
                   </View>
                   <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 5}}>
@@ -202,7 +245,10 @@ class DashBoard extends Component {
                       size={18}
                     />
                     <Text style={{color: colors.fontGrayColor, marginRight: 13}}>
-                      {item.cust_city + " " + item.cust_state + ", " + item.cust_zip}
+                      {
+                        this.state.selectedItem.customer_data ?
+                          this.state.selectedItem.customer_data[0].cust_city + " " + this.state.selectedItem.customer_data[0].cust_state + ", " + this.state.selectedItem.customer_data[0].cust_zip : ""
+                      }
                     </Text>
                     <Icon
                       name="calendar-o"
@@ -211,7 +257,10 @@ class DashBoard extends Component {
                       color={colors.fontGrayColor}
                     />
                     <Text style={{color: colors.fontGrayColor, marginLeft: 5}}>
-                      {item.cust_wed_date}
+                      {
+                        this.state.selectedItem.customer_data ?
+                          this.state.selectedItem.customer_data[0].cust_wed_date : ''
+                      }
                     </Text>
                   </View>
                   <View style={{flex: 1, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 3}}>
@@ -283,7 +332,7 @@ class DashBoard extends Component {
                         paddingVertical: 8,
                         borderRadius: 18
                       }}
-                      onPress={this.MarkNewBookingCallingComplete}
+                      onPress={() => this.MarkNewBookingCallingComplete(this.state.selectedItem)}
                     >
                       <Text style={{color: colors.white}}>Mark New Booking Call Complete</Text>
                     </TouchableOpacity>
@@ -298,6 +347,7 @@ class DashBoard extends Component {
                         paddingVertical: 8,
                         borderRadius: 18
                       }}
+                      onPress={() => this.MarkPhotoShootCallComplete(this.state.selectedItem)}
                     >
                       <Text style={{color: colors.white}}>Mark Photoshoot Call Complete</Text>
                     </TouchableOpacity>
@@ -449,7 +499,7 @@ class DashBoard extends Component {
                 <Text style={{color: colors.white, fontSize: 10, textAlign: "center"}}>
                   {
                     this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['check-in-call'] ? 
-                      this.props.dashReducer.dashboard['check-in-call'][0].customer_data.length : 0
+                      this.props.dashReducer.dashboard['check-in-call'].length : 0
                   }
                 </Text>
               </View>
@@ -491,7 +541,7 @@ class DashBoard extends Component {
                 <Text style={{color: colors.white, fontSize: 10, textAlign: "center"}}>
                 {
                   this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['new-booking'] ? 
-                    this.props.dashReducer.dashboard['new-booking'][0].customer_data.length : 0
+                    this.props.dashReducer.dashboard['new-booking'].length : 0
                 }
                 </Text>
               </View>
@@ -533,7 +583,7 @@ class DashBoard extends Component {
                 <Text style={{color: colors.white, fontSize: 10, textAlign: "center"}}>
                   {
                     this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['worksheet-updated'] ? 
-                      this.props.dashReducer.dashboard['worksheet-updated'][0].customer_data.length : 0
+                      this.props.dashReducer.dashboard['worksheet-updated'].length : 0
                   }
                 </Text>
               </View>
@@ -575,7 +625,7 @@ class DashBoard extends Component {
                 <Text style={{color: colors.white, fontSize: 10, textAlign: "center"}}>
                 {
                   this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['request-payment'] ? 
-                    this.props.dashReducer.dashboard['request-payment'][0].customer_data.length : 0
+                    this.props.dashReducer.dashboard['request-payment'].length : 0
                 }
                 </Text>
               </View>
