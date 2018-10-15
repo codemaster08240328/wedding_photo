@@ -123,10 +123,11 @@ class DashBoard extends Component {
     return data
   }
 
-  _toggleModal = () => this.setState({isModalVisible: !this.state.isModalVisible});
+  _toggleModal(){
+    this.setState({isModalVisible: !this.state.isModalVisible});
+  } 
 
   renderItemSection(item){
-    
     return(
       <View 
         style={{
@@ -163,7 +164,7 @@ class DashBoard extends Component {
             <Text style={{marginLeft:5, color: colors.white, fontSize:13}}>CALL</Text>
           </TouchableOpacity>
           <TouchableOpacity 
-            onPress={this._toggleModal} 
+            onPress={() => this._toggleModal()} 
           >
             <Icon 
               name="dots-three-vertical"
@@ -173,6 +174,7 @@ class DashBoard extends Component {
             />
           </TouchableOpacity>
         </View>
+
         <Modal isVisible={this.state.isModalVisible}>
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
               <View style={styles.modal}>
@@ -189,7 +191,7 @@ class DashBoard extends Component {
                 <View style={{flex: 1}}>
                   <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{fontSize:22}}>
-                      {"TestCustomer Samantha"}
+                      {item.cust_fname + " " + item.cust_lname}
                     </Text>
                   </View>
                   <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 5}}>
@@ -200,7 +202,7 @@ class DashBoard extends Component {
                       size={18}
                     />
                     <Text style={{color: colors.fontGrayColor, marginRight: 13}}>
-                      {"Andover MA, 02018"}
+                      {item.cust_city + " " + item.cust_state + ", " + item.cust_zip}
                     </Text>
                     <Icon
                       name="calendar-o"
@@ -209,7 +211,7 @@ class DashBoard extends Component {
                       color={colors.fontGrayColor}
                     />
                     <Text style={{color: colors.fontGrayColor, marginLeft: 5}}>
-                      {"2018-04-09"}
+                      {item.cust_wed_date}
                     </Text>
                   </View>
                   <View style={{flex: 1, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 3}}>
@@ -281,6 +283,7 @@ class DashBoard extends Component {
                         paddingVertical: 8,
                         borderRadius: 18
                       }}
+                      onPress={this.MarkNewBookingCallingComplete}
                     >
                       <Text style={{color: colors.white}}>Mark New Booking Call Complete</Text>
                     </TouchableOpacity>
@@ -373,6 +376,7 @@ class DashBoard extends Component {
               </View>     
             </View>
         </Modal>
+        
       </View>
     )
     
@@ -380,7 +384,17 @@ class DashBoard extends Component {
 
   renderHeaderSection(section){
     return(
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 15, paddingVertical: 10, alignItems: "center", borderBottomWidth: 0.5, borderColor: colors.lightBorderColor}}>
+      <View 
+        style={{
+          flexDirection: 'row', 
+          justifyContent: 'space-between', 
+          paddingHorizontal: 15, 
+          paddingVertical: 10, 
+          alignItems: "center", 
+          borderBottomWidth: 0.5, 
+          borderColor: colors.lightBorderColor
+        }}
+      >
         <Text>{section.key}</Text>
         <Text style={{color: colors.yellow, fontSize: 10}}>{section.type}</Text>
 
@@ -434,7 +448,8 @@ class DashBoard extends Component {
               >
                 <Text style={{color: colors.white, fontSize: 10, textAlign: "center"}}>
                   {
-                    this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['check-in-call'] ? this.props.dashReducer.dashboard['check-in-call'][0].customer_data.length : 0
+                    this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['check-in-call'] ? 
+                      this.props.dashReducer.dashboard['check-in-call'][0].customer_data.length : 0
                   }
                 </Text>
               </View>
@@ -475,7 +490,8 @@ class DashBoard extends Component {
               >
                 <Text style={{color: colors.white, fontSize: 10, textAlign: "center"}}>
                 {
-                  this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['new-booking'] ? this.props.dashReducer.dashboard['new-booking'][0].customer_data.length : 0
+                  this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['new-booking'] ? 
+                    this.props.dashReducer.dashboard['new-booking'][0].customer_data.length : 0
                 }
                 </Text>
               </View>
@@ -516,7 +532,8 @@ class DashBoard extends Component {
               >
                 <Text style={{color: colors.white, fontSize: 10, textAlign: "center"}}>
                   {
-                    this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['worksheet-updated'] ? this.props.dashReducer.dashboard['worksheet-updated'][0].customer_data.length : 0
+                    this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['worksheet-updated'] ? 
+                      this.props.dashReducer.dashboard['worksheet-updated'][0].customer_data.length : 0
                   }
                 </Text>
               </View>
@@ -535,7 +552,7 @@ class DashBoard extends Component {
             
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
               <View
-                style={this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['request-payment'] ?{
+                style={this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['request-payment'] ? {
                   justifyContent: 'center',
                   alignItems: 'center',
                   height:12, 
@@ -557,7 +574,8 @@ class DashBoard extends Component {
               >
                 <Text style={{color: colors.white, fontSize: 10, textAlign: "center"}}>
                 {
-                  this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['request-payment'] ? this.props.dashReducer.dashboard['request-payment'][0].customer_data.length : 0
+                  this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['request-payment'] ? 
+                    this.props.dashReducer.dashboard['request-payment'][0].customer_data.length : 0
                 }
                 </Text>
               </View>
@@ -581,7 +599,6 @@ class DashBoard extends Component {
             />
           </View>
         </View>
-        
       </ SideMenu>
     )
   }
