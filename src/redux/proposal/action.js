@@ -1,0 +1,34 @@
+const actions = {
+    GETTING_PROPOSAL: "GETTING_PROPOSAL",
+    GET_PROPOSAL_SUCCESS: "GET_PROPOSAL_SUCCESS",
+    GET_PROPOSAL_ERROR:"GET_PROPOSAL_ERROR",
+    GETTING_PROPOSAL_DETAIL:"GETTING_PROPOSAL_DETAIL",
+    GET_PROPOSAL_DETAIL_SUCCESS:"GET_PROPOSAL_DETAIL_SUCCESS",
+    GET_PROPOSAL_DETAIL_ERROR:"GET_PROPOSAL_DETAIL_ERROR",
+    GETTING_PROPOSAL_STATUS:"GETTING_PROPOSAL_STATUS",
+    GET_PROPOSAL_STATUS:"GET_PROPOSAL_STATUS",
+    GET_PROPOSAL_STATUS_ERROR:"GET_PROPOSAL_STATUS_ERROR",
+    PROPOSAL_CHANGE_REQUEST:"PROPOSAL_CHANGE_REQUEST",
+    PROPOSAL_CHANGE_SUCCESS:"PROPOSAL_CHANGE_SUCCESS",
+    PROPOSAL_CHANGE_ERROR:"PROPOSAL_CHANGE_ERROR",
+
+    getProposal: payload => ({
+        type: actions.GETTING_PROPOSAL,
+        payload
+    }),
+    getProposalOrderDetail: payload => ({
+        type:actions.GETTING_PROPOSAL_DETAIL,
+        payload
+    }),
+    getProposalStatus: payload => ({
+        type:actions.GETTING_PROPOSAL_STATUS,
+        payload
+    }),
+    changeProposalRequest:payload => ({
+        type:actions.PROPOSAL_CHANGE_REQUEST,
+        payload
+    })
+
+}
+  
+  export default actions

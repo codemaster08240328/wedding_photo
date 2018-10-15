@@ -1,0 +1,2873 @@
+{
+	"info": {
+		"_postman_id": "e8660f59-0140-d049-4462-b7a845375462",
+		"name": "PBM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Editing",
+			"item": [
+				{
+					"name": "assignEventEditor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"type": "text"
+								},
+								{
+									"key": "event_id",
+									"value": "8",
+									"description": "//get from form",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "assignEventEditor",
+									"description": "//the function name",
+									"type": "text"
+								},
+								{
+									"key": "admin_id",
+									"value": "44",
+									"description": "//the admin id which comes from the editors list form",
+									"type": "text"
+								},
+								{
+									"key": "assigned_by_admin_id",
+									"value": "1",
+									"description": "//the logged in session admin id",
+									"type": "text"
+								},
+								{
+									"key": "increase_event_round",
+									"value": "",
+									"description": "//true or false - leave blank in most cases. ",
+									"type": "text"
+								},
+								{
+									"key": "datatype",
+									"value": "json",
+									"description": "//optional",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/editing/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"editing",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "markEventReEditing",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"type": "text"
+								},
+								{
+									"key": "event_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "markEventReEditing",
+									"type": "text"
+								},
+								{
+									"key": "cust_notes",
+									"value": "The edited images are too dark!",
+									"type": "text"
+								},
+								{
+									"key": "admin_id",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "datatype",
+									"value": "json",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/editing/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"editing",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "markEventUnableToEdit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"type": "text"
+								},
+								{
+									"key": "event_id",
+									"value": "3",
+									"description": "// from form data",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "markEventUnableToEdit",
+									"type": "text"
+								},
+								{
+									"key": "unable_reason",
+									"value": "We cannot locate the image folders",
+									"description": "// from form data",
+									"type": "text"
+								},
+								{
+									"key": "admin_id",
+									"value": "30",
+									"description": "// from logged in session data",
+									"type": "text"
+								},
+								{
+									"key": "datatype",
+									"value": "json",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/editing/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"editing",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "markEventAvailableToEdit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"type": "text"
+								},
+								{
+									"key": "datatype",
+									"value": "json",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "markEventAvailableToEdit",
+									"type": "text"
+								},
+								{
+									"key": "event_id",
+									"value": "3",
+									"description": "// from form data",
+									"type": "text"
+								},
+								{
+									"key": "able_reason",
+									"value": "The images are ready to be found.",
+									"description": "// from form data",
+									"type": "text"
+								},
+								{
+									"key": "admin_id",
+									"value": "2",
+									"description": "// from logged in session data",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/editing/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"editing",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contractor",
+			"item": [
+				{
+					"name": "Photographer Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "login",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "photog_login",
+									"value": "soumikdasgupta115566@malinator.com",
+									"type": "text"
+								},
+								{
+									"key": "photog_pass",
+									"value": "yXNH73Xm",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"type": "text"
+								},
+								{
+									"key": "login_source",
+									"value": "ios_mobile",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "taxFormSubmitContractor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "taxFormSubmitContractor",
+									"type": "text"
+								},
+								{
+									"key": "photog_email",
+									"value": "cptp1@mail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Photographer First App Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "first_login_from_app",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required, photographer or videographer",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Photographer Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_profile",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Photographer Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "set_profile",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required. photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "photog_fname",
+									"value": "TestPhotog",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_lname",
+									"value": "One",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_email",
+									"value": "classic-test-photographer-1@mailinator.com",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_phone",
+									"value": "9749945541",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_pass",
+									"value": "abc123",
+									"description": "//optional",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Andover MA, 01810",
+									"description": "//just for display. in actual send zip, city, state, lat, long from get location api response",
+									"type": "text"
+								},
+								{
+									"key": "zip",
+									"value": "01810",
+									"description": "//from location api",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Andover",
+									"description": "//from location api",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "MA",
+									"description": "//from location api",
+									"type": "text"
+								},
+								{
+									"key": "lat",
+									"value": "42.358664",
+									"description": "//from location api",
+									"type": "text"
+								},
+								{
+									"key": "long",
+									"value": "-71.071293",
+									"description": "//from location api",
+									"type": "text"
+								},
+								{
+									"key": "photog_block_sun",
+									"value": "0",
+									"description": "//0 or 1",
+									"type": "text"
+								},
+								{
+									"key": "photog_block_mon",
+									"value": "0",
+									"description": "//0 or 1",
+									"type": "text"
+								},
+								{
+									"key": "photog_block_tue",
+									"value": "0",
+									"description": "//0 or 1",
+									"type": "text"
+								},
+								{
+									"key": "photog_block_wed",
+									"value": "0",
+									"description": "//0 or 1",
+									"type": "text"
+								},
+								{
+									"key": "photog_block_thu",
+									"value": "0",
+									"description": "//0 or 1",
+									"type": "text"
+								},
+								{
+									"key": "photog_block_fri",
+									"value": "0",
+									"description": "//0 or 1",
+									"type": "text"
+								},
+								{
+									"key": "photog_block_sat",
+									"value": "0",
+									"description": "//0 or 1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url_home}}/get_location.php?term=01810",
+							"host": [
+								"{{url_home}}"
+							],
+							"path": [
+								"get_location.php"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "01810"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Photographer Dashboard Data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_dashboard_data",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "",
+									"description": "//optional",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "",
+									"description": "//optional",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Photographer Notifications",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_notifications",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required, photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "n_type",
+									"value": "request-payment",
+									"description": "//optional",
+									"type": "text"
+								},
+								{
+									"key": "n_is_read",
+									"value": "",
+									"description": "//0= unread, 1= read, empty = all",
+									"type": "text"
+								},
+								{
+									"key": "n_action_done",
+									"value": "",
+									"description": "//0= undone, 1= done, empty = all",
+									"type": "text"
+								},
+								{
+									"key": "n_id",
+									"value": "27",
+									"description": "//optional. notification id. if used overrides n_type and n_is_read",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Photographer Unavailable Dates",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_unavailable_dates",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required, photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "filter_by_year",
+									"value": "2018",
+									"description": "//required.",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Photographer Unavailable Date",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "add_unavailable_date",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "14",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required, photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "unavl_date_from",
+									"value": "2018-11-07",
+									"description": "//required. //yyyy-mm-dd",
+									"type": "text"
+								},
+								{
+									"key": "unavl_date_to",
+									"value": "2018-11-09",
+									"description": "//required. //yyyy-mm-dd",
+									"type": "text"
+								},
+								{
+									"key": "unavl_reason",
+									"value": "1",
+									"description": "//just send value the 1.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Photographer Unavailable Date",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "delete_unavailable_date",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required, photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "unavl_date",
+									"value": "2017-12-28",
+									"description": "//required. //yyyy-mm-dd",
+									"type": "text"
+								},
+								{
+									"key": "unavl_date_id",
+									"value": "338601",
+									"description": "//required.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Photographer Notifications (For Test)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "reset_notifications",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required, photographer or videographer",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Notifications Read",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "mark_notification_read",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required. photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "n_id",
+									"value": "1",
+									"description": "//requried. notification id",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Notifications Done",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "mark_notification_done",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required. photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "n_id",
+									"value": "26",
+									"description": "//requried. notification id",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Photoshoot Call Complete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "mark_photoshoot_call_complete",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required. photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "n_id",
+									"value": "33",
+									"description": "//optional. notification id",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "538810",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "780974",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Photoshoot New Booking Call Complete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "mark_new_booking_call_complete",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "14",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required. photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "n_id",
+									"value": "1",
+									"description": "//optional. notification id",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "5347823",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "7802032",
+									"description": "//required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_orders",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "",
+									"description": "//requried. single or multiple separated by comma. ",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "",
+									"description": "//requried. single or multiple separated by comma",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required. photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//optional. if used overwrides cust_id and odr_id",
+									"type": "text"
+								},
+								{
+									"key": "videog_id",
+									"value": "",
+									"description": "//optional. if used overwrides cust_id and odr_id",
+									"type": "text"
+								},
+								{
+									"key": "search_term",
+									"value": "",
+									"description": "//optional. must be used along with photog_id or videog_id",
+									"type": "text"
+								},
+								{
+									"key": "show_recent",
+									"value": "true",
+									"description": "//show recent records.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Wedding Worksheet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_wedding_worksheet",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "548547",
+									"description": "//requried. ",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "789067",
+									"description": "//requried. ",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required. ",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//required. ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Engagement Worksheet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_engagement_worksheet",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "548547",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "789067",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Engagement Schedule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "post_engagement_schedule",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "548547",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "789067",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "eng_sch_date",
+									"value": "12/31/2018",
+									"description": "//required. date. mm/dd/yyyy",
+									"type": "text"
+								},
+								{
+									"key": "eng_sch_timeframe",
+									"value": "1pm to 2pm",
+									"description": "//text. required.",
+									"type": "text"
+								},
+								{
+									"key": "eng_sch_venue",
+									"value": "25 Broad Street, Wilmington MA, 01887",
+									"description": "//long text. requried.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Engagement Schedule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_engagement_schedule",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "548547",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "789067",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Payment Wedding",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "request_payment",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "539753",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "781206",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required. photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "pay_for",
+									"value": "Wedding",
+									"description": "//required. Wedding or Engagement",
+									"type": "text"
+								},
+								{
+									"key": "if_second_shooter",
+									"value": "yes",
+									"description": "//required. yes/no",
+									"type": "text"
+								},
+								{
+									"key": "second_shooter_name",
+									"value": "John Smith",
+									"description": "//required if if_second_shooter = yes",
+									"type": "text"
+								},
+								{
+									"key": "second_shooter_email",
+									"value": "johnsmith@email.com",
+									"description": "//required if if_second_shooter = yes",
+									"type": "text"
+								},
+								{
+									"key": "second_shooter_paid_by",
+									"value": "classic",
+									"description": "//required if if_second_shooter = yes",
+									"type": "text"
+								},
+								{
+									"key": "second_shooter_pay_rate",
+									"value": "20",
+									"description": "//required if if_second_shooter = yes",
+									"type": "text"
+								},
+								{
+									"key": "hours_as_per_contract",
+									"value": "8",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "additional_hours",
+									"value": "2",
+									"description": "//optional",
+									"type": "text"
+								},
+								{
+									"key": "travel_fees",
+									"value": "0",
+									"description": "//requried. as received by Get Hours As Per Contract API",
+									"type": "text"
+								},
+								{
+									"key": "first_shooter_images",
+									"value": "2500",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "second_shooter_images",
+									"value": "1500",
+									"description": "//required if if_second_shooter = yes",
+									"type": "text"
+								},
+								{
+									"key": "total_images",
+									"value": "4000",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "second_shooter_images_uploaded",
+									"value": "yes",
+									"description": "//required if if_second_shooter = yes (values are yes/no)",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Payment Engagement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "request_payment",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "548547",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "789067",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required. photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "pay_for",
+									"value": "Engagement",
+									"description": "//required. Wedding or Engagement",
+									"type": "text"
+								},
+								{
+									"key": "hours_as_per_contract",
+									"value": "1",
+									"description": "//required. Always 1. Static value.",
+									"type": "text"
+								},
+								{
+									"key": "engagement_date",
+									"value": "12/31/2016",
+									"description": "//required. mm/dd/yyyy",
+									"type": "text"
+								},
+								{
+									"key": "travel_fees",
+									"value": "8.75",
+									"description": "//optional",
+									"type": "text"
+								},
+								{
+									"key": "total_images",
+									"value": "700",
+									"description": "//required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hours As Per Contract",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_hours_as_per_contract",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "540651",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "782275",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required. photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "pay_for",
+									"value": "Wedding",
+									"description": "//required. Wedding or Engagement",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Payment List",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_payment_list",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required. photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "14",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "pay_for",
+									"value": "Wedding",
+									"description": "//required. Wedding or Engagement",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "534767",
+									"description": "//optional",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "780193",
+									"description": "//optional",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Blog Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_blog_post",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "html",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "blog_id",
+									"value": "11",
+									"description": "//required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Photographer Contracts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_contractor_contracts",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required, photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "contract_status",
+									"value": "Pending",
+									"description": "//optional. Pending/Signed/Declined/Cancelled/SignedAndRefused",
+									"type": "text"
+								},
+								{
+									"key": "contract_id",
+									"value": "",
+									"description": "//optional",
+									"type": "text"
+								},
+								{
+									"key": "limit",
+									"value": "20",
+									"description": "//optional",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Photographer Pending Contracts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "check_contractor_pending_contracts",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required, photographer or videographer",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Photographer Contract Description (HTML)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "get_contractor_contract_description",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "html",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required, photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "contract_id",
+									"value": "2273",
+									"description": "//required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Photographer Contract Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "set_contractor_contract_status",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "photog_id",
+									"value": "1295",
+									"description": "//requried",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "photographer",
+									"description": "//required, photographer or videographer",
+									"type": "text"
+								},
+								{
+									"key": "contract_status",
+									"value": "Declined",
+									"description": "//required. Signed or Declined",
+									"type": "text"
+								},
+								{
+									"key": "contract_id",
+									"value": "1839",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "odr_id",
+									"value": "789067",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "548547",
+									"description": "//required",
+									"type": "text"
+								},
+								{
+									"key": "decline_code",
+									"value": "Test22",
+									"description": "//required if contract_status is \"Declined\". (Set of radio checkboxes group)",
+									"type": "text"
+								},
+								{
+									"key": "decline_reason_detail",
+									"value": "Test33",
+									"description": "//required if contract_status is \"Declined\" (A text area)",
+									"type": "text"
+								},
+								{
+									"key": "photog_ip",
+									"value": "111.222.333.444",
+									"description": "//required. ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contractor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contractor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPhotographerLive",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photog_fname",
+									"value": "PhotogMou",
+									"type": "text"
+								},
+								{
+									"key": "photog_lname",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "photog_email",
+									"value": "photogmoutest3@mailinator.com",
+									"type": "text"
+								},
+								{
+									"key": "photog_pass",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "photog_headshot_url",
+									"value": "http://cloudinary.com/",
+									"type": "text"
+								},
+								{
+									"key": "photog_profile_bio",
+									"value": "Test Test Test Test Test Test Test Test Test Test Test Test ",
+									"type": "text"
+								},
+								{
+									"key": "profile_app_photog_id",
+									"value": "2255661",
+									"type": "text"
+								},
+								{
+									"key": "comp_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "api_key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "new_photographer",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://www.weddingphotomenu.com/photographer-api.php",
+							"protocol": "https",
+							"host": [
+								"www",
+								"weddingphotomenu",
+								"com"
+							],
+							"path": [
+								"photographer-api.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "General",
+			"item": [
+				{
+					"name": "updateCustomer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"type": "text"
+								},
+								{
+									"key": "event_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "updateCustomer",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "cust_email",
+									"value": "rgafa@ptux.com",
+									"type": "text"
+								},
+								{
+									"key": "stripe_cust_id",
+									"value": "cus_25698965",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/general/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"general",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Box-Uploader-KG",
+			"item": [
+				{
+					"name": "http://35.193.88.176:3000/upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "api_key",
+									"value": "wMnkfsNVepypDNxt8b5c",
+									"type": "text"
+								},
+								{
+									"key": "folder_id",
+									"value": "42645095743",
+									"type": "text"
+								},
+								{
+									"key": "filename",
+									"value": "laura.jpg",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://35.193.88.176:3000/upload",
+							"protocol": "http",
+							"host": [
+								"35",
+								"193",
+								"88",
+								"176"
+							],
+							"port": "3000",
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "getCustomerDashboardData",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "getCustomerDashboardData",
+									"type": "text"
+								},
+								{
+									"key": "cust_email",
+									"value": "classic-test-customer-1@mailinator.com",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "548546",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/customer/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customer",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomerLogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "WERIUE343737KSDFJIRNZNV",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "getCustomerLogin",
+									"type": "text"
+								},
+								{
+									"key": "cust_email",
+									"value": "creativecleo@yahoo.com",
+									"type": "text"
+								},
+								{
+									"key": "cust_pass",
+									"value": "BackBenchers2018",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/customer/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customer",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "setInvoiceStatus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "65S6DAF5ASFWER9WER98WERX",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "setInvoiceStatus",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "inv_id",
+									"value": "216520",
+									"type": "text"
+								},
+								{
+									"key": "paysch_paid_status",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://www.weddingphotomenu.com/api/customer/",
+							"protocol": "https",
+							"host": [
+								"www",
+								"weddingphotomenu",
+								"com"
+							],
+							"path": [
+								"api",
+								"customer",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomerOrders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "65S6DAF5ASFWER9WER98WERX",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "getCustomerOrders",
+									"type": "text"
+								},
+								{
+									"key": "json",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "538382",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://www.weddingphotomenu.com/api/customer/",
+							"protocol": "https",
+							"host": [
+								"www",
+								"weddingphotomenu",
+								"com"
+							],
+							"path": [
+								"api",
+								"customer",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

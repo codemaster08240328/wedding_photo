@@ -1,0 +1,130 @@
+import { createStackNavigator } from 'react-navigation';
+import Proposals from './pages/proposal';
+import Orders from './pages/order';
+import OrderDetail from './pages/order/orderDetails';
+import Pay from './pages/order/pay';
+// import ChangePassword from './pages/ChangePassword';
+import Invoices from './pages/order/invoices'; 
+import ProposalReview from './pages/proposal/proposalReview';
+import ProposalWebView from './pages/proposal/proposalWebView';
+import Login from './pages/auth/login';
+import PasswordReset from './pages/auth/forgetpwd';
+import WPWorkSheet from './pages/worksheet/wpworksheet'
+import EPWorkSheet from './pages/worksheet/epworksheet'
+import WVWorkSheet from './pages/worksheet/wvworksheet'
+import ProposalChange from './pages/proposal/proposalChange';
+import BlogPage from './pages/blog';
+import ChangePassword from './pages/auth/changepwd';
+import BlogDetailPage from './pages/blog/detail';
+import DashBoard from './pages/dashboard';
+
+
+
+const RootNavigator = createStackNavigator({
+	ProposalList: {
+        screen: Proposals,
+        navigationOptions: {
+            header: null,
+        }
+    },
+    review:{
+      screen:ProposalReview,
+      navigationOptions:{
+        header:null
+      }
+    },
+    webView:{
+      screen:ProposalWebView,
+      navigationOptions:{
+        header:null
+      }
+    },
+    Login:{
+      screen:Login,
+      navigationOptions:{
+        header:null
+      }
+    },
+    PasswordReset:{
+      screen:PasswordReset,
+      navigationOptions:{
+        header:null
+      }
+    },
+    ChangePassword:{
+      screen:ChangePassword,
+      navigationOptions:{
+        header:null
+      }
+    },
+    OrderList: {
+      screen: Orders,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    OrderDetail:{
+      screen:OrderDetail,
+      navigationOptions:{
+        header:null
+      }
+    },
+    invoice:{
+      screen:Invoices,
+      navigationOptions:{
+        header:null
+      }
+    },
+    pay:{
+      screen:Pay,
+      navigationOptions:{
+        header:null
+      }
+    },
+    proposalchange:{
+      screen:ProposalChange,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    WPWorkSheet:{
+      screen:WPWorkSheet,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    EPWorkSheet:{
+      screen:EPWorkSheet,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    WVWorkSheet:{
+      screen:WVWorkSheet,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    blog:{
+      screen:BlogPage,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    blogdetail:{
+      screen:BlogDetailPage,
+      navigationOptions:{
+        header:null
+      }
+    },
+    dashboard: {
+      screen: DashBoard,
+      navigationOptions: {
+        header: null
+      }
+    }
+
+},{
+    initialRouteName:'Login',
+});
+export default RootNavigator;
