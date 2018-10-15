@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, SectionList, TouchableOpacity, FlatList } from 
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SideMenu from 'react-native-side-menu'
+import call from 'react-native-phone-call'
+import SendSMS from 'react-native-sms'
+import email from 'react-native-email'
 import LogoComponent from '../../components/LogoComponent';
 import Menu from '../../components/SideMenu'
 import NavBar from '../../components/NavBar';
@@ -167,6 +170,36 @@ class DashBoard extends Component {
     });
   }
 
+  pressEmailBtn = () => {
+    const to = ['tiaan@email.com', 'foo@bar.com']
+    email(to, {
+      cc: ['bazzy@moo.com', 'dooo@daaa.com'],
+      bcc: 'mee@mee.com',
+      subject: 'Show how to use',
+      body: 'Some body right here'
+    }).catch(console.error)
+  }
+
+  pressCallBtn = () => {
+    const args = {
+      number: '+79858361090',
+      prompt: false
+    }
+    call(args).catch(console.error);
+  }
+
+  pressSMSBtn = () => {
+    console.log('sms button clicked')
+    SendSMS.send({
+      body: 'The default body of the SMS!',
+      recipients: ['123123123', '234234234'],
+      successTypes: ['sent', 'queued'],
+      allowAndroidSendWithoutReadPermission: true
+    }, (completed, cancelled, error) => {
+      console.log('SMS Callback: completed: ' + completed + 'cancelled: '+ cancelled);
+    })
+  }
+
   renderItemSection(item){
     return(
       <View 
@@ -274,6 +307,7 @@ class DashBoard extends Component {
                             paddingVertical: 8,
                             borderRadius: 18
                           }}
+                          onPress={()=>this.pressCallBtn()}
                         >
                           <Icon
                             name="call"
@@ -293,6 +327,7 @@ class DashBoard extends Component {
                             paddingVertical: 8,
                             borderRadius: 18
                           }}
+                          onPress={() => this.pressSMSBtn()}
                         >
                           <Icon
                             name="sms"
@@ -312,6 +347,7 @@ class DashBoard extends Component {
                             paddingVertical: 8,
                             borderRadius: 18
                           }}
+                          onPress={()=>this.pressEmailBtn()}
                         >
                           <Icon
                             name="email"
@@ -361,6 +397,10 @@ class DashBoard extends Component {
                         justifyContent: 'center', 
                         paddingVertical: 8,
                         borderRadius: 18
+                      }}
+                      onPress={() => {
+                        this._toggleModal(this.state.selectedItem);  
+                        this.props.navigation.navigate('engagement');
                       }}
                     >
                       <Text style={{color: colors.white}}>Schedule Engagement Date</Text>

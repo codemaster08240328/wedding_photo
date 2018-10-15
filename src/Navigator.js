@@ -17,6 +17,7 @@ import BlogPage from './pages/blog';
 import ChangePassword from './pages/auth/changepwd';
 import BlogDetailPage from './pages/blog/detail';
 import DashBoard from './pages/dashboard';
+import Engagement from './pages/dashboard/Engagement';
 
 
 
@@ -119,6 +120,12 @@ const RootNavigator = createStackNavigator({
     },
     dashboard: {
       screen: DashBoard,
+      navigationOptions: {
+        header: null
+      }
+    }, 
+    engagement: {
+      screen: Engagement,
       navigationOptions: {
         header: null
       }

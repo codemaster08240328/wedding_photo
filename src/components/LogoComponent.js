@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Dimensions from 'Dimensions';
 import {
     StyleSheet,
     View,
     Image,
     Text,
+    TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import { colors } from '../settings/constant'
@@ -26,21 +27,33 @@ class LogoComponent extends Component {
     render() {
       console.log('fname',this.props);
       return (
-       <View style = {styles.container}>
-            <Image
-                style={{
-                    height: 20
-                }}
-                resizeMode='contain'
-                source={logoImg}
-            />        
-        
-        {/* { this.props.auth.loginsuccess && <View style = {styles.LogoDAc}>
-            <Text style = {styles.LogoDesc}>{this.state.name}</Text>
-            <Text style = {styles.LogoDescCon}>Hi! {this.props.auth.user.cust_fname}, Your wedding at {this.props.auth.user.cust_wed_loc_city},{this.props.auth.user.cust_wed_loc_state}, {this.props.auth.user.cust_wed_loc_zip} on {convertDateFormat(this.props.auth.user.cust_wed_date)}</Text>
-        </View> } */}
-        
-       </View>
+        <View style = {styles.container}>
+            <View style = {{flex:1}}>
+                {this.props.backbtn&&
+                <TouchableOpacity >
+                    <Text 
+                        style={{
+                            color: 'blue',
+                            paddingLeft: 5
+                        }}
+                    >
+                        {"< Back "}
+                    </Text>
+                </TouchableOpacity>
+                    
+                }
+            </View>
+            <View style={{flex:3, alignItems: 'center'}}>
+                <Image
+                    style={{
+                        height: 20
+                    }}
+                    resizeMode='contain'
+                    source={logoImg}
+                />    
+            </View>
+            <View style={{flex:1}}></View>
+        </View>
       );
     }
 }
@@ -49,12 +62,12 @@ const styles = StyleSheet.create({
     container:{
         height:60,
         alignItems: 'center',
-        justifyContent:'center',
         paddingTop:15,
         backgroundColor: colors.headerColor,
         borderBottomWidth: 0.7,
         borderColor: colors.darkBorderColor,
-        width: DEVICE_WIDTH
+        width: DEVICE_WIDTH, 
+        flexDirection: 'row'
     },
     LogoImage:{
         justifyContent:'center',
