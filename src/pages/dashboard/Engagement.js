@@ -11,6 +11,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import LogoComponent from '../../components/LogoComponent'
 import { colors } from '../../settings/constant';
+import actions from '../../redux/dashboard/action';
 
 class Engagement extends Component {
   constructor(props) {
@@ -23,7 +24,14 @@ class Engagement extends Component {
 
   
   componentDidMount() {
-    
+    const param = {
+      photog_id: this.props.user.photog_id,
+      cust_id: this.state.customer.customer_data[0].cust_id,
+      n_id: this.state.customer.customer_data[0].n_id,
+      odr_id: this.state.customer.order_data[0].odr_id
+    }
+
+    this.props.dispatch(actions.getEngagementSchedule(param));
   }
   
   render() {
@@ -85,18 +93,21 @@ class Engagement extends Component {
               <Text style = {{paddingVertical: 5}}>EngagmentDate</Text>
               <TextInput
                 style={styles.input}
+                value={this.props.engagement.final_engagement_info ? this.props.engagement.final_engagement_info.eng_sch_date : ""}
               />
             </View>
             <View style={{flex: 1, padding: 5}}>
               <Text style={{paddingVertical: 5}}>Photoshoot Timeframe</Text>
               <TextInput
                 style={styles.input}
+                value={this.props.engagement.final_engagement_info ? this.props.engagement.final_engagement_info.eng_sch_timeframe : ""}
               />
             </View>
             <View style={{flex: 1, padding: 5}}>
               <Text style={{paddingVertical: 5}}>Engagment Venue</Text>
               <TextInput
                 style={styles.input}
+                value={this.props.engagement.final_engagement_info ? this.props.engagement.final_engagement_info.eng_sch_venue : ""}
               />
             </View>
             <View style={{flex: 1, padding: 5, justifyContent: 'center', alignItems: 'center'}}>
@@ -134,7 +145,10 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  
+  user: state.authReducer.user,
+  dashReducer: state.dashReducer,
+  engagmentReducer: state.engagementReducer,
+  engagement: state.engagementReducer.engagement
 })
 
 

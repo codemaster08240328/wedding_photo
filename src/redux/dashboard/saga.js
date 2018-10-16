@@ -21,9 +21,28 @@ export function* getDashBoard() {
   })
 }
 
+export function* getEngagement(){
+  yield takeEvery(actions.GET_ENGAGEMENT, function*({payload}){
+    const param = Object.assign({}, payload)
+    const result = yield call(DashHelper.getEngagement, param)
+    if(result && !result.error){
+      yield put({
+        type: actions.ENGAGEMENT_SUCCESS,
+        payload: result
+      })
+    } else {
+      yield put({
+        type: actions.ENGAGEMENT_ERROR,
+        payload: result.error
+      })
+    }
+  })
+}
+
 
 export default function* rootSaga() {
   yield all([
     fork(getDashBoard),
+    fork(getEngagement)
   ])
 }

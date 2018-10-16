@@ -18,6 +18,23 @@ class DashHelper {
       });
   }
 
+  getEngagement = async param => {
+    const body = new FormData();
+    body.append(API_ACTION.KEY, API_ACTION.KEY_NUM);
+    body.append(API_ACTION.ACTION, API_ACTION.GET_ENGAGEMENT_SCHEDULE);
+    body.append('json', true);
+    body.append('photog_id', param.photog_id);
+    body.append('user_type', API_ACTION.USER_TYPE);
+    body.append('cust_id', param.cust_id)
+    body.append('odr_id', param.odr_id)
+    return await SuperFetch.post("/", body)
+      .then((resp)=> resp.json())
+      .then(resp=>{
+        console.log('resp====>', resp)
+        return resp
+      });
+  }
+
   markNewBookingCallComplete = (param, cb) => {
     const body = new FormData();
     body.append(API_ACTION.KEY, API_ACTION.KEY_NUM);

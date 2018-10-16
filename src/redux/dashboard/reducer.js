@@ -27,10 +27,11 @@ export function dashReducer(state=initState, action={}){
             return state
     }
 }
+
 const initEnState =Immutable({
     loading: null,
     success: null,
-    engagement: null,
+    engagement: {},
     message: null
 }); 
 export function engagementReducer(state=initEnState, action={}){
@@ -45,7 +46,7 @@ export function engagementReducer(state=initEnState, action={}){
             return{
                 ...state,
                 loading: false,
-                engagement: action.payload,
+                engagement: action.payload.data,
                 success: true,
             }
 
