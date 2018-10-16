@@ -25,12 +25,14 @@ class LogoComponent extends Component {
         }
     }
     render() {
-      console.log('fname',this.props);
-      return (
+        const { goBack } = this.props.navigation;
+        return (
         <View style = {styles.container}>
             <View style = {{flex:1}}>
                 {this.props.backbtn&&
-                <TouchableOpacity >
+                <TouchableOpacity 
+                    onPress={() => goBack()}
+                >
                     <Text 
                         style={{
                             color: 'blue',

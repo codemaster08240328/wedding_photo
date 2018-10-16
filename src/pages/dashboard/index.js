@@ -19,14 +19,6 @@ import Dimensions from 'Dimensions';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
-
-
-// const data = [
-//   {data: [{name: "Rona Dalessio", date: "2017-11-18", address: 'Boston MA, 02108'}], key: "Make New Booking Call", type: 'Call Immediately'},
-//   {data: [{name: 'TestCustomer Samantha', date: '2018-04-25', address: 'Andover MA, 02108'}], key: "Request Wedding Pay", type: 'After files uploaded'},
-//   {data: [{name: 'Danyelle Mcelroy', date: '2018-07-30', address: 'Andover MA, 02108'}], key: "Engagement Worksheet", type: 'View Updated info'}
-// ]
-
 class DashBoard extends Component {
 
   constructor(props) {
@@ -42,6 +34,7 @@ class DashBoard extends Component {
     this.toggleSideMenu = this.toggleSideMenu.bind(this)
     this.renderHeaderSection = this.renderHeaderSection.bind(this)
     this.renderItemSection = this.renderItemSection.bind(this)
+    this.ScheduleEngagement = this.ScheduleEngagement.bind(this)
   }
 
   onMenuItemSelected(item){
@@ -168,6 +161,14 @@ class DashBoard extends Component {
       this._toggleModal(this.state.selectedItem);
       this.props.dispatch(actions.getDashboard(param_get))
     });
+  }
+
+  ScheduleEngagement = (item) => {
+    this._toggleModal(item);  
+    const param = {
+      customer: item
+    }
+    this.props.navigation.navigate('engagement', param);  
   }
 
   pressEmailBtn = () => {
@@ -398,10 +399,7 @@ class DashBoard extends Component {
                         paddingVertical: 8,
                         borderRadius: 18
                       }}
-                      onPress={() => {
-                        this._toggleModal(this.state.selectedItem);  
-                        this.props.navigation.navigate('engagement');
-                      }}
+                      onPress={() => this.ScheduleEngagement(this.state.selectedItem)}
                     >
                       <Text style={{color: colors.white}}>Schedule Engagement Date</Text>
                     </TouchableOpacity>
@@ -511,7 +509,7 @@ class DashBoard extends Component {
         onChange={isOpen => this.updateMenuState(isOpen)}
       >
         <View style={styles.container}>
-          <LogoComponent />
+          <LogoComponent {...this.props} />
           <NavBar handlePress={this.toggleSideMenu} />
           <View style={{height: 65, flexDirection: 'row', borderBottomWidth: 0.5, borderColor: colors.lightBorderColor}}>
             <View style={{borderRightWidth: 0.5, borderColor: colors.lightBorderColor, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
