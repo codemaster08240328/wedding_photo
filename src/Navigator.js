@@ -18,6 +18,7 @@ import ChangePassword from './pages/auth/changepwd';
 import BlogDetailPage from './pages/blog/detail';
 import DashBoard from './pages/dashboard';
 import Engagement from './pages/dashboard/Engagement';
+import WeddingWorksheet from './pages/dashboard/WeddingWorksheet';
 
 
 
@@ -126,6 +127,12 @@ const RootNavigator = createStackNavigator({
     }, 
     engagement: {
       screen: Engagement,
+      navigationOptions: {
+        header: null
+      }
+    },
+    weddingworksheet: {
+      screen: WeddingWorksheet,
       navigationOptions: {
         header: null
       }
