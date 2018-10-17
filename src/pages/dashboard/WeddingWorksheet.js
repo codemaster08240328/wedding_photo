@@ -164,6 +164,117 @@ class WeddingWorksheet extends Component {
               </TouchableOpacity>
             </View>
           </View>
+          <View style={{flex: 1, borderWidth: 1, borderColor: colors.darkBorderColor, marginTop: 10, paddingBottom: 10}}>
+            <View style={{flexDirection: 'row', paddingHorizontal:8, paddingVertical:9}}>
+              <Icon 
+                type="font-awesome"
+                name="list"
+                size={13}
+              /> 
+              <Text style={{marginLeft: 5, color: colors.fontGrayColor }}>Ceremony Start Location</Text>
+            </View>
+            <View style={{paddingHorizontal: 7}}>
+             
+              <Text style={{color: colors.fontGrayColor, fontSize: 12}}>Ceremony Location:</Text>
+              <Text style={{fontSize: 12}}>Church, 88 Nashua Road, Londonderry NH, 03053</Text>
+              <Text style={{color: colors.fontGrayColor, fontSize: 12, marginTop: 7}}>Ceremony Start Time: <Text style={{color: '#000'}}>2 pm</Text></Text>
+            </View>
+          </View>
+          <View style={{flex: 1, borderWidth: 1, borderColor: colors.darkBorderColor, marginTop: 10, paddingBottom: 10}}>
+            <View style={{flexDirection: 'row', paddingHorizontal:8, paddingVertical:9}}>
+              <Icon 
+                type="font-awesome"
+                name="list"
+                size={13}
+              /> 
+              <Text style={{marginLeft: 5, color: colors.fontGrayColor }}>Reception Start Location</Text>
+            </View>
+            <View style={{paddingHorizontal: 7}}>
+             
+              <Text style={{color: colors.fontGrayColor, fontSize: 12}}>Reception Location Name:</Text>
+              <Text style={{fontSize: 12}}>La Catetta Restaurant</Text>
+              <Text style={{color: colors.fontGrayColor, fontSize: 12, marginTop: 7}}>Reception Address & Contact Person: </Text>
+              <Text style={{fontSize: 12}}>44 Nashua Road Londeonderry NH 03053</Text>
+              <Text style={{color: colors.fontGrayColor, fontSize: 12}}>Start Time (If there is a cocktail hour, use that as start time):</Text>
+              <Text style={{fontSize: 12}}>La Catetta Restaurant</Text>
+              <Text style={{color: colors.fontGrayColor, fontSize: 12, marginTop: 7}}>Reception Venue Coordinator's First Name: </Text>
+              <Text style={{fontSize: 12}}>44 Nashua Road Londeonderry NH 03053</Text>
+              <Text style={{color: colors.fontGrayColor, fontSize: 12}}>Reception Venue Coordinator's Email Address: </Text>
+              <Text style={{fontSize: 12}}>La Catetta Restaurant</Text>
+              
+            </View>
+          </View>
+
+          <View style={{flex: 1, borderWidth: 1, borderColor: colors.darkBorderColor, marginTop: 10, paddingBottom: 10}}>
+            <View style={{flexDirection: 'row', paddingHorizontal:8, paddingVertical:9}}>
+              <Icon 
+                type="font-awesome"
+                name="list"
+                size={13}
+              /> 
+              <Text style={{marginLeft: 5, color: colors.fontGrayColor }}>Customer Special Comments</Text>
+            </View>
+            <View style={{paddingHorizontal: 7}}>
+              <Text style={{fontSize: 12}}>MOB doesn't speak English</Text>
+            </View>
+          </View>
+
+          <View style={{flex: 1, borderWidth: 1, borderColor: colors.darkBorderColor, marginTop: 10, paddingBottom: 10}}>
+            <View style={{flexDirection: 'row', paddingHorizontal:8, paddingVertical:9}}>
+              <Icon 
+                type="font-awesome"
+                name="list"
+                size={13}
+              /> 
+              <Text style={{marginLeft: 5, color: colors.fontGrayColor }}>Special Requests for Preparation Photos</Text>
+            </View>
+            <View style={{paddingHorizontal: 7}}>
+              <Text style={{fontSize: 12}}>Wedding dress hanging alone in front of the window</Text>
+            </View>
+          </View>
+
+          <View style={{flex: 1, borderWidth: 1, borderColor: colors.darkBorderColor, marginTop: 10, paddingBottom: 10}}>
+            <View style={{flexDirection: 'row', paddingHorizontal:8, paddingVertical:9}}>
+              <Icon 
+                type="font-awesome"
+                name="list"
+                size={13}
+              /> 
+              <Text style={{marginLeft: 5, color: colors.fontGrayColor }}>Special Requests for Ceremony Photography</Text>
+            </View>
+            <View style={{paddingHorizontal: 7}}>
+              <Text style={{fontSize: 12}}>Wedding dress hanging alone in front of the window</Text>
+            </View>
+          </View>
+
+          <View style={{flex: 1, borderWidth: 1, borderColor: colors.darkBorderColor, marginTop: 10, paddingBottom: 10}}>
+            <View style={{flexDirection: 'row', paddingHorizontal:8, paddingVertical:9}}>
+              <Icon 
+                type="font-awesome"
+                name="list"
+                size={13}
+              /> 
+              <Text style={{marginLeft: 5, color: colors.fontGrayColor }}>Special Requests for Family/ Bridal Party Formals</Text>
+            </View>
+            <View style={{paddingHorizontal: 7}}>
+              <Text style={{fontSize: 12}}>fun photo with everyone</Text>
+            </View>
+          </View>
+
+          <View style={{flex: 1, borderWidth: 1, borderColor: colors.darkBorderColor, marginTop: 10, paddingBottom: 10, marginBottom: 10}}>
+            <View style={{flexDirection: 'row', paddingHorizontal:8, paddingVertical:9}}>
+              <Icon 
+                type="font-awesome"
+                name="list"
+                size={13}
+              /> 
+              <Text style={{marginLeft: 5, color: colors.fontGrayColor }}>Special Requests for Reception Photography</Text>
+            </View>
+            <View style={{paddingHorizontal: 7}}>
+              <Text style={{fontSize: 12}}>st dance, cake cutting, bouquet/garter toss, dancing, send off, centerpieces, decorations</Text>
+            </View>
+          </View>
+
         </ScrollView>
       </View>
     )
