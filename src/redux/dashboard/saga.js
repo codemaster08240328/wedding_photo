@@ -39,10 +39,29 @@ export function* getEngagement(){
   })
 }
 
+export function* getWeddingWorksheet(){
+  yield takeEvery(actions.GET_WEDDING_WORKSHEET, function*({payload}){
+    const param = Object.assign({}, payload)
+    const result = yield call(DashHelper.getWeddingWorksheet, param)
+    if(result && !result.error){
+      yield put({
+        type: actions.WEDDING_WORKSHEET_SUCCESS,
+        payload: result
+      })
+    } else {
+      yield put({
+        type: actions.WEDDING_WORKSHEET_ERROR,
+        payload: result.error
+      })
+    }
+  })
+}
+
 
 export default function* rootSaga() {
   yield all([
     fork(getDashBoard),
-    fork(getEngagement)
+    fork(getEngagement),
+    fork(getWeddingWorksheet)
   ])
 }
