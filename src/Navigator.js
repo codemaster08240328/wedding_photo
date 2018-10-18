@@ -19,6 +19,7 @@ import BlogDetailPage from './pages/blog/detail';
 import DashBoard from './pages/dashboard';
 import Engagement from './pages/dashboard/Engagement';
 import WeddingWorksheet from './pages/dashboard/WeddingWorksheet';
+import EngagementWorksheet from './pages/dashboard/EngagementWorksheet';
 
 
 
@@ -133,6 +134,12 @@ const RootNavigator = createStackNavigator({
     },
     weddingworksheet: {
       screen: WeddingWorksheet,
+      navigationOptions: {
+        header: null
+      }
+    },
+    engagementworksheet: {
+      screen: EngagementWorksheet,
       navigationOptions: {
         header: null
       }

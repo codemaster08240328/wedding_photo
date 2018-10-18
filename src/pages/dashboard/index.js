@@ -36,6 +36,7 @@ class DashBoard extends Component {
     this.renderItemSection = this.renderItemSection.bind(this)
     this.ScheduleEngagement = this.ScheduleEngagement.bind(this)
     this.WeddingWorksheet = this.WeddingWorksheet.bind(this)
+    this.EngagementWorksheet = this.EngagementWorksheet.bind(this)
   }
 
   onMenuItemSelected(item){
@@ -178,6 +179,14 @@ class DashBoard extends Component {
       customer: item
     }
     this.props.navigation.navigate('weddingworksheet', param);  
+  }
+
+  EngagementWorksheet = (item) => {
+    this._toggleModal(item);  
+    const param = {
+      customer: item
+    }
+    this.props.navigation.navigate('engagementworksheet', param);  
   }
 
   pressEmailBtn = () => {
@@ -438,6 +447,7 @@ class DashBoard extends Component {
                         paddingVertical: 8,
                         borderRadius: 18
                       }}
+                      onPress={()=>this.EngagementWorksheet(this.state.selectedItem)}
                     >
                       <Text style={{color: colors.white}}>View Engagement Worksheet</Text>
                     </TouchableOpacity>
