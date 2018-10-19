@@ -10,6 +10,9 @@ const actions = {
   GET_WEDDING_WORKSHEET: 'GET_WEDDING_WORKSHEET',
   WEDDING_WORKSHEET_SUCCESS: 'WEDDING_WORKSHEET_SUCCESS',
   WEDDING_WORKSHEET_ERROR: 'WEDDING_WORKSHEET_ERROR',
+  GET_ENGAGEMENT_WORKSHEET: 'GET_ENGAGEMENT_WORKSHEET',
+  ENGAGEMENT_WORKSHEET_SUCCESS: 'ENGAGEMENT_WORKSHEET_SUCCESS',
+  ENGAGEMENT_WORKSHEET_ERROR: 'ENGAGEMENT_WORKSHEET_ERROR',
   getDashboard: payload => ({
     type: actions.GET_DASHBOARD,
     payload
@@ -20,6 +23,10 @@ const actions = {
   }),
   getWeddingWorksheet: payload => ({
     type: actions.GET_WEDDING_WORKSHEET,
+    payload
+  }),
+  getEngagementWorksheet: payload => ({
+    type: actions.GET_ENGAGEMENT_WORKSHEET,
     payload
   })
 }

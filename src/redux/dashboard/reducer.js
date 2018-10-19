@@ -98,3 +98,39 @@ export function weddingWorksheetReducer(state=initWeState, action={}){
             return state
     }
 }
+
+const initEnWoState = Immutable({
+    loading: null,
+    success: null,
+    engagement_worksheet: {},
+    message: null
+})
+
+export function engagementWorksheetReducer(state=initEnWoState, action={}){
+    switch (action.type) {
+        case actions.GET_ENGAGEMENT_WORKSHEET:
+            return{
+                ...state,
+                loading: true,
+            }
+
+        case actions.ENGAGEMENT_WORKSHEET_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                engagement_worksheet: action.payload.data,
+                success: true,
+            }
+
+        case actions.ENGAGEMENT_WORKSHEET_ERROR:
+            return{
+                ...state,
+                success: false,
+                loading: false,
+                message: action.payload
+            }
+
+        default:
+            return state
+    }
+}

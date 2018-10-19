@@ -13,7 +13,7 @@ const API_ACTION = {
      POST_ENGAGEMENT_SCHEDULE: 'POST_ENGAGEMENT_SCHEDULE',
      GET_ENGAGEMENT_SCHEDULE: 'get_engagement_schedule',
      GET_WEDDING_WORKSHEET: 'get_wedding_worksheet',
-     GET_ENGAGEMENT_WORKSHEET: 'GET_ENGAGEMENT_WORKSHEET',
+     GET_ENGAGEMENT_WORKSHEET: 'get_engagement_worksheet',
      REQUEST_PAYMENT: 'REQUEST_PAYMENT',
      USER_TYPE: 'photographer',
      LOGIN_SOURCE: 'ios_mobile',

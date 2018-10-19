@@ -4,7 +4,7 @@ import { orderReducer, invoiceReducer, invoiceStatus, orderDetailsReducer } from
 import { wpworksheet, epworksheet, wvworksheet  } from './worksheet/reducer'
 import { proposalReducer, proposalDetails, invoicestatus, propChange } from './proposal/reducer'
 import { blogReducer } from './blog/reducer'
-import { dashReducer, engagementReducer, weddingWorksheetReducer } from './dashboard/reducer'
+import { dashReducer, engagementReducer, weddingWorksheetReducer, engagementWorksheetReducer } from './dashboard/reducer'
 
 export {
   authReducer,
@@ -24,5 +24,6 @@ export {
   orderDetailsReducer, 
   dashReducer,
   engagementReducer,
-  weddingWorksheetReducer
+  weddingWorksheetReducer,
+  engagementWorksheetReducer
 }

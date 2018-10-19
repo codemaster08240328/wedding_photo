@@ -42,16 +42,16 @@ class WeddingWorksheet extends Component {
         <LogoComponent backbtn {...this.props}/>
         <ScrollView style={{padding: 10}}>
           <View style={{height: 44, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{fontSize: 18}}>{this.state.customer.customer_data[0].cust_name} Wedding Worksheet</Text>
+            <Text style={{fontSize: 18}}>{this.state.customer.customer_data[0].cust_fname} Wedding Worksheet</Text>
           </View>
           <View style={{height: 30, alignItems: 'center'}}>
-            <Text style={{fontSize: 14}}>Photographer: {this.props.user.photog_name}</Text>
+            <Text style={{fontSize: 14}}>Photographer: {this.props.user.photog_fname + " " + this.props.user.photog_lname}</Text>
           </View>
-          <Text style={{color: colors.fontGrayColor, fontSize: 14, marginTop: 10}}>Wedding Date: <Text style={{color: '#000'}}>07/30/2018</Text></Text>
-          <Text style={{color: colors.fontGrayColor, fontSize: 14, marginTop: 10}}>Email: <Text style={{color: '#000'}}>soumikabandon02@yahoo.com</Text></Text>
+          <Text style={{color: colors.fontGrayColor, fontSize: 14, marginTop: 10}}>Wedding Date: <Text style={{color: '#000'}}>{this.state.customer.customer_data[0].cust_wed_date}</Text></Text>
+          <Text style={{color: colors.fontGrayColor, fontSize: 14, marginTop: 10}}>Email: <Text style={{color: '#000'}}>{this.state.customer.customer_data[0].cust_email}</Text></Text>
           <View style={{flexDirection: 'row', alignItems: 'center', height: 35}}>
             <View style={{flex:6}}>
-              <Text style={{color: colors.fontGrayColor, fontSize: 14, marginTop: 12}}>Phone: <Text style={{color: '#000'}}>9749945541</Text></Text>
+              <Text style={{color: colors.fontGrayColor, fontSize: 14, marginTop: 12}}>Phone: <Text style={{color: '#000'}}>{this.state.customer.customer_data[0].cust_phone1}</Text></Text>
             </View>
             <View style={{flex:2, flexDirection: 'row'}}>
               <TouchableOpacity
