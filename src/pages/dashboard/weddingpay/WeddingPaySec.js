@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button'
+import { View, Text, StyleSheet, Picker } from 'react-native'
 import { Icon } from 'react-native-elements'
-import { connect } from 'react-redux'
 import LogoComponent from '../../../components/LogoComponent'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import { colors } from '../../../settings/constant'
+class WeddingPaySec extends Component {
 
-const radio_props = [
-  { label: 'YES       ', value: 0 },
-  { label: 'NO', value: 1}
-]
-class WeddingPay extends Component {
   constructor(props) {
     super(props)
   
@@ -23,14 +19,11 @@ class WeddingPay extends Component {
   }
 
   nextBtnClicked = () => {
-    console.log("clicked");
-    const param = {
-      customer: this.state.customer
+    if (this.state.nextbtnvisible){
+      console.log("clicked");
     }
-    this.props.navigation.navigate("weddingpaysec", param);
-
+    
   }
-  
 
   render() {
     return (
@@ -88,18 +81,25 @@ class WeddingPay extends Component {
         >
           <Text style={{color: colors.fontGrayColor}}>Request Wedding Photoshoot Payment</Text>
         </View>
-        <View style={{height: 50, justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{fontSize: 20}}>Was there a Second Shooter?</Text>
+        <View style={{marginTop: 10, height: 50, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 50}}>
+          <Text style={{fontSize: 20, textAlign: 'center'}}>Where there extra hours added at the day of the event?</Text>
         </View>
-        <View style={{flex: 1, alignItems: 'center'}}>
-          <RadioForm
-            radio_props={radio_props}
-            initial={0}
-            onPress={(value)=>{this.setState({value: value})}}
-            buttonColor={colors.btnColor}
-            selectedButtonColor={colors.btnColor}
-            formHorizontal={true}
-          />
+        <View style={{paddingHorizontal: 15}}>
+          <Text style={{color: colors.btnColor, textAlign: 'center'}}>(Select this option only if this event had extra hours beyond contracted hours)</Text>
+        </View>
+        <View>
+          <Picker
+            selectedValue = {this.state.selected}
+            onValueChange = {(itemValue, itemIndex)=>this.setState({selected: itemValue})}
+          >
+            <Picker.Item label="No Additional hours were added" value="nothing"/>
+            <Picker.Item label="1 Additional Hour" value="1 hour"/>
+            <Picker.Item label="2 Additional Hours" value="2 hours"/>
+            <Picker.Item label="3 Additional Hours" value="3 hours"/>
+            <Picker.Item label="4 Additional Hours" value="4 hours"/>
+            <Picker.Item label="5 Additional Hours" value="5 hours"/>
+
+          </Picker>
         </View>
       </View>
     )
@@ -124,4 +124,4 @@ const mapStateToProps = (state) => ({
   
 })
 
-export default connect(mapStateToProps)(WeddingPay)
+export default connect(mapStateToProps)(WeddingPaySec)

@@ -21,6 +21,7 @@ import Engagement from './pages/dashboard/Engagement';
 import WeddingWorksheet from './pages/dashboard/WeddingWorksheet';
 import EngagementWorksheet from './pages/dashboard/EngagementWorksheet';
 import  WeddingPay  from './pages/dashboard/weddingpay';
+import WeddingPaySec from './pages/dashboard/weddingpay/WeddingPaySec';
 
 
 
@@ -147,6 +148,12 @@ const RootNavigator = createStackNavigator({
     },
     weddingpay: {
       screen: WeddingPay,
+      navigationOptions: {
+        header: null
+      }
+    },
+    weddingpaysec: {
+      screen: WeddingPaySec,
       navigationOptions: {
         header: null
       }
