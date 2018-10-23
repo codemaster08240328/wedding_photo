@@ -37,6 +37,7 @@ class DashBoard extends Component {
     this.ScheduleEngagement = this.ScheduleEngagement.bind(this)
     this.WeddingWorksheet = this.WeddingWorksheet.bind(this)
     this.EngagementWorksheet = this.EngagementWorksheet.bind(this)
+    this.WeddingPayRequest = this.WeddingPayRequest.bind(this)
   }
 
   onMenuItemSelected(item){
@@ -187,6 +188,14 @@ class DashBoard extends Component {
       customer: item
     }
     this.props.navigation.navigate('engagementworksheet', param);  
+  }
+
+  WeddingPayRequest = (item) => {
+    this._toggleModal(item);
+    const param = {
+      customer: item
+    }
+    this.props.navigation.navigate('weddingpay', param);
   }
 
   pressEmailBtn = () => {
@@ -462,6 +471,7 @@ class DashBoard extends Component {
                         paddingVertical: 8,
                         borderRadius: 18
                       }}
+                      onPress={()=>this.WeddingPayRequest(this.state.selectedItem)}
                     >
                       <Text style={{color: colors.white}}>Request Wedding Pay</Text>
                     </TouchableOpacity>

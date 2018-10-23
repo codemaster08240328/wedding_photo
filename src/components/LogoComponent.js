@@ -54,7 +54,24 @@ class LogoComponent extends Component {
                     source={logoImg}
                 />    
             </View>
-            <View style={{flex:1}}></View>
+            <View style={{flex:1, alignItems: 'flex-end'}}>
+                {this.props.nextbtn&&
+                <TouchableOpacity 
+                    onPress={this.props.nextBtnClicked}
+                >
+                    <Text 
+                        style={this.props.nextbtnvisible ? {
+                            color: 'blue',
+                            paddingRight: 5
+                        } : {
+                            color: colors.fontGrayColor,
+                            paddingRight: 5}}
+                    >
+                        {"Next > "}
+                    </Text>
+                </TouchableOpacity>
+                }
+            </View>
         </View>
       );
     }
