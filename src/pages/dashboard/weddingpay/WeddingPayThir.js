@@ -1,19 +1,23 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Picker } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { Icon } from 'react-native-elements'
 import LogoComponent from '../../../components/LogoComponent'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { colors } from '../../../settings/constant'
-class WeddingPaySec extends Component {
+class WeddingPayThir extends Component {
 
   constructor(props) {
     super(props)
   
     this.state = {
       nextbtnvisible: true,
-      customer: this.props.navigation.getParam('customer')
+      customer: this.props.navigation.getParam('customer'),
+      editable: false,
+      text1: 5,
+      text2: 0
+    
     }
     this.nextBtnClicked = this.nextBtnClicked.bind(this)
   }
@@ -21,12 +25,7 @@ class WeddingPaySec extends Component {
   nextBtnClicked = () => {
     if (this.state.nextbtnvisible){
       console.log("clicked");
-      const param = {
-        customer: this.state.customer
-      }
-      this.props.navigation.navigate("weddingpaythir", param);
     }
-    
     
   }
 
@@ -86,26 +85,54 @@ class WeddingPaySec extends Component {
         >
           <Text style={{color: colors.fontGrayColor}}>Request Wedding Photoshoot Payment</Text>
         </View>
-        <View style={{marginTop: 10, height: 50, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 50}}>
-          <Text style={{fontSize: 17, textAlign: 'center', fontWeight: 'bold'}}>Where there extra hours added at the day of the event?</Text>
+        <View style={{height: 50, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20}}>
+          <Text style={{fontSize: 17, textAlign: 'center', fontWeight: 'bold'}}>Please confirm total hours for this event</Text>
         </View>
-        <View style={{paddingHorizontal: 15}}>
-          <Text style={{color: colors.btnColor, textAlign: 'center'}}>(Select this option only if this event had extra hours beyond contracted hours)</Text>
+        <View style={{paddingLeft: 10, paddingRight: 20, height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderColor: colors.darkBorderColor, borderTopWidth: 1}}>
+          <Text style={{fontSize: 17}}>Hours As Per Contract</Text>
+          <Text style={{fontSize: 17}}>{this.state.text1}</Text>
         </View>
-        <View>
-          <Picker
-            selectedValue = {this.state.selected}
-            onValueChange = {(itemValue, itemIndex)=>this.setState({selected: itemValue})}
+        <View style={{paddingLeft: 10, paddingRight: 20, height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderColor: colors.darkBorderColor, borderTopWidth: 1}}>
+          <Text style={{fontSize: 17}}>Additional Hours / Extra Hours</Text>
+          <Text style={{fontSize: 17}}>{this.state.text2}</Text>
+        </View>
+        <View style={{paddingLeft: 10, paddingRight: 20, height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderColor: colors.darkBorderColor, borderTopWidth: 1, borderBottomWidth: 1}}>
+          <Text style={{fontSize: 17}}>Total Hours</Text>
+          <Text style={{fontSize: 17}}>{parseInt(this.state.text1) + parseInt(this.state.text2)}</Text>
+        </View>
+        <View style={{marginTop: 20, height: 40, alignItems: 'center'}}>
+          <TouchableOpacity 
+            onPress={()=>this.setState({editable: !this.state.editable})}
+            style={{
+              height:30, 
+              paddingHorizontal: 10, 
+              borderRadius: 15, 
+              justifyContent: 'center', 
+              backgroundColor: colors.btnGrayColor
+            }}
           >
-            <Picker.Item label="No Additional hours were added" value="nothing"/>
-            <Picker.Item label="1 Additional Hour" value="1 hour"/>
-            <Picker.Item label="2 Additional Hours" value="2 hours"/>
-            <Picker.Item label="3 Additional Hours" value="3 hours"/>
-            <Picker.Item label="4 Additional Hours" value="4 hours"/>
-            <Picker.Item label="5 Additional Hours" value="5 hours"/>
-
-          </Picker>
+            <Text style={{color: colors.white}}>NO, I NEED TO CHANGE.</Text>
+          </TouchableOpacity>
         </View>
+        {
+          this.state.editable&&
+          <View style={{flex: 1, paddingHorizontal: 10}}>
+            <Text>Hours As Per Contract</Text>
+            <TextInput
+              placeholder="Numbers from 4 to 12"
+              onChangeText={(text1)=>this.setState({text1})}
+              style={{borderWidth: 1, borderColor: colors.darkBorderColor, padding: 5}}
+            />
+            <Text style={{marginTop: 10}}>Additional Hours / Extra Hours</Text>
+            <TextInput
+              onChangeText={(text2)=>this.setState({text2})}
+              placeholder="Numbers from 1 to 5"
+              style={{borderWidth: 1, borderColor: colors.darkBorderColor, padding: 5}}
+            />
+          </View>
+        }
+        
+        
       </View>
     )
   }
@@ -129,4 +156,4 @@ const mapStateToProps = (state) => ({
   
 })
 
-export default connect(mapStateToProps)(WeddingPaySec)
+export default connect(mapStateToProps)(WeddingPayThir)

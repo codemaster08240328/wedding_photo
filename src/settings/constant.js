@@ -5,7 +5,8 @@ const colors = {
   white: '#fff',
   fontGrayColor: '#9c9c9c',
   yellow: '#fe9f17',
-  btnColor: '#fb5660'
+  btnColor: '#fb5660',
+  btnGrayColor: '#A0A0A0'
 }
 
 export {

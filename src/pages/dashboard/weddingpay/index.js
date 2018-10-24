@@ -89,7 +89,7 @@ class WeddingPay extends Component {
           <Text style={{color: colors.fontGrayColor}}>Request Wedding Photoshoot Payment</Text>
         </View>
         <View style={{height: 50, justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{fontSize: 20}}>Was there a Second Shooter?</Text>
+          <Text style={{fontSize: 17, fontWeight: 'bold'}}>Was there a Second Shooter?</Text>
         </View>
         <View style={{flex: 1, alignItems: 'center'}}>
           <RadioForm
