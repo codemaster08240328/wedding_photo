@@ -96,7 +96,7 @@ class WeddingPay extends Component {
             radio_props={radio_props}
             initial={0}
             onPress={(value)=>{this.setState({value: value})}}
-            buttonColor={colors.btnColor}
+            buttonColor={colors.btnGrayColor}
             selectedButtonColor={colors.btnColor}
             formHorizontal={true}
           />

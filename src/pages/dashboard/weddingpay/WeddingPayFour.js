@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button'
 import { Icon } from 'react-native-elements'
 import LogoComponent from '../../../components/LogoComponent'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+
 import { colors } from '../../../settings/constant'
-class WeddingPayThir extends Component {
+
+const radio_props_f = [
+  { label: 'YES', value: 1 },
+]
+const radio_props_s = [
+  { label: 'YES', value: 1 },
+]
+class WeddingPayFour extends Component {
 
   constructor(props) {
     super(props)
@@ -25,10 +34,6 @@ class WeddingPayThir extends Component {
   nextBtnClicked = () => {
     if (this.state.nextbtnvisible){
       console.log("clicked");
-      const param = {
-        customer: this.state.customer
-      }
-      this.props.navigation.navigate("weddingpayfour", param);
     }
     
   }
@@ -90,51 +95,80 @@ class WeddingPayThir extends Component {
           <Text style={{color: colors.fontGrayColor}}>Request Wedding Photoshoot Payment</Text>
         </View>
         <View style={{height: 50, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20}}>
-          <Text style={{fontSize: 17, textAlign: 'center', fontWeight: 'bold'}}>Please confirm total hours for this event</Text>
+          <Text style={{fontSize: 17, textAlign: 'center', fontWeight: 'bold'}}>Confirm Image Uploads</Text>
         </View>
-        <View style={{paddingLeft: 10, paddingRight: 20, height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderColor: colors.darkBorderColor, borderTopWidth: 1}}>
-          <Text style={{fontSize: 17}}>Hours As Per Contract</Text>
-          <Text style={{fontSize: 17}}>{this.state.text1}</Text>
-        </View>
-        <View style={{paddingLeft: 10, paddingRight: 20, height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderColor: colors.darkBorderColor, borderTopWidth: 1}}>
-          <Text style={{fontSize: 17}}>Additional Hours / Extra Hours</Text>
-          <Text style={{fontSize: 17}}>{this.state.text2}</Text>
-        </View>
-        <View style={{paddingLeft: 10, paddingRight: 20, height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderColor: colors.darkBorderColor, borderTopWidth: 1, borderBottomWidth: 1}}>
-          <Text style={{fontSize: 17}}>Total Hours</Text>
-          <Text style={{fontSize: 17}}>{parseInt(this.state.text1) + parseInt(this.state.text2)}</Text>
-        </View>
-        <View style={{marginTop: 20, height: 40, alignItems: 'center'}}>
-          <TouchableOpacity 
-            onPress={()=>this.setState({editable: !this.state.editable})}
+        <View style={{paddingHorizontal:10}}>
+          <Text style={{marginTop: 10}}>No. of images Primary Photographer shot*</Text>
+          <TextInput
             style={{
-              height:30, 
-              paddingHorizontal: 10, 
-              borderRadius: 15, 
-              justifyContent: 'center', 
-              backgroundColor: colors.btnGrayColor
+              marginTop: 5,
+              borderColor: colors.darkBorderColor,
+              borderWidth: 1,
+              borderRadius: 3,
+              padding:5,
+              width: '60%',
+              fontSize: 15
+
             }}
-          >
-            <Text style={{color: colors.white}}>NO, I NEED TO CHANGE.</Text>
-          </TouchableOpacity>
+          />
+          <Text style={{marginTop: 10}}>No. of images Second Photographer shot*</Text>
+          <TextInput
+            style={{
+              marginTop: 5,
+              borderColor: colors.darkBorderColor,
+              borderWidth: 1,
+              borderRadius: 3,
+              padding:5,
+              width: '60%',
+              fontSize: 15
+
+            }}
+          />
+          <Text style={{marginTop: 10}}>Total no. of images*</Text>
+          <TextInput
+            style={{
+              marginTop: 5,
+              borderColor: colors.darkBorderColor,
+              borderWidth: 1,
+              borderRadius: 3,
+              padding:5,
+              width: '60%',
+              fontSize: 15
+
+            }}
+          />
         </View>
-        {
-          this.state.editable&&
-          <View style={{flex: 1, paddingHorizontal: 10}}>
-            <Text>Hours As Per Contract</Text>
-            <TextInput
-              placeholder="Numbers from 4 to 12"
-              onChangeText={(text1)=>this.setState({text1})}
-              style={{borderWidth: 1, borderColor: colors.darkBorderColor, padding: 5}}
-            />
-            <Text style={{marginTop: 10}}>Additional Hours / Extra Hours</Text>
-            <TextInput
-              onChangeText={(text2)=>this.setState({text2})}
-              placeholder="Numbers from 1 to 5"
-              style={{borderWidth: 1, borderColor: colors.darkBorderColor, padding: 5}}
+        <View style={{flexDirection: 'row', paddingHorizontal: 10, marginTop: 30}}>
+          <View style={{flex: 3, justifyContent: 'center'}}>
+            <Text>I have submitted a "So Tell Us" video review and I'm submitting for my $25 Bonus!</Text>
+          </View>
+          <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
+            <RadioForm
+              radio_props={radio_props_f}
+              initial={1}
+              onPress={(value)=>{this.setState({value: value})}}
+              buttonColor={colors.btnGrayColor}
+              selectedButtonColor={colors.btnColor}
+              formHorizontal={true}
             />
           </View>
-        }
+        </View>
+        <View style={{flexDirection: 'row', paddingHorizontal: 10, marginTop: 30}}>
+          <View style={{flex: 3, justifyContent: 'center'}}>
+            <Text>I confirm that all first and second shooter images(if applicable) have been uploaded!</Text>
+          </View>
+          <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
+            <RadioForm
+              radio_props={radio_props_s}
+              initial={1}
+              onPress={(value)=>{this.setState({value: value})}}
+              buttonColor={colors.btnGrayColor}
+              selectedButtonColor={colors.btnColor}
+              formHorizontal={true}
+            />
+          </View>
+        </View>
+        
         
         
       </View>
@@ -160,4 +194,4 @@ const mapStateToProps = (state) => ({
   
 })
 
-export default connect(mapStateToProps)(WeddingPayThir)
+export default connect(mapStateToProps)(WeddingPayFour)

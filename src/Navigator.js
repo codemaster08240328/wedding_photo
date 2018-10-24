@@ -3,7 +3,6 @@ import Proposals from './pages/proposal';
 import Orders from './pages/order';
 import OrderDetail from './pages/order/orderDetails';
 import Pay from './pages/order/pay';
-// import ChangePassword from './pages/ChangePassword';
 import Invoices from './pages/order/invoices'; 
 import ProposalReview from './pages/proposal/proposalReview';
 import ProposalWebView from './pages/proposal/proposalWebView';
@@ -23,6 +22,7 @@ import EngagementWorksheet from './pages/dashboard/EngagementWorksheet';
 import WeddingPay  from './pages/dashboard/weddingpay';
 import WeddingPaySec from './pages/dashboard/weddingpay/WeddingPaySec';
 import WeddingPayThir from './pages/dashboard/weddingpay/WeddingPayThir';
+import WeddingPayFour from './pages/dashboard/weddingpay/WeddingPayFour';
 
 
 const RootNavigator = createStackNavigator({
@@ -160,6 +160,12 @@ const RootNavigator = createStackNavigator({
     },
     weddingpaythir: {
       screen: WeddingPayThir,
+      navigationOptions: {
+        header: null
+      }
+    },
+    weddingpayfour:{
+      screen: WeddingPayFour,
       navigationOptions: {
         header: null
       }
