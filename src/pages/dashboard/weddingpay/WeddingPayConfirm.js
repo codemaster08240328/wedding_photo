@@ -1,36 +1,18 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Picker } from 'react-native'
 import { Icon } from 'react-native-elements'
-import RNPickerSelect from 'react-native-picker-select';
+import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button'
 import LogoComponent from '../../../components/LogoComponent'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { colors } from '../../../settings/constant'
 
-const items = [
-  {
-    label: '1 Additional Hour',
-    value: 1
-  },
-  {
-    label: '2 Additional Hours',
-    value: 2
-  },
-  {
-    label: '3 Additional Hours',
-    value: 3
-  },
-  {
-    label: '4 Additional Hours',
-    value: 4
-  },
-  {
-    label: '5 Additional Hours',
-    value: 5
-  }
+const radio_props = [
+  { label: 'I (the first shooter) am paying or have paid them directly.', value: 0 },
+  { label: 'I would like the 2nd Photographer paid directly by Classic Photographers via Payable and deducted from my invoice total.', value: 1}
 ]
-class WeddingPaySec extends Component {
+class WeddingPayConfirm extends Component {
 
   constructor(props) {
     super(props)
@@ -48,7 +30,7 @@ class WeddingPaySec extends Component {
       const param = {
         customer: this.state.customer
       }
-      this.props.navigation.navigate("weddingpaythir", param);
+      this.props.navigation.navigate("weddingpaysec", param);
     }
     
     
@@ -111,20 +93,20 @@ class WeddingPaySec extends Component {
           <Text style={{color: colors.fontGrayColor}}>Request Wedding Photoshoot Payment</Text>
         </View>
         <View style={{marginTop: 10, height: 50, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 50}}>
-          <Text style={{fontSize: 17, textAlign: 'center', fontWeight: 'bold'}}>Where there extra hours added at the day of the event?</Text>
+          <Text style={{fontSize: 17, textAlign: 'center', fontWeight: 'bold'}}>How would you like your second shooter to get paid?</Text>
         </View>
         <View style={{paddingHorizontal: 15}}>
-          <Text style={{color: colors.btnColor, textAlign: 'center'}}>(Select this option only if this event had extra hours beyond contracted hours)</Text>
+          <Text style={{color: colors.btnColor,fontSize: 12, textAlign: 'center'}}>This section is very important to getting your payment to go through properly. If you have paid the second shooter yourself, and would like to receive the second shooter pay to yourself, please select the first option. Only choose the other options if you would like Classic Photographers to pay the second shooter directly.</Text>
         </View>
-        <View style={{paddingHorizontal: 10, marginTop: 30}}>
-          <RNPickerSelect
-            placeholder={{
-              label: 'No Additional hours were added',
-              value: 0
-            }}
-            items={items}
-            style={{...pickerSelectStyles}}
-            onValueChange={(value)=>this.setState({value})}
+        <View style = {{paddingHorizontal: 10, marginTop: 15}}>
+          <RadioForm
+            radio_props={radio_props}
+            initial={0}
+            buttonSize={10}
+            onPress={(value)=>{this.setState({value: value})}}
+            buttonColor={colors.btnGrayColor}
+            selectedButtonColor={colors.btnColor}
+            formHorizontal={false}
           />
         </View>
       </View>
@@ -146,22 +128,8 @@ const styles = StyleSheet.create({
   }
 })
 
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 16,
-    paddingTop: 13,
-    paddingHorizontal: 10,
-    paddingBottom: 12,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    backgroundColor: 'white',
-    color: 'black',
-  },
-});
-
 const mapStateToProps = (state) => ({
   
 })
 
-export default connect(mapStateToProps)(WeddingPaySec)
+export default connect(mapStateToProps)(WeddingPayConfirm)

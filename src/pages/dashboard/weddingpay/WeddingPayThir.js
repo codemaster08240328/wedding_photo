@@ -1,11 +1,73 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { Icon } from 'react-native-elements'
+import RNPickerSelect from 'react-native-picker-select';
 import LogoComponent from '../../../components/LogoComponent'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { colors } from '../../../settings/constant'
+
+const items = [
+
+  {
+    label: '5',
+    value: 5
+  },
+  {
+    label: '6',
+    value: 6
+  },
+  {
+    label: '7',
+    value: 7
+  },
+  {
+    label: '8',
+    value: 8
+  },
+  {
+    label: '9',
+    value: 9
+  },
+  {
+    label: '10',
+    value: 10
+  },
+  {
+    label: '11',
+    value: 11
+  },
+  {
+    label: '12',
+    value: 12
+  }
+
+]
+const items2 = [
+
+  {
+    label: '1',
+    value: 1
+  },
+  {
+    label: '2',
+    value: 2
+  },
+  {
+    label: '3',
+    value: 3
+  },
+  {
+    label: '4',
+    value: 4
+  },
+  {
+    label: '5',
+    value: 5
+  }
+]
+
 class WeddingPayThir extends Component {
 
   constructor(props) {
@@ -122,16 +184,24 @@ class WeddingPayThir extends Component {
           this.state.editable&&
           <View style={{flex: 1, paddingHorizontal: 10}}>
             <Text>Hours As Per Contract</Text>
-            <TextInput
-              placeholder="Numbers from 4 to 12"
-              onChangeText={(text1)=>this.setState({text1})}
-              style={{borderWidth: 1, borderColor: colors.darkBorderColor, padding: 5}}
+            <RNPickerSelect
+              placeholder={{
+                label: '4',
+                value: 4
+              }}
+              items={items}
+              style={{...pickerSelectStyles}}
+              onValueChange={(value)=>this.setState({value1: value})}
             />
             <Text style={{marginTop: 10}}>Additional Hours / Extra Hours</Text>
-            <TextInput
-              onChangeText={(text2)=>this.setState({text2})}
-              placeholder="Numbers from 1 to 5"
-              style={{borderWidth: 1, borderColor: colors.darkBorderColor, padding: 5}}
+            <RNPickerSelect
+              placeholder={{
+                label: '0',
+                value: 0
+              }}
+              items={items2}
+              style={{...pickerSelectStyles}}
+              onValueChange={(value)=>this.setState({value2: value})}
             />
           </View>
         }
@@ -155,6 +225,20 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   }
 })
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    fontSize: 16,
+    paddingTop: 13,
+    paddingHorizontal: 10,
+    paddingBottom: 12,
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 4,
+    backgroundColor: 'white',
+    color: 'black',
+  },
+});
 
 const mapStateToProps = (state) => ({
   

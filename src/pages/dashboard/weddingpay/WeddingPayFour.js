@@ -146,6 +146,7 @@ class WeddingPayFour extends Component {
             <RadioForm
               radio_props={radio_props_f}
               initial={1}
+              buttonSize={10}
               onPress={(value)=>{this.setState({value: value})}}
               buttonColor={colors.btnGrayColor}
               selectedButtonColor={colors.btnColor}
@@ -161,6 +162,7 @@ class WeddingPayFour extends Component {
             <RadioForm
               radio_props={radio_props_s}
               initial={1}
+              buttonSize={10}
               onPress={(value)=>{this.setState({value: value})}}
               buttonColor={colors.btnGrayColor}
               selectedButtonColor={colors.btnColor}

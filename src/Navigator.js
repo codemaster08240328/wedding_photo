@@ -23,6 +23,7 @@ import WeddingPay  from './pages/dashboard/weddingpay';
 import WeddingPaySec from './pages/dashboard/weddingpay/WeddingPaySec';
 import WeddingPayThir from './pages/dashboard/weddingpay/WeddingPayThir';
 import WeddingPayFour from './pages/dashboard/weddingpay/WeddingPayFour';
+import WeddingPayConfirm from './pages/dashboard/weddingpay/WeddingPayConfirm';
 
 
 const RootNavigator = createStackNavigator({
@@ -164,8 +165,14 @@ const RootNavigator = createStackNavigator({
         header: null
       }
     },
-    weddingpayfour:{
+    weddingpayfour: {
       screen: WeddingPayFour,
+      navigationOptions: {
+        header: null
+      }
+    },
+    weddingpayconfirm: {
+      screen: WeddingPayConfirm,
       navigationOptions: {
         header: null
       }

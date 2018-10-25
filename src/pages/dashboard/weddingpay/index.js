@@ -17,7 +17,8 @@ class WeddingPay extends Component {
   
     this.state = {
       nextbtnvisible: true,
-      customer: this.props.navigation.getParam('customer')
+      customer: this.props.navigation.getParam('customer'),
+      value: ''
     }
     this.nextBtnClicked = this.nextBtnClicked.bind(this)
   }
@@ -27,7 +28,12 @@ class WeddingPay extends Component {
     const param = {
       customer: this.state.customer
     }
-    this.props.navigation.navigate("weddingpaysec", param);
+    if(this.state.value == 0){
+      this.props.navigation.navigate('weddingpayconfirm', param);
+    }else{
+      this.props.navigation.navigate("weddingpaysec", param);
+    }
+    
 
   }
   
@@ -95,6 +101,7 @@ class WeddingPay extends Component {
           <RadioForm
             radio_props={radio_props}
             initial={0}
+            buttonSize={10}
             onPress={(value)=>{this.setState({value: value})}}
             buttonColor={colors.btnGrayColor}
             selectedButtonColor={colors.btnColor}
