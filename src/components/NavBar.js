@@ -57,7 +57,34 @@ class NavBar extends Component {
                   style = {{marginRight: 9, marginTop: 4}} 
                 //   onPress = {this.props.handlePress}
                 >
-                    <Icon name="earth" type="material-community" color="#b4b4b4" size={26} />
+                    
+                    <View>
+                        <Icon name="earth" type="material-community" color="#b4b4b4" size={26} />   
+                    </View>
+                    <View
+                        style={[{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height:12, 
+                            width: 12, 
+                            borderRadius: 6, 
+                            position: "absolute",
+                            top: -1,
+                            left: 13
+            
+                        },{
+                            backgroundColor: colors.btnColor
+                        }]}
+                    >
+                        <Text style={{color: colors.white, fontSize: 10, textAlign: "center"}}>
+                        {
+                        this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['unread_notifications'] ? 
+                            this.props.dashReducer.dashboard['unread_notifications'].length : 0
+                        }
+                        </Text>
+                    </View>
+
+                    
                 </TouchableOpacity>
                 <TouchableOpacity  
                     style={{marginRight: 8}}
@@ -120,7 +147,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state){
     return {
-      user:state.authReducer.user
+      user: state.authReducer.user,
+      dashReducer: state.dashReducer
     }
   }
 
