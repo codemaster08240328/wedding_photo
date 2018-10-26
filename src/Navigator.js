@@ -24,6 +24,7 @@ import WeddingPaySec from './pages/dashboard/weddingpay/WeddingPaySec';
 import WeddingPayThir from './pages/dashboard/weddingpay/WeddingPayThir';
 import WeddingPayFour from './pages/dashboard/weddingpay/WeddingPayFour';
 import WeddingPayConfirm from './pages/dashboard/weddingpay/WeddingPayConfirm';
+import Notification from './pages/dashboard/Notification';
 
 
 const RootNavigator = createStackNavigator({
@@ -173,6 +174,12 @@ const RootNavigator = createStackNavigator({
     },
     weddingpayconfirm: {
       screen: WeddingPayConfirm,
+      navigationOptions: {
+        header: null
+      }
+    },
+    notification: {
+      screen: Notification,
       navigationOptions: {
         header: null
       }

@@ -55,14 +55,14 @@ class NavBar extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity 
                   style = {{marginRight: 9, marginTop: 4}} 
-                //   onPress = {this.props.handlePress}
+                  onPress = {()=>this.props.navigation.navigate("notification")}
                 >
                     
                     <View>
                         <Icon name="earth" type="material-community" color="#b4b4b4" size={26} />   
                     </View>
                     <View
-                        style={[{
+                        style={this.props.dashReducer.dashboard && this.props.dashReducer.dashboard['unread_notifications'] ? {
                             justifyContent: 'center',
                             alignItems: 'center',
                             height:12, 
@@ -70,11 +70,18 @@ class NavBar extends Component {
                             borderRadius: 6, 
                             position: "absolute",
                             top: -1,
-                            left: 13
-            
-                        },{
+                            left: 13,
                             backgroundColor: colors.btnColor
-                        }]}
+                        }:{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height:12, 
+                            width: 12, 
+                            borderRadius: 6, 
+                            position: "absolute",
+                            top: -1,
+                            left: 13,
+                        }}
                     >
                         <Text style={{color: colors.white, fontSize: 10, textAlign: "center"}}>
                         {

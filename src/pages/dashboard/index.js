@@ -540,7 +540,7 @@ class DashBoard extends Component {
       >
         <View style={styles.container}>
           <LogoComponent {...this.props} />
-          <NavBar handlePress={this.toggleSideMenu} />
+          <NavBar handlePress={this.toggleSideMenu} {...this.props} />
           <View style={{height: 65, flexDirection: 'row', borderBottomWidth: 0.5, borderColor: colors.lightBorderColor}}>
             <View style={{borderRightWidth: 0.5, borderColor: colors.lightBorderColor, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
               <View
