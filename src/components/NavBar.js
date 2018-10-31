@@ -95,7 +95,7 @@ class NavBar extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity  
                     style={{marginRight: 8}}
-                    // onPress = {this.props.handlePress}
+                    onPress = {()=>this.props.navigation.navigate("search")}
                 >
                     <Icon name="search" type="feather" color="#b4b4b4" size={25} />
                 </TouchableOpacity>

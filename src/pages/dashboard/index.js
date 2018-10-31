@@ -299,30 +299,34 @@ class DashBoard extends Component {
                     </Text>
                   </View>
                   <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 5}}>
-                    <Icon
-                      type="entypo"
-                      name="location-pin"
-                      color={colors.fontGrayColor}
-                      size={18}
-                    />
-                    <Text style={{color: colors.fontGrayColor, marginRight: 13}}>
-                      {
-                        this.state.selectedItem.customer_data ?
-                          this.state.selectedItem.customer_data[0].cust_city + " " + this.state.selectedItem.customer_data[0].cust_state + ", " + this.state.selectedItem.customer_data[0].cust_zip : ""
-                      }
-                    </Text>
-                    <Icon
-                      name="calendar-o"
-                      type="font-awesome"
-                      size={15}
-                      color={colors.fontGrayColor}
-                    />
-                    <Text style={{color: colors.fontGrayColor, marginLeft: 5}}>
-                      {
-                        this.state.selectedItem.customer_data ?
-                          this.state.selectedItem.customer_data[0].cust_wed_date : ''
-                      }
-                    </Text>
+                    <View style={{flex: 6, flexDirection: 'row'}}>
+                      <Icon
+                        type="entypo"
+                        name="location-pin"
+                        color={colors.fontGrayColor}
+                        size={18}
+                      />
+                      <Text style={{color: colors.fontGrayColor, marginRight: 13}}>
+                        {
+                          this.state.selectedItem.customer_data ?
+                            this.state.selectedItem.customer_data[0].cust_city + " " + this.state.selectedItem.customer_data[0].cust_state + ", " + this.state.selectedItem.customer_data[0].cust_zip : ""
+                        }
+                      </Text>
+                    </View>
+                    <View style={{flex: 4, flexDirection: 'row'}}>
+                      <Icon
+                        name="calendar-o"
+                        type="font-awesome"
+                        size={15}
+                        color={colors.fontGrayColor}
+                      />
+                      <Text style={{color: colors.fontGrayColor, marginLeft: 5}}>
+                        {
+                          this.state.selectedItem.customer_data ?
+                            this.state.selectedItem.customer_data[0].cust_wed_date : ''
+                        }
+                      </Text>
+                    </View>
                   </View>
                   <View style={{flex: 1, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 3}}>
                       <View style={{flex:1, paddingHorizontal:3}}>
