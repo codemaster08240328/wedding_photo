@@ -328,7 +328,7 @@ class DashBoard extends Component {
                       </Text>
                     </View>
                   </View>
-                  <View style={{flex: 1, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 3}}>
+                  <View style={{flex: 1, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 3, paddingVertical: 1}}>
                       <View style={{flex:1, paddingHorizontal:3}}>
                         <TouchableOpacity
                           style={{
@@ -390,7 +390,7 @@ class DashBoard extends Component {
                         </TouchableOpacity>
                       </View>
                   </View>
-                  <View style={{flex: 1, paddingHorizontal: 6}}>
+                  <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
                     <TouchableOpacity
                       style={{
                         flexDirection: 'row', 
@@ -405,7 +405,7 @@ class DashBoard extends Component {
                       <Text style={{color: colors.white}}>Mark New Booking Call Complete</Text>
                     </TouchableOpacity>
                   </View>
-                  <View style={{flex: 1, paddingHorizontal: 6}}>
+                  <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
                     <TouchableOpacity
                       style={{
                         flexDirection: 'row', 
@@ -420,7 +420,7 @@ class DashBoard extends Component {
                       <Text style={{color: colors.white}}>Mark Photoshoot Call Complete</Text>
                     </TouchableOpacity>
                   </View>
-                  <View style={{flex: 1, paddingHorizontal: 6}}>
+                  <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
                     <TouchableOpacity
                       style={{
                         flexDirection: 'row', 
@@ -435,7 +435,7 @@ class DashBoard extends Component {
                       <Text style={{color: colors.white}}>Schedule Engagement Date</Text>
                     </TouchableOpacity>
                   </View>
-                  <View style={{flex: 1, paddingHorizontal: 6}}>
+                  <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
                     <TouchableOpacity
                       style={{
                         flexDirection: 'row', 
@@ -450,7 +450,7 @@ class DashBoard extends Component {
                       <Text style={{color: colors.white}}>View Wedding Worksheet</Text>
                     </TouchableOpacity>
                   </View>
-                  <View style={{flex: 1, paddingHorizontal: 6}}>
+                  <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
                     <TouchableOpacity
                       style={{
                         flexDirection: 'row', 
@@ -465,7 +465,7 @@ class DashBoard extends Component {
                       <Text style={{color: colors.white}}>View Engagement Worksheet</Text>
                     </TouchableOpacity>
                   </View>
-                  <View style={{flex: 1, paddingHorizontal: 6}}>
+                  <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
                     <TouchableOpacity
                       style={{
                         flexDirection: 'row', 
@@ -480,7 +480,7 @@ class DashBoard extends Component {
                       <Text style={{color: colors.white}}>Request Wedding Pay</Text>
                     </TouchableOpacity>
                   </View>
-                  <View style={{flex: 1, paddingHorizontal: 6}}>
+                  <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
                     <TouchableOpacity
                       style={{
                         flexDirection: 'row', 

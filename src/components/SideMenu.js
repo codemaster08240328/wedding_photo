@@ -60,7 +60,7 @@ class Menu extends Component {
 
   proposal(){
     if(this.props.user != null){
-      this.props.onItemSelected("ProposalList");
+      this.props.onItemSelected("dashboard");
     }else{
       alert("Please login");
     }
@@ -92,6 +92,7 @@ class Menu extends Component {
 
   auth(){
     if(this.props.user!=null){
+      console.log('clicked')
       this.logout();
     }else{
       this.props.onItemSelected('Login');
@@ -100,9 +101,10 @@ class Menu extends Component {
   }
 
   logout = async()=>{
+    console.log('clicked2')
     await AsyncStorage.clear();
     this.props.dispatch(actions.logout());
-    this.props.navigation.navigate("blog");
+    this.props.navigation.navigate("Login");
   }
   render(){
     return (
