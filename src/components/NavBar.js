@@ -45,7 +45,7 @@ class NavBar extends Component {
             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center'}}>
                 <TouchableOpacity  
                     style = {{marginRight: 10}} 
-                    // onPress = {this.props.handlePress}
+                    onPress = {()=>this.props.navigation.navigate("calendar")}
                 >
                     <Icon 
                         name="calendar"
