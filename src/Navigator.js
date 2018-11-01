@@ -26,7 +26,7 @@ import WeddingPayFour from './pages/dashboard/weddingpay/WeddingPayFour';
 import WeddingPayConfirm from './pages/dashboard/weddingpay/WeddingPayConfirm';
 import Notification from './pages/dashboard/Notification';
 import Search from './pages/dashboard/Search';
-import Calendar from './pages/dashboard/Calendar';
+import CalendarView from './pages/dashboard/CalendarView';
 
 
 const RootNavigator = createStackNavigator({
@@ -193,7 +193,7 @@ const RootNavigator = createStackNavigator({
       }
     },
     calendar: {
-      screen: Calendar,
+      screen: CalendarView,
       navigationOptions: {
         header: null
       }

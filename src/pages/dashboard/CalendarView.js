@@ -1,0 +1,101 @@
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import {LocaleConfig} from 'react-native-calendars';
+import {colors} from '../../settings/constant';
+
+
+LocaleConfig.locales['fr'] = {
+  monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+  monthNamesShort: ['Janv.','Févr.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov.','Déc.'],
+  dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+  dayNamesShort: ['Dim.','Lun.','Mar.','Mer.','Jeu.','Ven.','Sam.']
+};
+LocaleConfig.locales['En'] = {
+  monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'October', 'November', 'December'],
+  monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  dayNames: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+  dayNamesShort: ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+}
+LocaleConfig.defaultLocale = 'En';
+
+export default class CalendarView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedStartDate: null,
+      selectedEndDate: null,
+      markedData: {
+        '2018-11-16': {selected: true, selectedColor: colors.btnGrayColor},
+        '2018-11-17': {selected: true, selectedColor: colors.btnGrayColor},
+        '2018-11-18': {selected: true, selectedColor: colors.btnGrayColor},
+        '2018-11-19': {selected: true, selectedColor: colors.btnGrayColor}
+      }
+    };
+    this.selectedDay = this.selectedDay.bind(this)
+  }
+ 
+  selectedDay = (day) => {
+    let selectedDay = day.dateString;
+    let obj = {}
+    obj[selectedDay] = {selected: true, selectedColor: colors.btnGrayColor}
+    console.log('obj~~~~~~~', obj)
+    let newMarkedData = {...this.state.markedData, ...obj}
+    console.log(newMarkedData)
+    this.setState({markedData: newMarkedData});
+  }
+
+ 
+  render() {    
+ 
+    return (
+      <View style={styles.container}>
+        <Calendar
+          // Initially visible month. Default = Date()
+          // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
+          // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
+          // Handler which gets executed on day press. Default = undefined
+          onDayPress={(day) => this.selectedDay(day)}
+          // Handler which gets executed on day long press. Default = undefined
+          onDayLongPress={(day) => {console.log('selected day', day)}}
+          // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
+          monthFormat={'MMM yyyy'}
+          // Handler which gets executed when visible month changes in calendar. Default = undefined
+          onMonthChange={(month) => {console.log('month changed', month)}}
+          // Hide month navigation arrows. Default = false
+          // hideArrows={true}
+          // Replace default arrows with custom ones (direction can be 'left' or 'right')
+          // renderArrow={(direction) => (<Arrow />)}
+          // Do not show days of other months in month page. Default = false
+          hideExtraDays={true}
+          // If hideArrows=false and hideExtraDays=false do not switch month when tapping on greyed out
+          // day from another month that is visible in calendar page. Default = false
+          // disableMonthChange={true}
+          // If firstDay=1 week starts from Monday. Note that dayNames and dayNamesShort should still start from Sunday.
+          firstDay={1}
+          // Hide day names. Default = false
+          // hideDayNames={true}
+          // Show week numbers to the left. Default = false
+          showWeekNumbers={true}
+          // Handler which gets executed when press arrow icon left. It receive a callback can go back month
+          // onPressArrowLeft={substractMonth => substractMonth()}
+          // Handler which gets executed when press arrow icon left. It receive a callback can go next month
+          // onPressArrowRight={addMonth => addMonth()}
+          markedDates={this.state.markedData}
+        />
+      </View>
+    );
+  }
+}
+ 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    marginTop: 100,
+  },
+});
