@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import {LocaleConfig} from 'react-native-calendars';
+import LogoComponent from '../../components/LogoComponent'
 import {colors} from '../../settings/constant';
 
 
@@ -41,12 +42,18 @@ export default class CalendarView extends Component {
  
   selectedDay = (day) => {
     let selectedDay = day.dateString;
-    let obj = {}
-    obj[selectedDay] = {selected: true, selectedColor: colors.btnGrayColor}
-    console.log('obj~~~~~~~', obj)
-    let newMarkedData = {...this.state.markedData, ...obj}
-    console.log(newMarkedData)
-    this.setState({markedData: newMarkedData});
+    let obj={}
+    if(selectedDay in this.state.markedData){
+      obj = Object.assign({}, this.state.markedData);
+      delete obj[selectedDay];
+      this.setState({markedData: obj})
+    }else{
+      obj[selectedDay] = {selected: true, selectedColor: colors.btnGrayColor}
+      console.log('obj~~~~~~~', obj)
+      let newMarkedData = {...this.state.markedData, ...obj}
+      console.log(newMarkedData)
+      this.setState({markedData: newMarkedData});
+    }
   }
 
  
@@ -54,6 +61,17 @@ export default class CalendarView extends Component {
  
     return (
       <View style={styles.container}>
+        <LogoComponent {...this.props} backbtn />
+        <View style={{height: 50, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontSize: 25}}>Manage My Dates</Text>
+        </View>
+        <View style={{height: 30, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+          <View style={{height: 14, width: 14, backgroundColor: colors.btnColor, borderRadius: 7}}></View>
+          <Text style={{marginLeft: 5}}>Booked</Text>
+          <View style={{marginLeft:10, height: 14, width: 14, backgroundColor: colors.btnGrayColor, borderRadius: 7}}></View>
+          <Text style={{marginLeft: 5}}>Unavailable</Text>
+        </View>
+        <View>
         <Calendar
           // Initially visible month. Default = Date()
           // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
@@ -71,7 +89,7 @@ export default class CalendarView extends Component {
           // Replace default arrows with custom ones (direction can be 'left' or 'right')
           // renderArrow={(direction) => (<Arrow />)}
           // Do not show days of other months in month page. Default = false
-          hideExtraDays={true}
+          // hideExtraDays={true}
           // If hideArrows=false and hideExtraDays=false do not switch month when tapping on greyed out
           // day from another month that is visible in calendar page. Default = false
           // disableMonthChange={true}
@@ -87,6 +105,8 @@ export default class CalendarView extends Component {
           // onPressArrowRight={addMonth => addMonth()}
           markedDates={this.state.markedData}
         />
+        </View>
+        
       </View>
     );
   }
@@ -94,8 +114,7 @@ export default class CalendarView extends Component {
  
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-    marginTop: 100,
-  },
-});
+    backgroundColor: colors.white,
+    flex: 1
+  }
+})
