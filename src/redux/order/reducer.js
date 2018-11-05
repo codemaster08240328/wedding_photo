@@ -6,27 +6,27 @@ const initState_ = Immutable({ getsuccess: null, invoice:[], message:null, loadi
 const initState_status = Immutable({ invoice_status:null})
 const orderDetailState = Immutable({ getsuccess: null, orderDetail:[], message:null, loading:null })
 
-export function orderReducer(state = initState, action={}) {
-    switch (action.type) {
-        case actions.GET_ORDER_SUCCESS:
-            return {
-                ...state,
-                getsuccess:true,
-                order:action.payload,
-                loading:false
-            }
-        case actions.GET_ERROR:
-            return {
-                ...state,
-                getsuccess:false,
-                order:[],
-                message:action.payload,
-                loading:false,
-            }
-        default:
-            return state
-    }
-}
+// export function orderReducer(state = initState, action={}) {
+//     switch (action.type) {
+//         case actions.GET_ORDER_SUCCESS:
+//             return {
+//                 ...state,
+//                 getsuccess:true,
+//                 order:action.payload,
+//                 loading:false
+//             }
+//         case actions.GET_ERROR:
+//             return {
+//                 ...state,
+//                 getsuccess:false,
+//                 order:[],
+//                 message:action.payload,
+//                 loading:false,
+//             }
+//         default:
+//             return state
+//     }
+// }
 
 export function orderDetailsReducer(state = orderDetailState, action = {}){
     switch(action.type){

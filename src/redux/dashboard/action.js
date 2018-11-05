@@ -13,6 +13,9 @@ const actions = {
   GET_ENGAGEMENT_WORKSHEET: 'GET_ENGAGEMENT_WORKSHEET',
   ENGAGEMENT_WORKSHEET_SUCCESS: 'ENGAGEMENT_WORKSHEET_SUCCESS',
   ENGAGEMENT_WORKSHEET_ERROR: 'ENGAGEMENT_WORKSHEET_ERROR',
+  GET_ORDER: 'GET_ORDER',
+  ORDER_SUCCESS: 'ORDER_SUCCESS',
+  ORDER_FAIL: 'ORDER_FAIL',
   getDashboard: payload => ({
     type: actions.GET_DASHBOARD,
     payload
@@ -27,6 +30,10 @@ const actions = {
   }),
   getEngagementWorksheet: payload => ({
     type: actions.GET_ENGAGEMENT_WORKSHEET,
+    payload
+  }),
+  getOrder:payload => ({
+    type: actions.GET_ORDER,
     payload
   })
 }

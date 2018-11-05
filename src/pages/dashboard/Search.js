@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import SideMenu from 'react-native-side-menu'
 import Menu from '../../components/SideMenu'
 import { Icon } from 'react-native-elements'
+import actions from '../../redux/dashboard/action'
 
 import LogoComponent from '../../components/LogoComponent'
 import NavBar from '../../components/NavBar'
@@ -18,7 +19,7 @@ class Search extends Component {
     super(props)
   
     this.state = {
-       
+       text:''
     }
     this.onMenuItemSelected = this.onMenuItemSelected.bind(this)
     this.updateMenuState = this.updateMenuState.bind(this)
@@ -35,10 +36,19 @@ class Search extends Component {
   updateMenuState(isOpen) {
     this.setState({ isOpen });
   }
-  toggleSideMenu () {
+  toggleSideMenu() {
     this.setState({
       isOpen: !this.state.isOpen
     })
+  }
+
+  searchbtn = () => {
+    console.log(this.state.text)
+    const param = {
+      photog_id: this.props.user.photog_id,
+      search_term: this.state.text
+    }
+    this.props.dispatch(actions.getOrder(param));
   }
   render() {
     const menu = <Menu onItemSelected={this.onMenuItemSelected} {...this.props} />;
@@ -81,6 +91,7 @@ class Search extends Component {
                   borderWidth: 1,
                   borderColor: colors.darkBorderColor
                 }}
+                onChangeText={(text)=>this.setState({text})}
               />
             </View>
             <View style={{flex: 2}}>
@@ -93,6 +104,7 @@ class Search extends Component {
                   borderTopRightRadius: 5,
                   borderBottomRightRadius: 5
                 }}
+                onPress={this.searchbtn}
               >
                 <Text style={{color: colors.white}}>Search</Text>
               </TouchableOpacity>
@@ -122,7 +134,9 @@ class Search extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  state: state
+  state: state,
+  user: state.authReducer.user,
+
 })
 
 const styles = StyleSheet.create({

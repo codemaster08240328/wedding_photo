@@ -108,6 +108,22 @@ class DashHelper {
       })
   }
 
+  getOrder = async(param) => {
+    const body = new FormData();
+    body.append(API_ACTION.KEY, API_ACTION.KEY_NUM);
+    body.append(API_ACTION.ACTION, API_ACTION.GET_ORDER);
+    body.append('json', true);
+    body.append('user_type', API_ACTION.USER_TYPE);
+    body.append('photog_id', param.photog_id);
+    body.append('search_term', param.search_term);
+    
+    return await SuperFetch.post("/", body)
+      .then((resp) => resp.json())
+      .then(resp => {
+        return resp;
+      })
+  }
+
 
 }
 

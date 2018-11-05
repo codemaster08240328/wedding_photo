@@ -75,11 +75,31 @@ export function* getEngagementWorksheet(){
   })
 }
 
+export function* getOrder(){
+  yield takeEvery(actions.GET_ORDER, function*({payload}){
+    const param = Object.assign({}, payload)
+    console.log(param);
+    const result = yield call(DashHelper.getOrder, param)
+    if(result && !result.error){
+      yield put({
+        type: actions.ORDER_SUCCESS,
+        payload: result
+      })
+    }else{
+      yield put({
+        type: actions.ORDER_FAIL,
+        payload: result.error
+      })
+    }
+  })
+}
+
 export default function* rootSaga() {
   yield all([
     fork(getDashBoard),
     fork(getEngagement),
     fork(getWeddingWorksheet),
-    fork(getEngagementWorksheet)
+    fork(getEngagementWorksheet),
+    fork(getOrder)
   ])
 }

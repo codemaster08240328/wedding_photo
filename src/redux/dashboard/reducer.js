@@ -134,3 +134,39 @@ export function engagementWorksheetReducer(state=initEnWoState, action={}){
             return state
     }
 }
+
+const initOrderState = Immutable({
+    loading: null,
+    success: null,
+    order: {},
+    message: null
+})
+
+export function orderReducer(state=initOrderState, action={}){
+    switch (action.type) {
+        case actions.GET_ORDER:
+            return{
+                ...state,
+                loading: true,
+            }
+
+        case actions.ORDER_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                order: action.payload.data,
+                success: true,
+            }
+
+        case actions.ORDER_FAIL:
+            return{
+                ...state,
+                success: false,
+                loading: false,
+                message: action.payload
+            }
+
+        default:
+            return state
+    }
+}

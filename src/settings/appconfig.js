@@ -10,6 +10,7 @@ const API_ACTION = {
      GET_DASHBOARD: 'get_dashboard_data',
      MARK_NEW_BOOKING_CALL_COMPLETE: 'mark_new_booking_call_complete',
      MARK_PHOTOSHOOT_CALL_COMPLETE: 'mark_photoshoot_call_complete',
+     GET_ORDER: 'get_orders',
      POST_ENGAGEMENT_SCHEDULE: 'POST_ENGAGEMENT_SCHEDULE',
      GET_ENGAGEMENT_SCHEDULE: 'get_engagement_schedule',
      GET_WEDDING_WORKSHEET: 'get_wedding_worksheet',
