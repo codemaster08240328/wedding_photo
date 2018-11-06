@@ -94,12 +94,32 @@ export function* getOrder(){
   })
 }
 
+export function* getUnavailableDate(){
+  yield takeEvery(actions.GET_UNAVAILABLE_DATE, function*({payload}){
+    const param = Object.assign({}, payload)
+    console.log(param);
+    const result = yield call(DashHelper.getUnavailableDate, param)
+    if(result && !result.error){
+      yield put({
+        type: actions.UNAVAILABLE_DATE_GET_SUCCESS,
+        payload: result
+      })
+    }else{
+      yield put({
+        type: actions.UNAVAILABLE_DATE_GET_FALSE,
+        payload: result.message
+      })
+    }
+  })
+}
+
 export default function* rootSaga() {
   yield all([
     fork(getDashBoard),
     fork(getEngagement),
     fork(getWeddingWorksheet),
     fork(getEngagementWorksheet),
-    fork(getOrder)
+    fork(getOrder),
+    fork(getUnavailableDate)
   ])
 }

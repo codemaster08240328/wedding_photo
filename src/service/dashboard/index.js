@@ -128,6 +128,26 @@ class DashHelper {
       })
   }
 
+  getUnavailableDate = async(param) => {
+    const body = new FormData();
+    body.append(API_ACTION.KEY, API_ACTION.KEY_NUM);
+    body.append(API_ACTION.ACTION, API_ACTION.GET_UNAVAILABLE_DATE);
+    body.append('json', true);
+    body.append('user_type', API_ACTION.USER_TYPE);
+    body.append('photog_id', param.photog_id);
+    body.append('search_term', param.search_term);
+    body.append('filter_by_year', param.filter_by_year);
+    
+    return await SuperFetch.post("/", body)
+      .then((resp) => resp.json())
+      .then(resp => {
+        if(resp.success=="true")
+          return resp;
+        else
+          return {error: true, data: resp.message}
+      })
+  }
+
 
 }
 

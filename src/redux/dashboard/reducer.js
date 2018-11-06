@@ -171,3 +171,40 @@ export function orderReducer(state=initOrderState, action={}){
             return state
     }
 }
+
+const initUnavailableState = Immutable({
+    loading: null,
+    success: null,
+    unavailable_date: [],
+    message: null
+})
+
+export function unavailableDateReducer(state=initUnavailableState, action={}){
+    switch (action.type) {
+        case actions.GET_UNAVAILABLE_DATE:
+            return{
+                ...state,
+                loading: true,
+            }
+
+        case actions.UNAVAILABLE_DATE_GET_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                unavailable_date: action.payload.data,
+                success: true,
+            }
+
+        case actions.UNAVAILABLE_DATE_GET_FALSE:
+            return{
+                ...state,
+                success: false,
+                loading: false,
+                unavailable_date: [],
+                message: payload
+            }
+
+        default:
+            return state
+    }
+}

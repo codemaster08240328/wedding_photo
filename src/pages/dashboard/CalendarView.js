@@ -39,6 +39,10 @@ export default class CalendarView extends Component {
     };
     this.selectedDay = this.selectedDay.bind(this)
   }
+
+  componentDidMount(props) {
+    
+  }
  
   selectedDay = (day) => {
     let selectedDay = day.dateString;

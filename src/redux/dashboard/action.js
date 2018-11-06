@@ -16,6 +16,9 @@ const actions = {
   GET_ORDER: 'GET_ORDER',
   ORDER_SUCCESS: 'ORDER_SUCCESS',
   ORDER_FAIL: 'ORDER_FAIL',
+  GET_UNAVAILABLE_DATE: 'GET_UNAVAILABLE_DATE',
+  UNAVAILABLE_DATE_GET_SUCCESS: 'UNAVAILABLE_DATE_GET_SUCCESS',
+  UNAVAILABLE_DATE_GET_FALSE: 'UNAVAILABLE_DATE_GET_FALSE',
   getDashboard: payload => ({
     type: actions.GET_DASHBOARD,
     payload
@@ -32,8 +35,12 @@ const actions = {
     type: actions.GET_ENGAGEMENT_WORKSHEET,
     payload
   }),
-  getOrder:payload => ({
+  getOrder: payload => ({
     type: actions.GET_ORDER,
+    payload
+  }),
+  getUnavailableDate: payload => ({
+    type: actions.GET_UNAVAILABLE_DATE,
     payload
   })
 }
