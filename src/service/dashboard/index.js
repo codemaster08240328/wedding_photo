@@ -135,7 +135,6 @@ class DashHelper {
     body.append('json', true);
     body.append('user_type', API_ACTION.USER_TYPE);
     body.append('photog_id', param.photog_id);
-    body.append('search_term', param.search_term);
     body.append('filter_by_year', param.filter_by_year);
     
     return await SuperFetch.post("/", body)
@@ -145,6 +144,31 @@ class DashHelper {
           return resp;
         else
           return {error: true, data: resp.message}
+      })
+  }
+
+  addUnavailableDate = async(param) => {
+    const body = new FormData();
+    body.append(API_ACTION.KEY, API_ACTION.KEY_NUM);
+    body.append(API_ACTION.ACTION, API_ACTION.ADD_UNAVAILABLE_DATE);
+    body.append('json', true);
+    body.append('user_type', API_ACTION.USER_TYPE);
+    body.append('photog_id', param.photog_id);
+    body.append('unavl_date_from', param.unavl_date_from);
+    body.append('unavl_date_to', param.unavl_date_to);
+    body.append('unavl_reason', param.unavl_reason);
+    
+    return await SuperFetch.post("/", body)
+      .then((resp) => resp.json())
+      .then(resp => {
+        console.log("resp",resp)
+        if(resp.success=="true")
+          return resp;
+        else
+          return {error: true, data: resp.message}
+      })
+      .catch((err)=>{
+        console.log(err)
       })
   }
 

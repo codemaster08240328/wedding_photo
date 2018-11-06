@@ -12,6 +12,7 @@ const API_ACTION = {
      MARK_PHOTOSHOOT_CALL_COMPLETE: 'mark_photoshoot_call_complete',
      GET_ORDER: 'get_orders',
      GET_UNAVAILABLE_DATE: 'get_unavailable_dates',
+     ADD_UNAVAILABLE_DATE: 'add_unavailable_date',
      POST_ENGAGEMENT_SCHEDULE: 'POST_ENGAGEMENT_SCHEDULE',
      GET_ENGAGEMENT_SCHEDULE: 'get_engagement_schedule',
      GET_WEDDING_WORKSHEET: 'get_wedding_worksheet',

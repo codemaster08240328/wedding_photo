@@ -7,6 +7,7 @@ import {
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import { LocaleConfig } from 'react-native-calendars';
 import actions from '../../redux/dashboard/action'
+import DashHelper from "../../service/dashboard"
 
 import { connect } from 'react-redux'
 import LogoComponent from '../../components/LogoComponent'
@@ -52,19 +53,29 @@ class CalendarView extends Component {
     this.props.dispatch(actions.getUnavailableDate(param));
   }
  
-  selectedDay = (day) => {
+  selectedDay = async(day) => {
     let selectedDay = day.dateString;
     let obj={}
-    if(selectedDay in this.state.markedData){
-      obj = Object.assign({}, this.state.markedData);
-      delete obj[selectedDay];
-      this.setState({markedData: obj})
-    }else{
-      obj[selectedDay] = {selected: true, selectedColor: colors.btnGrayColor}
-      console.log('obj~~~~~~~', obj)
-      let newMarkedData = {...this.state.markedData, ...obj}
-      console.log(newMarkedData)
-      this.setState({markedData: newMarkedData});
+    const param = {
+      photog_id: this.props.user.photog_id,
+      unavl_date_from: selectedDay,
+      unavl_date_to: selectedDay,
+      unavl_reason: 1
+    }
+    const result =await DashHelper.addUnavailableDate(param);
+    
+    if(result && !result.error){
+      if(selectedDay in this.state.markedData){
+        obj = Object.assign({}, this.state.markedData);
+        delete obj[selectedDay];
+        this.setState({markedData: obj})
+      }else{
+        obj[selectedDay] = {selected: true, selectedColor: colors.btnGrayColor}
+        console.log('obj~~~~~~~', obj)
+        let newMarkedData = {...this.state.markedData, ...obj}
+        console.log(newMarkedData)
+        this.setState({markedData: newMarkedData});
+      }
     }
   }
 
