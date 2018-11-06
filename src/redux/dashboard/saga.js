@@ -88,7 +88,7 @@ export function* getOrder(){
     }else{
       yield put({
         type: actions.ORDER_FAIL,
-        payload: result.error
+        payload: result.message
       })
     }
   })

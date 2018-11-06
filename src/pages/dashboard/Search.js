@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ListView } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SideMenu from 'react-native-side-menu'
@@ -19,11 +19,21 @@ class Search extends Component {
     super(props)
   
     this.state = {
-       text:''
+       text:'',
+       searchResult: false,
+       order:[]
     }
     this.onMenuItemSelected = this.onMenuItemSelected.bind(this)
     this.updateMenuState = this.updateMenuState.bind(this)
     this.toggleSideMenu = this.toggleSideMenu.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log("~~~~~~~~~`",nextProps)
+    if( nextProps.order.length > 0 ){
+      const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+      this.setState({searchResult: true, order: ds.cloneWithRows(nextProps.order)})
+    }
   }
   
   onMenuItemSelected(item){
@@ -46,9 +56,50 @@ class Search extends Component {
     console.log(this.state.text)
     const param = {
       photog_id: this.props.user.photog_id,
-      search_term: this.state.text
+      search_term: this.state.text,
+      show_recent: false
     }
     this.props.dispatch(actions.getOrder(param));
+  }
+  recent = () => {
+    const param = {
+      photog_id: this.props.user.photog_id,
+      search_term: '',
+      show_recent: true
+    }
+    this.setState({text: 'Recent'})
+    this.props.dispatch(actions.getOrder(param));
+  }
+  renderRowItem = (row_data) => {
+    return(
+      <View 
+        style={{
+          flexDirection: "row", 
+          borderBottomWidth: 0.5, 
+          borderColor: colors.lightBorderColor,
+          paddingVertical: 10,
+          paddingHorizontal: 15
+        }}
+      >
+        <View style={{flex: 10}}>
+          <Text style={{fontSize: 15}}>{row_data.customer_data[0].cust_fname + " " + row_data.customer_data[0].cust_lname}</Text>
+          <Text style={{fontSize:13, color: colors.fontGrayColor}}>{row_data.customer_data[0].cust_addr1 + " " + row_data.customer_data[0].cust_city + ", " + row_data.customer_data[0].cust_state + " " + row_data.customer_data[0].cust_zip}</Text>
+          <Text style={{fontSize:13, color: colors.fontGrayColor}}>{row_data.customer_data[0].cust_wed_date}</Text>
+        </View>
+        <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+          <TouchableOpacity 
+            onPress={() => this._toggleModal(item)} 
+          >
+            <Icon 
+              name="dots-three-vertical"
+              type="entypo"
+              color={colors.fontGrayColor}
+              size={25}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    )
   }
   render() {
     const menu = <Menu onItemSelected={this.onMenuItemSelected} {...this.props} />;
@@ -62,6 +113,8 @@ class Search extends Component {
         <View style={styles.container}>
           <LogoComponent {...this.props} />
           <NavBar handlePress={this.toggleSideMenu} {...this.props} />
+          {!this.state.searchResult &&
+          <View>
           <View style={{height: 60, flexDirection: 'row', padding: 10}}>
             <View style={{flex: 7, flexDirection: 'row'}}>
               <View 
@@ -123,11 +176,27 @@ class Search extends Component {
                 paddingVertical: 7,
                 borderRadius: 5
               }}
+              onPress={this.recent}
             >
               <Text style={{color: colors.white}}>Show Recent Customers</Text>
             </TouchableOpacity>
           </View>
         </View>
+          }
+          {
+            this.state.searchResult && 
+            <View>
+              <View style={{height: 50, justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={{fontSize: 20}}>Results for search "{this.state.text}"</Text>
+              </View>
+              <ListView
+                dataSource = {this.state.order}
+                renderRow={(row_data)=>this.renderRowItem(row_data)}
+              />
+            </View>
+          }
+        </View>
+          
       </SideMenu>
     )
   }
@@ -136,6 +205,7 @@ class Search extends Component {
 const mapStateToProps = (state) => ({
   state: state,
   user: state.authReducer.user,
+  order: state.orderReducer.order
 
 })
 

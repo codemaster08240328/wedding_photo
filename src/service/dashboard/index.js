@@ -116,11 +116,15 @@ class DashHelper {
     body.append('user_type', API_ACTION.USER_TYPE);
     body.append('photog_id', param.photog_id);
     body.append('search_term', param.search_term);
+    body.append('show_recent', param.show_recent)
     
     return await SuperFetch.post("/", body)
       .then((resp) => resp.json())
       .then(resp => {
-        return resp;
+        if(resp.success=="true")
+          return resp;
+        else
+          return {error: true, data: resp.message}
       })
   }
 

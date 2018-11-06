@@ -138,7 +138,7 @@ export function engagementWorksheetReducer(state=initEnWoState, action={}){
 const initOrderState = Immutable({
     loading: null,
     success: null,
-    order: {},
+    order: [],
     message: null
 })
 
@@ -163,7 +163,8 @@ export function orderReducer(state=initOrderState, action={}){
                 ...state,
                 success: false,
                 loading: false,
-                message: action.payload
+                order: {},
+                message: payload
             }
 
         default:
