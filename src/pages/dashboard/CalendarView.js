@@ -5,13 +5,16 @@ import {
   View
 } from 'react-native';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
-import {LocaleConfig} from 'react-native-calendars';
+import { LocaleConfig } from 'react-native-calendars';
+import actions from '../../redux/dashboard/action'
+
+import { connect } from 'react-redux'
 import LogoComponent from '../../components/LogoComponent'
-import {colors} from '../../settings/constant';
+import { colors } from '../../settings/constant';
 
 
 LocaleConfig.locales['fr'] = {
-  monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+  monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
   monthNamesShort: ['Janv.','Févr.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov.','Déc.'],
   dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
   dayNamesShort: ['Dim.','Lun.','Mar.','Mer.','Jeu.','Ven.','Sam.']
@@ -24,7 +27,7 @@ LocaleConfig.locales['En'] = {
 }
 LocaleConfig.defaultLocale = 'En';
 
-export default class CalendarView extends Component {
+class CalendarView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,8 +43,13 @@ export default class CalendarView extends Component {
     this.selectedDay = this.selectedDay.bind(this)
   }
 
-  componentDidMount(props) {
-    
+  componentDidMount() {
+    const dt = new Date();
+    const param = {
+      photog_id: this.props.user.photog_id,
+      filter_by_year: dt.getFullYear()
+    }
+    this.props.dispatch(actions.getUnavailableDate(param));
   }
  
   selectedDay = (day) => {
@@ -57,6 +65,18 @@ export default class CalendarView extends Component {
       let newMarkedData = {...this.state.markedData, ...obj}
       console.log(newMarkedData)
       this.setState({markedData: newMarkedData});
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.unavailable_date.length > 0){
+      let obj={}
+      nextProps.unavailable_date.map((item)=>{
+        obj[item.unavl_date] = {selected: true, selectedColor: colors.btnGrayColor}
+      })
+      this.setState({
+        markedData: obj
+      })
     }
   }
 
@@ -122,3 +142,13 @@ const styles = StyleSheet.create({
     flex: 1
   }
 })
+
+function mapStateToProps(state){
+  return {
+    state: state,
+    user: state.authReducer.user,
+    unavailable_date: state.unavailableDateReducer.unavailable_date
+  }
+}
+
+export default connect(mapStateToProps)(CalendarView)
