@@ -12,6 +12,7 @@ import DashHelper from "../../service/dashboard"
 import { connect } from 'react-redux'
 import LogoComponent from '../../components/LogoComponent'
 import { colors } from '../../settings/constant';
+// import Toast from 'react-native-simple-toast';
 
 
 LocaleConfig.locales['fr'] = {
@@ -34,12 +35,7 @@ class CalendarView extends Component {
     this.state = {
       selectedStartDate: null,
       selectedEndDate: null,
-      markedData: {
-        '2018-11-16': {selected: true, selectedColor: colors.btnGrayColor},
-        '2018-11-17': {selected: true, selectedColor: colors.btnGrayColor},
-        '2018-11-18': {selected: true, selectedColor: colors.btnGrayColor},
-        '2018-11-19': {selected: true, selectedColor: colors.btnGrayColor}
-      }
+      markedData: {}
     };
     this.selectedDay = this.selectedDay.bind(this)
   }
@@ -52,29 +48,41 @@ class CalendarView extends Component {
     }
     this.props.dispatch(actions.getUnavailableDate(param));
   }
- 
+
   selectedDay = async(day) => {
     let selectedDay = day.dateString;
     let obj={}
-    const param = {
-      photog_id: this.props.user.photog_id,
-      unavl_date_from: selectedDay,
-      unavl_date_to: selectedDay,
-      unavl_reason: 1
-    }
-    const result =await DashHelper.addUnavailableDate(param);
-    
-    if(result && !result.error){
-      if(selectedDay in this.state.markedData){
-        obj = Object.assign({}, this.state.markedData);
-        delete obj[selectedDay];
-        this.setState({markedData: obj})
-      }else{
+    if(selectedDay in this.state.markedData){
+      let deletingObj = this.props.unavailable_date.filter((item)=>item.unavl_date===selectedDay);
+      console.log("deleting object~~~`",deletingObj);
+      const param1 = {
+        photog_id: this.props.user.photog_id,
+        unavl_date: selectedDay,
+        unavl_date_id: deletingObj[0].unavl_date_id
+      }
+      const result1 = await DashHelper.deleteUnavailableDate(param1)
+      if(result1 && !result1.error){
+          obj = Object.assign({}, this.state.markedData);
+          delete obj[selectedDay];
+          this.setState({markedData: obj})
+      }
+    }else{
+      const param = {
+        photog_id: this.props.user.photog_id,
+        unavl_date_from: selectedDay,
+        unavl_date_to: selectedDay,
+        unavl_reason: 1
+      }
+      const result = await DashHelper.addUnavailableDate(param);
+      if(result && !result.error){
         obj[selectedDay] = {selected: true, selectedColor: colors.btnGrayColor}
         console.log('obj~~~~~~~', obj)
         let newMarkedData = {...this.state.markedData, ...obj}
         console.log(newMarkedData)
         this.setState({markedData: newMarkedData});
+      }else{
+        // Toast.show("From date must be a future date")
+        alert("From date must be a future date")
       }
     }
   }
@@ -83,7 +91,12 @@ class CalendarView extends Component {
     if(nextProps.unavailable_date.length > 0){
       let obj={}
       nextProps.unavailable_date.map((item)=>{
-        obj[item.unavl_date] = {selected: true, selectedColor: colors.btnGrayColor}
+        if(item.unavl_reason==1){
+          obj[item.unavl_date] = {selected: true, selectedColor: colors.btnGrayColor}
+        }else{
+          obj[item.unavl_date] = {selected: true, selectedColor: colors.btnColor}
+        }
+        
       })
       this.setState({
         markedData: obj

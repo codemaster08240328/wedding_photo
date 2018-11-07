@@ -13,6 +13,7 @@ const API_ACTION = {
      GET_ORDER: 'get_orders',
      GET_UNAVAILABLE_DATE: 'get_unavailable_dates',
      ADD_UNAVAILABLE_DATE: 'add_unavailable_date',
+     DELETE_UNAVAILABLE_DATE: 'delete_unavailable_date',
      POST_ENGAGEMENT_SCHEDULE: 'POST_ENGAGEMENT_SCHEDULE',
      GET_ENGAGEMENT_SCHEDULE: 'get_engagement_schedule',
      GET_WEDDING_WORKSHEET: 'get_wedding_worksheet',
