@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 import LogoComponent from '../../components/LogoComponent'
 import { colors } from '../../settings/constant';
 // import Toast from 'react-native-simple-toast';
-
+const dt = new Date();
 
 LocaleConfig.locales['fr'] = {
   monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
@@ -35,16 +35,17 @@ class CalendarView extends Component {
     this.state = {
       selectedStartDate: null,
       selectedEndDate: null,
-      markedData: {}
+      markedData: {},
+      curYear:dt.getFullYear()
     };
     this.selectedDay = this.selectedDay.bind(this)
   }
 
   componentDidMount() {
-    const dt = new Date();
+    
     const param = {
       photog_id: this.props.user.photog_id,
-      filter_by_year: dt.getFullYear()
+      filter_by_year: this.state.curYear
     }
     this.props.dispatch(actions.getUnavailableDate(param));
   }
@@ -104,6 +105,18 @@ class CalendarView extends Component {
     }
   }
 
+  onMonthChange = (month) => {
+    if(this.state.curYear != month.year){
+      console.log(month.year)
+      const param = {
+        photog_id: this.props.user.photog_id,
+        filter_by_year: month.year
+      }
+      this.props.dispatch(actions.getUnavailableDate(param));
+      this.setState({curYear:month.year})
+    }
+  }
+
  
   render() {    
  
@@ -131,7 +144,8 @@ class CalendarView extends Component {
           // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
           monthFormat={'MMM yyyy'}
           // Handler which gets executed when visible month changes in calendar. Default = undefined
-          onMonthChange={(month) => {console.log('month changed', month)}}
+          onMonthChange={(month) => this.onMonthChange(month)}
+          
           // Hide month navigation arrows. Default = false
           // hideArrows={true}
           // Replace default arrows with custom ones (direction can be 'left' or 'right')
