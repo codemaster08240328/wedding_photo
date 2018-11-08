@@ -1,24 +1,34 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ListView } from 'react-native'
+import { Icon } from 'react-native-elements'
 import LogoComponent from '../../components/LogoComponent'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import{ colors } from '../../settings/constant'
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 class Notification extends Component {
-
   constructor(props) {
     super(props)
   
     this.state = {
-       
+      unread_notifications: this.props.dashReducer.dashboard['unread_notifications'] ? this.props.dashReducer.dashboard['unread_notifications'] : [],
+      read_notifications: this.props.dashReducer.dashboard['read_notifications'] ? this.props.dashReducer.dashboard['read_notifications'] : []
     }
-    console.log(this.props.dashReducer.dashboard['read_notifications'])
   }
   _renderRow(item) {
-
     return (
-    <Text>asdfadfa</Text>
+    <View style={{flexDirection: 'row', alignItems: 'center', borderBottomWidth: 1, borderColor: colors.darkBorderColor, height: 45, flex:1}}>
+      <Icon
+        type='evilicon'
+        name='question'
+        color={ colors.btnGrayColor }
+        size={25}
+      />
+      <Text style={{marginLeft: 10}}>
+        { item.n_name }
+      </Text>
+    </View>
     );
   }
 
@@ -32,31 +42,32 @@ class Notification extends Component {
               height: 25, 
               justifyContent: "center", 
               backgroundColor: colors.headerColor,
-              paddingLeft: 10
+              paddingLeft: 15
             }}
           >
-            <Text>Unread Notifications</Text>
+            <Text style={{fontWeight:"bold"}}>Unread Notifications</Text>
           </View>
-          {this.props.dashReducer.dashboard['unread_notifications']&&
-            <ListView
-              dataSource={[]}
-              renderRow={(item)=>this._renderRow(item)}
-            />
-          }
-          
-
+          <ListView
+            dataSource={ds.cloneWithRows(this.state.unread_notifications)}
+            renderRow={(item)=>this._renderRow(item)}
+          />
           <View
             style={{
               height: 25, 
               justifyContent: "center", 
               backgroundColor: colors.headerColor,
-              paddingLeft: 10
+              paddingLeft: 15
             }}  
           >
-            <Text>Read Notifications</Text>
+            <Text style={{fontWeight:"bold"}}>Read Notifications</Text>
           </View>
-          {
-          }
+          <View style={{paddingHorizontal: 10}}>
+            <ListView
+              dataSource={ds.cloneWithRows(this.state.read_notifications)}
+              renderRow={(item)=>this._renderRow(item)}
+            />
+          </View>
+          
         </View>
       </View>
     )
