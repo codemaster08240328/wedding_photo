@@ -21,7 +21,7 @@ const API_ACTION = {
      REQUEST_PAYMENT: 'REQUEST_PAYMENT',
      USER_TYPE: 'photographer',
      LOGIN_SOURCE: 'ios_mobile',
-     ORDER : 'getCustomerOrders',
+     PAYMENT : 'get_payment_list',
      ORDER_DETAILS:'getOrderDetailsById',
      PROPOSAL : 'getCustomerProposals',
      INVOICE : 'getOderInvoices',

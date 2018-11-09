@@ -1,0 +1,13 @@
+const actions = {
+  GETTING_PAYMENT_HISTORY: "GETTING_PAYMENT_HISTORY",
+  PAYMENT_HISTORY_GET_SUCCESS: 'PAYMENT_HISTORY_GET_SUCCESS',
+  PAYMENT_HISTORY_GET_ERROR: 'PAYMENT_HISTORY_GET_ERROR',
+  GET_ORDER_SUCCESS: "GET_ORDER_SUCCESS",
+  getPaymentHistory: payload => ({
+      type: actions.GETTING_PAYMENT_HISTORY,
+      payload
+  })
+
+}
+
+export default actions

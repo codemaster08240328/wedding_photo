@@ -76,6 +76,8 @@ class Payment extends Component {
                   justifyContent: 'center',
                   alignItems: 'center'
                 }, this.state.flag && {backgroundColor: colors.btnColor}]}
+                onPress={()=>this.setState({flag:true})}
+                
               >
                 <Text 
                   style={this.state.flag ? {color: colors.white} : {color: colors.btnColor}}
@@ -95,6 +97,8 @@ class Payment extends Component {
                   alignItems: 'center'
 
                 }, !this.state.flag && {backgroundColor: colors.btnColor}]}
+                onPress={()=>this.setState({flag:false})}
+
               >
                 <Text style={!this.state.flag ? {color: colors.white} : {color: colors.btnColor}} >Engagement</Text>
               </TouchableOpacity>
