@@ -53,7 +53,7 @@ class Menu extends Component {
     super(props);
     this.proposal = this.proposal.bind(this);
     this.order = this.order.bind(this);
-    this.blog = this.blog.bind(this);
+    this.payment = this.payment.bind(this);
     this.auth = this.auth.bind(this);
     this.change = this.change.bind(this);
 }
@@ -86,8 +86,8 @@ class Menu extends Component {
     
   }
 
-  blog(){
-      this.props.onItemSelected('blog');   
+  payment(){
+      this.props.onItemSelected('payment');   
   }
 
   auth(){
@@ -119,7 +119,7 @@ class Menu extends Component {
                     <Icon size={17} name = "date-range"  color="#fff"/>
                     <Text style = {{paddingLeft:5, color:'white'}}>Manage My Dates</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={this.blog} style = {{flexDirection:'row',alignItems:'center',height:40,paddingLeft:10,padding:10,borderBottomColor:'white',borderBottomWidth:1}}>
+                <TouchableOpacity onPress={this.payment} style = {{flexDirection:'row',alignItems:'center',height:40,paddingLeft:10,padding:10,borderBottomColor:'white',borderBottomWidth:1}}>
                     <Icon size={17} name = "history" type="font-awesome" color="#fff"/>
                     <Text style = {{paddingLeft:5, color:'white'}}>Payments History</Text>
                 </TouchableOpacity>
