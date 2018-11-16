@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements'
 import LogoComponent from '../../components/LogoComponent'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import {Notifications} from 'expo';
 
 import{ colors } from '../../settings/constant'
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
@@ -16,6 +17,7 @@ class Notification extends Component {
       read_notifications: this.props.dashReducer.dashboard['read_notifications'] ? this.props.dashReducer.dashboard['read_notifications'] : []
     }
   }
+
   _renderRow(item) {
     return (
     <View style={{flexDirection: 'row', alignItems: 'center', borderBottomWidth: 1, borderColor: colors.darkBorderColor, height: 45, flex:1}}>

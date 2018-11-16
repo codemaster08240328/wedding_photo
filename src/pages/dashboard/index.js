@@ -6,37 +6,19 @@ import SideMenu from 'react-native-side-menu'
 import call from 'react-native-phone-call'
 import SendSMS from 'react-native-sms'
 import email from 'react-native-email'
+import * as Helper from '../../helpers/utility';
 import LogoComponent from '../../components/LogoComponent';
 import Menu from '../../components/SideMenu'
 import NavBar from '../../components/NavBar';
 import actions from '../../redux/dashboard/action';
 import DashHelper from "../../service/dashboard";
-import {Permissions, Notifications} from 'expo';
+import { Notifications} from 'expo';
 import { colors } from '../../settings/constant'
 import { Icon, ListItem, Button } from 'react-native-elements';
 import Modal from 'react-native-modal'
 import Dimensions from 'Dimensions';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
-
-async function register() {
-  const { status: existingStatus } = await Permissions.getAsync(
-    Permissions.NOTIFICATIONS
-  );
-  let finalStatus = existingStatus;
-  if(existingStatus !== 'granted'){
-    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-    finalStatus = status;
-    alert(finalStatus)
-  }
-
-  if (finalStatus !== 'granted') {
-    return;
-  }
-
-  const token = await Notifications.getExpoPushTokenAsync();
-  console.log(finalStatus, token);
-}
 
 class DashBoard extends Component {
 
@@ -60,7 +42,7 @@ class DashBoard extends Component {
   }
 
   componentWillMount = () => {
-    register();
+    Helper.notificationRegister();
     this.listener = Notifications.addListener(this.listen)
   }
   componentWillUnmount = () => {
