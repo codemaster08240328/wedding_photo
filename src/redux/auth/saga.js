@@ -22,8 +22,11 @@ export function* loginRequest() {
 export function* loginRegister(){
   yield takeEvery(actions.LOGIN_SUCCESS, function*({payload}) {
     console.log('this is called now')
-    // const result = yield call(AuthHelper.authorize, userInfo)
-    
+    const param = {
+      photog_id: payload.photog_id
+    }
+    AuthHelper.loginRegister(param)
+    // const result = yield call(AuthHelper.loginRegister, param)
   })
 }
 export function* forgotPassword(){
