@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SideMenu from 'react-native-side-menu'
@@ -9,6 +9,7 @@ import NavBar from '../../components/NavBar'
 import Menu from '../../components/SideMenu'
 
 import { colors } from '../../settings/constant'
+import actions from '../../redux/payment/action';
 
 class Payment extends Component {
   static propTypes = {
@@ -27,6 +28,22 @@ class Payment extends Component {
     this.updateMenuState = this.updateMenuState.bind(this)
     this.toggleSideMenu = this.toggleSideMenu.bind(this)
   }
+  componentDidMount(){
+    if(this.state.flag){
+      const param = {
+        photog_id: this.props.user.photog_id,
+        pay_for: 'Wedding'
+      }
+      this.props.dispatch(actions.getWeddingPaymentHistory(param));
+    }else{
+      const param = {
+        photog_id: this.props.user.photog_id,
+        pay_for: 'Engagement'
+      }
+      this.props.dispatch(actions.getWeddingPaymentHistory(param));
+    }
+      
+  }
 
   onMenuItemSelected(item){
     this.setState({
@@ -43,7 +60,52 @@ class Payment extends Component {
       isOpen: !this.state.isOpen
     })
   }
-  
+
+  payForClicked = (flag) => {
+    this.setState({flag});
+    if(flag){
+      const param = {
+        photog_id: this.props.user.photog_id,
+        pay_for: 'Wedding'
+      }
+      this.props.dispatch(actions.getWeddingPaymentHistory(param));
+    }else{
+      const param = {
+        photog_id: this.props.user.photog_id,
+        pay_for: 'Engagement'
+      }
+      this.props.dispatch(actions.getWeddingPaymentHistory(param));
+    }
+  }
+
+  _keyExtractor = (item, index) => item.id;
+
+  _renderItem = ({item}) => {
+    return(
+      <View 
+        style={{
+          flexDirection: "row", 
+          borderBottomWidth: 0.5, 
+          borderColor: colors.lightBorderColor,
+          paddingVertical: 10,
+          paddingHorizontal: 15
+        }}
+      >
+        <View style={{flex: 8}}>
+          <Text style={{fontSize: 15}}>{item.cust_name}</Text>
+          <Text style={{fontSize:13, color: colors.fontGrayColor}}>First shooter: ${item.first_shooter_total_pay}</Text>
+          <Text style={{fontSize:13, color: colors.fontGrayColor}}>Second shooter: ${item.second_shooter_total_pay}</Text>
+        </View>
+        <View style = {{flex: 3, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+          
+          <Text style={item.pay_status == 'paid' ? {marginLeft:5, color: "#05ff02", fontSize:18} : {marginLeft:5, color: colors.btnColor, fontSize:18}}>
+          {item.pay_status.charAt(0).toUpperCase() + item.pay_status.substr(1)}
+          </Text>
+
+        </View>
+      </View>
+    )
+  }
 
   render() {
     const menu = <Menu onItemSelected={this.onMenuItemSelected} {...this.props} />;
@@ -75,9 +137,8 @@ class Payment extends Component {
                   height: 30,
                   justifyContent: 'center',
                   alignItems: 'center'
-                }, this.state.flag && {backgroundColor: colors.btnColor}]}
-                onPress={()=>this.setState({flag:true})}
-                
+                }, this.state.flag && {backgroundColor: colors.btnColor}]}    
+                onPress={() => this.payForClicked(true)}            
               >
                 <Text 
                   style={this.state.flag ? {color: colors.white} : {color: colors.btnColor}}
@@ -97,7 +158,7 @@ class Payment extends Component {
                   alignItems: 'center'
 
                 }, !this.state.flag && {backgroundColor: colors.btnColor}]}
-                onPress={()=>this.setState({flag:false})}
+                onPress={() => this.payForClicked(false)}
 
               >
                 <Text style={!this.state.flag ? {color: colors.white} : {color: colors.btnColor}} >Engagement</Text>
@@ -105,6 +166,14 @@ class Payment extends Component {
             </View>
             <Text style = {{marginTop: 5, fontSize: 12}}>Showing last 15 records</Text>
 
+          </View>
+          <View>
+            <FlatList
+              data={this.props.PaymentHistory}
+              extraData={this.state}
+              keyExtractor={this._keyExtractor}
+              renderItem={this._renderItem}
+            />
           </View>
         </View>
       </SideMenu>
@@ -122,7 +191,8 @@ const styles = StyleSheet.create({
   
 })
 const mapStateToProps = (state) => ({
-  
+  user: state.authReducer.user,
+  PaymentHistory: state.weddingPaymentHistoryReducer.paymenthistory
 })
 
 export default connect(mapStateToProps)(Payment)

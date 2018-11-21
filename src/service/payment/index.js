@@ -9,14 +9,22 @@ class PaymentHelper {
         body.append('json', true);
         body.append('user_type', API_ACTION.USER_TYPE);
         body.append('photog_id', param.photog_id);
-        body.append('cust_id', param.cust_id);
-        body.append('pay_for', 'Wedding');
-        body.append('odr_id', param.odr_id);
+        body.append('cust_id', param.cust_id ? param.cust_id : '' );
+        body.append('pay_for', param.pay_for);
+        body.append('odr_id', param.odr_id ? param.odr_id : '');
         return await SuperFetch.post("/", body)
             .then((resp)=> resp.json())
             .then(resp=>{
                 return this.handleResponse(resp)
             });
+    }
+    handleResponse = (response) => {
+        if (response.success == "true") { 
+            return response.data
+        }    
+        return {
+            error: response.message
+        }
     }
 }
 
