@@ -25,7 +25,7 @@ export function getContentFromHTML(content){
   return result;
 }
 
-export async function notificationRegister(){
+export async function notificationRegister(photog_id){
   const { status: existingStatus } = await Permissions.getAsync(
     Permissions.NOTIFICATIONS
   );
@@ -42,10 +42,12 @@ export async function notificationRegister(){
 
   const token = await Notifications.getExpoPushTokenAsync();
   console.log(finalStatus, token);
-  // const param = {
-
-  // }
-  //const result = await NotificationHelper.RegisterDevice(param);
+  console.log('photog_id', photog_id)
+  const param = {
+    photog_id,
+    device_token: token
+  }
+  const result = await NotificationHelper.RegisterDevice(param);
 
 }
   

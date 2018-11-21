@@ -19,6 +19,13 @@ export function* loginRequest() {
     }
   })
 }
+export function* loginRegister(){
+  yield takeEvery(actions.LOGIN_SUCCESS, function*({payload}) {
+    console.log('this is called now')
+    // const result = yield call(AuthHelper.authorize, userInfo)
+    
+  })
+}
 export function* forgotPassword(){
   yield takeEvery(actions.FORGOT_PASS, function*({payload}){
     const email_address = payload
@@ -59,5 +66,6 @@ export default function* rootSaga() {
     fork(logout),
     fork(forgotPassword),
     fork(changePassword),
+    fork(loginRegister)
   ])
 }

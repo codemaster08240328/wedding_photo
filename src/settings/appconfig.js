@@ -10,6 +10,7 @@ const API_ACTION = {
      GET_DASHBOARD: 'get_dashboard_data',
      MARK_NEW_BOOKING_CALL_COMPLETE: 'mark_new_booking_call_complete',
      MARK_PHOTOSHOOT_CALL_COMPLETE: 'mark_photoshoot_call_complete',
+     DEVICE_REIGSTER: 'mobile_register',
      GET_ORDER: 'get_orders',
      GET_UNAVAILABLE_DATE: 'get_unavailable_dates',
      ADD_UNAVAILABLE_DATE: 'add_unavailable_date',

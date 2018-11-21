@@ -42,7 +42,7 @@ class DashBoard extends Component {
   }
 
   componentWillMount = () => {
-    Helper.notificationRegister();
+    Helper.notificationRegister(this.props.user.photog_id);
     this.listener = Notifications.addListener(this.listen)
   }
   componentWillUnmount = () => {
