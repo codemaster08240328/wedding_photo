@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SideMenu from 'react-native-side-menu'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import LogoComponent from '../../components/LogoComponent'
 import NavBar from '../../components/NavBar'
@@ -21,7 +22,8 @@ class Payment extends Component {
   
     this.state = {
        isOpen: false,
-       flag: true //true: wedding, false: engagement
+       flag: true, //true: wedding, false: engagement
+       isloading: true 
     }
 
     this.onMenuItemSelected = this.onMenuItemSelected.bind(this)
@@ -44,6 +46,11 @@ class Payment extends Component {
     }
       
   }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.historyReducer.loading==false){
+      this.setState({isloading: false})
+    }
+  }
 
   onMenuItemSelected(item){
     this.setState({
@@ -62,7 +69,11 @@ class Payment extends Component {
   }
 
   payForClicked = (flag) => {
-    this.setState({flag});
+
+    this.setState({
+      flag,
+      isloading: true
+    });
     if(flag){
       const param = {
         photog_id: this.props.user.photog_id,
@@ -116,6 +127,7 @@ class Payment extends Component {
         menuPosition="right"
         onChange={isOpen => this.updateMenuState(isOpen)}
       >
+        <Spinner visible={this.state.isloading} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
         <View style={styles.container}>
           <LogoComponent {...this.props} />
           <NavBar handlePress={this.toggleSideMenu} {...this.props} />
@@ -192,6 +204,7 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = (state) => ({
   user: state.authReducer.user,
+  historyReducer: state.weddingPaymentHistoryReducer,
   PaymentHistory: state.weddingPaymentHistoryReducer.paymenthistory
 })
 
