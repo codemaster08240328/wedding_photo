@@ -7,6 +7,7 @@ const API_ACTION = {
      ACTION : 'action',
      KEY_NUM  : 'WERIUE343737KSDFJIRNZNV',
      LOGIN : 'login',
+     GET_PENDING_CONTRACT: 'get_contractor_contracts',
      LOGIN_REGISTER: 'first_login_from_app',
      GET_DASHBOARD: 'get_dashboard_data',
      MARK_NEW_BOOKING_CALL_COMPLETE: 'mark_new_booking_call_complete',

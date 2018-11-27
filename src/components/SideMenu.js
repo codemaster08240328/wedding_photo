@@ -69,7 +69,7 @@ class Menu extends Component {
 
   order(){
     if(this.props.user!=null){
-      this.props.onItemSelected('OrderList');
+      this.props.onItemSelected('calendar');
     }else{
       alert('Please login');
     }
@@ -79,7 +79,7 @@ class Menu extends Component {
 
   change(){
     if(this.props.user!=null){
-      this.props.onItemSelected('ChangePassword');
+      this.props.onItemSelected('contract');
     }else{
       alert('Please login');
     }

@@ -28,7 +28,7 @@ import Notification from './pages/dashboard/Notification';
 import Search from './pages/dashboard/Search';
 import CalendarView from './pages/dashboard/CalendarView';
 import Payment from './pages/history/Payment';
-
+import Contract from './pages/contract'
 
 const RootNavigator = createStackNavigator({
 	ProposalList: {
@@ -201,6 +201,12 @@ const RootNavigator = createStackNavigator({
     },
     payment: {
       screen: Payment,
+      navigationOptions: {
+        header: null
+      }
+    },
+    contract: {
+      screen: Contract,
       navigationOptions: {
         header: null
       }

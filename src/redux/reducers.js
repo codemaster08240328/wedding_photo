@@ -6,6 +6,7 @@ import { proposalReducer, proposalDetails, invoicestatus, propChange } from './p
 import { blogReducer } from './blog/reducer'
 import { dashReducer, engagementReducer, weddingWorksheetReducer, engagementWorksheetReducer, orderReducer, unavailableDateReducer } from './dashboard/reducer'
 import { weddingPaymentHistoryReducer, engPaymentHistoryReducer } from './payment/reducer'
+import { contractReducer } from './contract/reducer'
 export {
   authReducer,
   changePwdReducer, 
@@ -28,5 +29,6 @@ export {
   orderReducer,
   unavailableDateReducer,
   weddingPaymentHistoryReducer,
-  engPaymentHistoryReducer
+  engPaymentHistoryReducer,
+  contractReducer
 }
