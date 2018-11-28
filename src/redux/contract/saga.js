@@ -19,6 +19,23 @@ export function* getPendingContract() {
     }
   })
 }
+export function* getContractDetail(){
+  yield takeEvery(actions.GET_CONTRACT_DETAIL, function*({payload}) {
+    const  userInfo  = payload
+    const result = yield call(ContractHelper.getContractDetail, userInfo)
+    if (result && !result.error) {
+      yield put({
+        type: actions.GET_CONTRACT_DETAIL_SUCCESS,
+        payload: result
+      })
+    } else {
+      yield put({ 
+        type: actions.GET_CONTRACT_DETAIL_ERROR,
+        payload:result.error
+      })
+    }
+  })
+}
 
 export default function* rootSaga() {
   yield all([

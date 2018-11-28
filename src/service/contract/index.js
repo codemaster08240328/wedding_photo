@@ -34,6 +34,18 @@ class ContractHelper {
           return this.handleResponse(resp,userInfo.pass)
       });
   }
+  getContractDetail = async param => {
+    const body = new FormData();
+    body.append(API_ACTION.KEY, API_ACTION.KEY_NUM)
+    body.append(API_ACTION.ACTION, API_ACTION.GET_CONTRACT_DETAIL)
+    body.append('html', true)
+    body.append('photog_id', param.photog_id)
+    body.append('user_type', API_ACTION.USER_TYPE)
+    body.append('contract_id', param.contract_id)
+
+    return await SuperFetch.post("/", body)
+      .then((resp)=> resp.text())
+  }
   handleResponse = (response) => {
     if (response.success=="true") { 
       return response.data

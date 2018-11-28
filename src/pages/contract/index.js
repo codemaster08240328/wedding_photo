@@ -85,6 +85,12 @@ class Contract extends Component {
       this.props.dispatch(actions.getPendingContract(param));
     }
   }
+  handleViewClick = (item) => {
+    const param = {
+      item: item
+    }
+    this.props.navigation.navigate('detail', param)
+  }
 
   _renderItem = ({item}) => {
     return(
@@ -112,6 +118,7 @@ class Contract extends Component {
               justifyContent: 'center',
               alignItems: 'center'
             }}
+            onPress={() => this.handleViewClick(item)}
           >
             <Text style={{color: colors.white}}>VIEW</Text>
           </TouchableOpacity>
