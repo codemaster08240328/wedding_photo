@@ -8,7 +8,8 @@ import blogSagas from './blog/saga'
 import dashSagas from './dashboard/saga'
 import paymentSagas from './payment/saga'
 import contractSagas from './contract/saga'
+import profileSagas from './profile/saga'
 
 export default function* rootSaga(getState) {
-  yield all([authSagas(), orderSagas(), worksheetSagas(), proposalSagas(), blogSagas(), dashSagas(), paymentSagas(), contractSagas()])
+  yield all([authSagas(), orderSagas(), worksheetSagas(), proposalSagas(), blogSagas(), dashSagas(), paymentSagas(), contractSagas(), profileSagas()])
 }

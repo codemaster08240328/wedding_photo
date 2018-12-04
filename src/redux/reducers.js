@@ -7,6 +7,7 @@ import { blogReducer } from './blog/reducer'
 import { dashReducer, engagementReducer, weddingWorksheetReducer, engagementWorksheetReducer, orderReducer, unavailableDateReducer } from './dashboard/reducer'
 import { weddingPaymentHistoryReducer, engPaymentHistoryReducer } from './payment/reducer'
 import { contractReducer } from './contract/reducer'
+import { profileReducer } from './profile/reducer'
 export {
   authReducer,
   changePwdReducer, 
@@ -30,5 +31,6 @@ export {
   unavailableDateReducer,
   weddingPaymentHistoryReducer,
   engPaymentHistoryReducer,
-  contractReducer
+  contractReducer,
+  profileReducer
 }

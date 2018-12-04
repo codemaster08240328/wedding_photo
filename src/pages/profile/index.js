@@ -10,6 +10,8 @@ import LogoComponent from '../../components/LogoComponent'
 import NavBar from '../../components/NavBar'
 import Menu from '../../components/SideMenu'
 
+import actions from '../../redux/profile/action'
+
 class Profile extends Component {
   static propTypes = {
     prop: PropTypes
@@ -28,13 +30,43 @@ class Profile extends Component {
       fri: true,
       sat: true,
       sec: false,
-      maxdist: '80'
-      // isloading: true 
+      maxdist: '80',
+      isloading: true 
     }
 
     this.onMenuItemSelected = this.onMenuItemSelected.bind(this)
     this.updateMenuState = this.updateMenuState.bind(this)
     this.toggleSideMenu = this.toggleSideMenu.bind(this)
+  }
+
+  componentDidMount(){
+    const param = {
+      photog_id: this.props.user.photog_id,
+    }
+    this.props.dispatch(actions.getProfile(param));
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.profileReducer.loading == false){
+      this.setState({isloading: false});
+      console.log("~~~~~~~~~~~~~~~~~~~~~~~`",nextProps.profile.photog_block_sun);
+      this.setState({sun: nextProps.profile.photog_block_sun == '1' ? true : false})
+      this.setState({mon: nextProps.profile.photog_block_mon == '1' ? true : false})
+      this.setState({tue: nextProps.profile.photog_block_tue == '1' ? true : false})
+      this.setState({wed: nextProps.profile.photog_block_wed == '1' ? true : false})
+      this.setState({thr: nextProps.profile.photog_block_thu == '1' ? true : false})
+      this.setState({fri: nextProps.profile.photog_block_fri == '1' ? true : false})
+      this.setState({sat: nextProps.profile.photog_block_sat == '1' ? true : false})
+      this.setState({sec: nextProps.profile.is_second_shooter == '1' ? true : false})
+      this.setState({maxdist: nextProps.profile.photog_distance_value})
+      // nextProps.profile.photog_block_sun == '1' ? this.setState({sun: true}) : this.setState({sun: false})
+      // nextProps.profile.photog_block_mon == '1' ? this.setState({mon: true}) : this.setState({mon: false})
+      // nextProps.profile.photog_block_tue == '1' ? this.setState({tue: true}) : this.setState({tue: false})
+      // nextProps.profile.photog_block_wed == '1' ? this.setState({wed: true}) : this.setState({wed: false})
+      // nextProps.profile.photog_block_thu == '1' ? this.setState({thr: true}) : this.setState({thr: false})
+      // nextProps.profile.photog_block_fri == '1' ? this.setState({fri: true}) : this.setState({fri: false})
+      // nextProps.profile.photog_block_sat == '1' ? this.setState({sat: true}) : this.setState({sat: false}) 
+    }
   }
 
   onMenuItemSelected(item){
@@ -101,24 +133,31 @@ class Profile extends Component {
           <ScrollView>
             <View style={{padding: 10, paddingHorizontal: 15}}>
               <TextInput
+                value={this.props.profile ? this.props.profile.photog_fname : ''}
                 style={{padding: 5, borderWidth: 1, borderColor: colors.darkBorderColor}}
                 placeholder="FIRST NAME"
               />
               <TextInput
+                value={this.props.profile ? this.props.profile.photog_lname : ''}
                 style={styles.textInput}
                 placeholder="LAST NAME"
               />
               <TextInput
+                value={this.props.profile ? this.props.profile.photog_email : ''}
                 style={styles.textInput}
                 placeholder="EMAIL"
               />
               <TextInput
+                value={this.props.profile ? this.props.profile.photog_phone : ''}
                 style={styles.textInput}
                 placeholder="PHONE"
               />
               <TextInput
+                value={this.props.profile ? this.props.profile.photog_pass : ''}
                 style={styles.textInput}
                 placeholder="PASSWORD"
+                secureTextEntry = {true}
+
               />
               <TextInput
                 style={styles.textInput}
@@ -256,7 +295,9 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  
+  user: state.authReducer.user,
+  profileReducer: state.profileReducer,
+  profile: state.profileReducer.profile
 })
 
-export default connect(mapStateToProps) (Profile)
+export default connect(mapStateToProps)(Profile)

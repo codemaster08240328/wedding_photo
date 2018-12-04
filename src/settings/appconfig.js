@@ -12,6 +12,7 @@ const API_ACTION = {
      SET_CONTRACT_STATUS: 'set_contractor_contract_status',
      LOGIN_REGISTER: 'first_login_from_app',
      GET_DASHBOARD: 'get_dashboard_data',
+     GET_PROFILE: 'get_profile',
      MARK_NEW_BOOKING_CALL_COMPLETE: 'mark_new_booking_call_complete',
      MARK_PHOTOSHOOT_CALL_COMPLETE: 'mark_photoshoot_call_complete',
      DEVICE_REIGSTER: 'mobile_register',
