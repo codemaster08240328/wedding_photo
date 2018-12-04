@@ -8,9 +8,12 @@ const actions = {
   GET_CONTRACT_DETAIL: 'GET_CONTRACT_DETAIL',
   GET_CONTRACT_DETAIL_SUCCESS: 'GET_CONTRACT_DETAIL_SUCCESS',
   GET_CONTRACT_DETAIL_ERROR: 'GET_CONTRACT_DETAIL_ERROR',
-
   getPendingContract: payload => ({
     type: actions.GET_PENDING_CONTRACT,
+    payload
+  }),
+  getContractDetail: payload => ({
+    type: actions.GET_CONTRACT_DETAIL,
     payload
   })
 }
