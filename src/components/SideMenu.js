@@ -85,6 +85,14 @@ class Menu extends Component {
     }
     
   }
+  profile = () => {
+    if(this.props.user!=null){
+      this.props.onItemSelected('profile');
+    }else{
+      alert('Please login');
+    }
+    
+  }
 
   payment(){
       this.props.onItemSelected('payment');   
@@ -147,7 +155,7 @@ class Menu extends Component {
                     <Icon size={17} name = "ios-call" type="ionicon" color="#fff"/>
                     <Text style = {{paddingLeft:5, color:'white'}}>Emergency</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={this.change} style = {{flexDirection:'row',alignItems:'center',height:40,paddingLeft:10,padding:10,borderBottomColor:'white',borderBottomWidth:1}}>
+                <TouchableOpacity onPress={() => this.profile()} style = {{flexDirection:'row',alignItems:'center',height:40,paddingLeft:10,padding:10,borderBottomColor:'white',borderBottomWidth:1}}>
                     <Icon size={17} name = "details" color="#fff"/>
                     <Text style = {{paddingLeft:5, color:'white'}}>My Details</Text>
                 </TouchableOpacity>

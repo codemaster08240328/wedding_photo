@@ -30,6 +30,7 @@ import CalendarView from './pages/dashboard/CalendarView';
 import Payment from './pages/history/Payment';
 import Contract from './pages/contract'
 import ContractDetail from './pages/contract/detail'
+import profile from './pages/profile';
 
 const RootNavigator = createStackNavigator({
 	ProposalList: {
@@ -214,6 +215,12 @@ const RootNavigator = createStackNavigator({
     },
     detail: {
       screen: ContractDetail,
+      navigationOptions: {
+        header: null
+      }
+    },
+    profile: {
+      screen: profile,
       navigationOptions: {
         header: null
       }
