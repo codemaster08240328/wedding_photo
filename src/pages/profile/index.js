@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SideMenu from 'react-native-side-menu'
 import Spinner from 'react-native-loading-spinner-overlay';
-
+import ProfileHelper from '../../service/profile';
 import { colors } from '../../settings/constant'
 import LogoComponent from '../../components/LogoComponent'
 import NavBar from '../../components/NavBar'
@@ -59,13 +59,10 @@ class Profile extends Component {
       this.setState({sat: nextProps.profile.photog_block_sat == '1' ? true : false})
       this.setState({sec: nextProps.profile.is_second_shooter == '1' ? true : false})
       this.setState({maxdist: nextProps.profile.photog_distance_value})
-      // nextProps.profile.photog_block_sun == '1' ? this.setState({sun: true}) : this.setState({sun: false})
-      // nextProps.profile.photog_block_mon == '1' ? this.setState({mon: true}) : this.setState({mon: false})
-      // nextProps.profile.photog_block_tue == '1' ? this.setState({tue: true}) : this.setState({tue: false})
-      // nextProps.profile.photog_block_wed == '1' ? this.setState({wed: true}) : this.setState({wed: false})
-      // nextProps.profile.photog_block_thu == '1' ? this.setState({thr: true}) : this.setState({thr: false})
-      // nextProps.profile.photog_block_fri == '1' ? this.setState({fri: true}) : this.setState({fri: false})
-      // nextProps.profile.photog_block_sat == '1' ? this.setState({sat: true}) : this.setState({sat: false}) 
+      this.setState({photog_fname: nextProps.profile.photog_fname})
+      this.setState({photog_lname: nextProps.profile.photog_lname})
+      this.setState({photog_email: nextProps.profile.photog_email})
+      this.setState({photog_phone: nextProps.profile.photog_phone})
     }
   }
 
@@ -115,6 +112,28 @@ class Profile extends Component {
         break
     }
   }
+
+  detailClick = async() => {
+    let param = {
+      photog_id: this.props.user.photog_id,
+      photog_fname: this.state.photog_fname,
+      photog_lname: this.state.photog_lname,
+      photog_email: this.state.photog_email,
+      photog_phone: this.state.photog_phone,
+      photog_pass: this.state.photog_pass,
+      photog_block_sun: this.state.sun ? "1" : "0",
+      photog_block_mon: this.state.mon ? "1" : "0",
+      photog_block_tue: this.state.tue ? "1" : "0",
+      photog_block_wed: this.state.wed ? "1" : "0",
+      photog_block_thu: this.state.thr ? "1" : "0",
+      photog_block_fri: this.state.fri ? "1" : "0",
+      photog_block_sat: this.state.sat ? "1" : "0",
+      is_second_shooter: this.state.sec ? "1" : "0",
+      photog_distance_value: this.state.maxdist
+    }
+    const result = await ProfileHelper.setProfile(param);
+    result.success == 'true' ? alert("Success")  : alert("False")
+  }
   
 
   render() {
@@ -136,32 +155,31 @@ class Profile extends Component {
                 value={this.props.profile ? this.props.profile.photog_fname : ''}
                 style={{padding: 5, borderWidth: 1, borderColor: colors.darkBorderColor}}
                 placeholder="FIRST NAME"
+                onChangeText={(photog_fname)=>this.setState({photog_fname})}
               />
               <TextInput
                 value={this.props.profile ? this.props.profile.photog_lname : ''}
                 style={styles.textInput}
                 placeholder="LAST NAME"
+                onChangeText={(photog_lname)=>this.setState({photog_lname})}
               />
               <TextInput
                 value={this.props.profile ? this.props.profile.photog_email : ''}
                 style={styles.textInput}
                 placeholder="EMAIL"
+                onChangeText={(photog_email)=>this.setState({photog_email})}
               />
               <TextInput
                 value={this.props.profile ? this.props.profile.photog_phone : ''}
                 style={styles.textInput}
                 placeholder="PHONE"
+                onChangeText={(photog_phone)=>this.setState({photog_phone})}
               />
               <TextInput
-                value={this.props.profile ? this.props.profile.photog_pass : ''}
                 style={styles.textInput}
                 placeholder="PASSWORD"
                 secureTextEntry = {true}
-
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholder="LOCATION"
+                onChangeText={(photog_pass)=>this.setState({photog_pass})}
               />
             </View>
             <View>
@@ -270,7 +288,9 @@ class Profile extends Component {
               </View>
 
               <View style={{marginTop: 10, marginBottom: 10, justifyContent: 'center', alignItems: 'center'}}>
-                <TouchableOpacity style={{backgroundColor: colors.btnColor, padding: 10}}>
+                <TouchableOpacity 
+                  onPress={()=>this.detailClick()}
+                  style={{backgroundColor: colors.btnColor, padding: 10}}>
                   <Text style={{color: 'white'}}>SAVE DETAILS</Text>
                 </TouchableOpacity>
               </View>
