@@ -31,6 +31,9 @@ import Payment from './pages/history/Payment';
 import Contract from './pages/contract'
 import ContractDetail from './pages/contract/detail'
 import profile from './pages/profile';
+import WeddingPayConfirmOne from './pages/dashboard/weddingpay/WeddingPayConfirmOne';
+import WeddingPayConfirmSec from './pages/dashboard/weddingpay/WeddingPayConfirmSec';
+import WeddingPayFormFinal from './pages/dashboard/weddingpay/WeddingPayFormFinal';
 
 const RootNavigator = createStackNavigator({
 	ProposalList: {
@@ -179,6 +182,24 @@ const RootNavigator = createStackNavigator({
     },
     weddingpayconfirm: {
       screen: WeddingPayConfirm,
+      navigationOptions: {
+        header: null
+      }
+    },
+    weddingpayconfirmone: {
+      screen: WeddingPayConfirmOne,
+      navigationOptions: {
+        header: null
+      }
+    },
+    weddingpayconfirmsec: {
+      screen: WeddingPayConfirmSec,
+      navigationOptions: {
+        header: null
+      }
+    },
+    weddingpayformfinal: {
+      screen: WeddingPayFormFinal,
       navigationOptions: {
         header: null
       }

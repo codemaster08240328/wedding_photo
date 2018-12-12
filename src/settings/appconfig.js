@@ -16,6 +16,8 @@ const API_ACTION = {
      SET_PROFILE: 'set_profile',
      MARK_NEW_BOOKING_CALL_COMPLETE: 'mark_new_booking_call_complete',
      MARK_PHOTOSHOOT_CALL_COMPLETE: 'mark_photoshoot_call_complete',
+     GET_HOURS_AS_PER_CONTRACT: 'get_hours_as_per_contract',
+     REQUEST_WEDDING_PAYMENT: 'request_payment',
      DEVICE_REIGSTER: 'mobile_register',
      GET_ORDER: 'get_orders',
      GET_UNAVAILABLE_DATE: 'get_unavailable_dates',

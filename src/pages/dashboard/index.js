@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, SectionList, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, StyleSheet, SectionList, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SideMenu from 'react-native-side-menu'
 import call from 'react-native-phone-call'
 import SendSMS from 'react-native-sms'
 import email from 'react-native-email'
-import * as Helper from '../../helpers/utility';
-import LogoComponent from '../../components/LogoComponent';
+import Toast, {DURATION} from 'react-native-easy-toast'
+import * as Helper from '../../helpers/utility'
+import LogoComponent from '../../components/LogoComponent'
 import Menu from '../../components/SideMenu'
-import NavBar from '../../components/NavBar';
-import actions from '../../redux/dashboard/action';
-import DashHelper from "../../service/dashboard";
-import { Notifications} from 'expo';
+import NavBar from '../../components/NavBar'
+import actions from '../../redux/dashboard/action'
+import payreqActions from '../../redux/payrequest/action'
+import DashHelper from "../../service/dashboard"
+import { Notifications} from 'expo'
 import { colors } from '../../settings/constant'
-import { Icon, ListItem, Button } from 'react-native-elements';
+import { Icon } from 'react-native-elements'
 import Modal from 'react-native-modal'
-import Dimensions from 'Dimensions';
+import Dimensions from 'Dimensions'
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
@@ -28,7 +30,9 @@ class DashBoard extends Component {
     this.state = {
        data:[],
        isModalVisible: false,
-       selectedItem: {}
+       selectedItem: {},
+       cust_id: '',
+       odr_id: ''
     }
     this.onMenuItemSelected = this.onMenuItemSelected.bind(this)
     this.updateMenuState = this.updateMenuState.bind(this)
@@ -207,10 +211,16 @@ class DashBoard extends Component {
 
   WeddingPayRequest = (item) => {
     this._toggleModal(item);
-    const param = {
-      customer: item
+    
+    console.log('~~~~~~~~`', this.state.selectedItem)
+    const api_param = {
+      cust_id: this.state.selectedItem.customer_data[0].cust_id,
+      odr_id: this.state.selectedItem.order_data[0].odr_id,
+      photog_id: this.props.user.photog_id,
+      pay_for: 'Wedding'
     }
-    this.props.navigation.navigate('weddingpay', param);
+    this.props.dispatch(payreqActions.requestWeddingPayment(api_param));
+    // this.props.navigation.navigate('weddingpay', param);
   }
 
   pressEmailBtn = () => {
@@ -539,6 +549,17 @@ class DashBoard extends Component {
     )
 
   }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.weddingPaymentRequestReducer.success && (Object.keys(nextProps.weddingpayreq).length == 2)){
+      const param = {
+        customer: this.state.selectedItem
+      }
+      this.props.navigation.navigate('weddingpay', param)
+    }else if(!!nextProps.weddingPaymentRequestReducer.message){
+        this.refs.toast.show(nextProps.weddingPaymentRequestReducer.message, 2000)
+    }
+  }
   
 
   render() {
@@ -558,6 +579,7 @@ class DashBoard extends Component {
         onChange={isOpen => this.updateMenuState(isOpen)}
       >
         <View style={styles.container}>
+          <Toast ref = 'toast' />
           <LogoComponent {...this.props} />
           <NavBar handlePress={this.toggleSideMenu} {...this.props} />
           <View style={{height: 65, flexDirection: 'row', borderBottomWidth: 0.5, borderColor: colors.lightBorderColor}}>
@@ -757,7 +779,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   user: state.authReducer.user,
-  dashReducer: state.dashReducer
+  dashReducer: state.dashReducer,
+  weddingPaymentRequestReducer: state.weddingPaymentRequestReducer,
+  weddingpayreq: state.weddingPaymentRequestReducer.weddingpayreq
 })
 
 

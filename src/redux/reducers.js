@@ -8,6 +8,7 @@ import { dashReducer, engagementReducer, weddingWorksheetReducer, engagementWork
 import { weddingPaymentHistoryReducer, engPaymentHistoryReducer } from './payment/reducer'
 import { contractReducer } from './contract/reducer'
 import { profileReducer } from './profile/reducer'
+import { weddingPaymentRequestReducer } from './payrequest/reducer'
 export {
   authReducer,
   changePwdReducer, 
@@ -32,5 +33,6 @@ export {
   weddingPaymentHistoryReducer,
   engPaymentHistoryReducer,
   contractReducer,
-  profileReducer
+  profileReducer,
+  weddingPaymentRequestReducer
 }

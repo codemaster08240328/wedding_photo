@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button'
-import { Icon } from 'react-native-elements'
+import { Icon, CheckBox } from 'react-native-elements'
 import LogoComponent from '../../../components/LogoComponent'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import actions from '../../../redux/payrequest/action'
 
 
 import { colors } from '../../../settings/constant'
@@ -24,8 +25,9 @@ class WeddingPayFour extends Component {
       nextbtnvisible: true,
       customer: this.props.navigation.getParam('customer'),
       editable: false,
-      text1: 5,
-      text2: 0
+      text1: 0,
+      text2: 0,
+      checked: true
     
     }
     this.nextBtnClicked = this.nextBtnClicked.bind(this)
@@ -34,8 +36,24 @@ class WeddingPayFour extends Component {
   nextBtnClicked = () => {
     if (this.state.nextbtnvisible){
       console.log("clicked");
+      const action_param = {
+        first_shooter_images: this.state.text1,
+        second_shooter_images: this.state.text2,
+        total_images: parseInt(this.state.text1) + parseInt(this.state.text2),
+        second_shooter_images_uploaded: this.state.checked ? "yes" : "no",
+        stage: 7
+      }
+      this.props.dispatch(actions.secondShooterDetail(action_param))
     }
-    
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.weddingpayreq.stage == 7){
+      const param = {
+        customer: this.state.customer
+      }
+      this.props.navigation.navigate("weddingpayformfinal", param);
+    }
   }
 
   render() {
@@ -108,8 +126,9 @@ class WeddingPayFour extends Component {
               padding:5,
               width: '60%',
               fontSize: 15
-
             }}
+            onChangeText={(text1) => this.setState({text1})}
+            value={this.state.text1 + ''}
           />
           <Text style={{marginTop: 10}}>No. of images Second Photographer shot*</Text>
           <TextInput
@@ -121,8 +140,9 @@ class WeddingPayFour extends Component {
               padding:5,
               width: '60%',
               fontSize: 15
-
             }}
+            onChangeText={(text2) => this.setState({text2})}
+            value={this.state.text2 + ''}
           />
           <Text style={{marginTop: 10}}>Total no. of images*</Text>
           <TextInput
@@ -134,11 +154,11 @@ class WeddingPayFour extends Component {
               padding:5,
               width: '60%',
               fontSize: 15
-
             }}
+            value={parseInt(this.state.text1) + parseInt(this.state.text2) + ""}
           />
         </View>
-        <View style={{flexDirection: 'row', paddingHorizontal: 10, marginTop: 30}}>
+        {/* <View style={{flexDirection: 'row', paddingHorizontal: 10, marginTop: 30}}>
           <View style={{flex: 3, justifyContent: 'center'}}>
             <Text>I have submitted a "So Tell Us" video review and I'm submitting for my $25 Bonus!</Text>
           </View>
@@ -153,20 +173,15 @@ class WeddingPayFour extends Component {
               formHorizontal={true}
             />
           </View>
-        </View>
+        </View> */}
         <View style={{flexDirection: 'row', paddingHorizontal: 10, marginTop: 30}}>
-          <View style={{flex: 3, justifyContent: 'center'}}>
-            <Text>I confirm that all first and second shooter images(if applicable) have been uploaded!</Text>
-          </View>
           <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
-            <RadioForm
-              radio_props={radio_props_s}
-              initial={1}
-              buttonSize={10}
-              onPress={(value)=>{this.setState({value: value})}}
-              buttonColor={colors.btnGrayColor}
-              selectedButtonColor={colors.btnColor}
-              formHorizontal={true}
+            <CheckBox
+              iconRight
+              checkedColor={colors.btnColor}
+              title="I confirm that all first and second shooter images(if applicable) have been uploaded!"
+              checked={this.state.checked}
+              onPress={() => this.setState({checked: !this.state.checked})}
             />
           </View>
         </View>
@@ -193,7 +208,8 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  
+  weddingpayreq: state.weddingPaymentRequestReducer.weddingpayreq
+
 })
 
 export default connect(mapStateToProps)(WeddingPayFour)

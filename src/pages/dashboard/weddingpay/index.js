@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button'
 import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
+import actions from '../../../redux/payrequest/action'
 import LogoComponent from '../../../components/LogoComponent'
 
 import { colors } from '../../../settings/constant'
@@ -25,19 +26,26 @@ class WeddingPay extends Component {
 
   nextBtnClicked = () => {
     console.log("clicked");
-    const param = {
-      customer: this.state.customer
+    const action_param = {
+      if_second_shooter: this.state.value == 0 ? 'yes' : 'no',
+      stage: 1
     }
-    if(this.state.value == 0){
-      this.props.navigation.navigate('weddingpayconfirm', param);
-    }else{
-      this.props.navigation.navigate("weddingpaysec", param);
-    }
-    
+    this.props.dispatch(actions.ifSecondShooter(action_param))
+  }
 
+  componentDidUpdate(prevProps){
+    if(prevProps.weddingpayreq.if_second_shooter != this.props.weddingpayreq.if_second_shooter){
+      if(!!this.props.weddingpayreq.if_second_shooter ){
+        const param = {
+          customer: this.state.customer
+        }
+        this.state.value == 0 ? 
+          this.props.navigation.navigate("weddingpayconfirm", param)
+          : this.props.navigation.navigate("weddingpaysec", param)
+      }
+    }
   }
   
-
   render() {
     return (
       <View style={styles.container}>
@@ -128,7 +136,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  
+  weddingpayreq: state.weddingPaymentRequestReducer.weddingpayreq
 })
 
 export default connect(mapStateToProps)(WeddingPay)

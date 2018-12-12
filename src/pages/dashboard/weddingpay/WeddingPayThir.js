@@ -5,6 +5,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import LogoComponent from '../../../components/LogoComponent'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import actions from '../../../redux/payrequest/action'
 
 import { colors } from '../../../settings/constant'
 
@@ -77,8 +78,8 @@ class WeddingPayThir extends Component {
       nextbtnvisible: true,
       customer: this.props.navigation.getParam('customer'),
       editable: false,
-      text1: 5,
-      text2: 0
+      text1: this.props.weddingpayreq.hours_as_per_contract,
+      text2: this.props.weddingpayreq.additional_hours
     
     }
     this.nextBtnClicked = this.nextBtnClicked.bind(this)
@@ -86,13 +87,22 @@ class WeddingPayThir extends Component {
 
   nextBtnClicked = () => {
     if (this.state.nextbtnvisible){
-      console.log("clicked");
+      const action_param = {
+        additional_hours: this.state.text2,
+        hours_as_per_contract: this.state.text1,
+        stage: 6
+      }
+      this.props.dispatch(actions.secondShooterDetail(action_param))
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.weddingpayreq.stage == 6){
       const param = {
         customer: this.state.customer
       }
       this.props.navigation.navigate("weddingpayfour", param);
     }
-    
   }
 
   render() {
@@ -191,7 +201,7 @@ class WeddingPayThir extends Component {
               }}
               items={items}
               style={{...pickerSelectStyles}}
-              onValueChange={(value)=>this.setState({value1: value})}
+              onValueChange={(value)=>this.setState({text1: value})}
             />
             <Text style={{marginTop: 10}}>Additional Hours / Extra Hours</Text>
             <RNPickerSelect
@@ -201,7 +211,7 @@ class WeddingPayThir extends Component {
               }}
               items={items2}
               style={{...pickerSelectStyles}}
-              onValueChange={(value)=>this.setState({value2: value})}
+              onValueChange={(value)=>this.setState({text2: value})}
             />
           </View>
         }
@@ -241,7 +251,8 @@ const pickerSelectStyles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  
+  weddingpayreq: state.weddingPaymentRequestReducer.weddingpayreq
+
 })
 
 export default connect(mapStateToProps)(WeddingPayThir)

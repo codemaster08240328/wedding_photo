@@ -5,6 +5,7 @@ import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'reac
 import LogoComponent from '../../../components/LogoComponent'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import actions from '../../../redux/payrequest/action'
 
 import { colors } from '../../../settings/constant'
 
@@ -19,7 +20,8 @@ class WeddingPayConfirm extends Component {
   
     this.state = {
       nextbtnvisible: true,
-      customer: this.props.navigation.getParam('customer')
+      customer: this.props.navigation.getParam('customer'),
+      value: 0
     }
     this.nextBtnClicked = this.nextBtnClicked.bind(this)
   }
@@ -27,13 +29,21 @@ class WeddingPayConfirm extends Component {
   nextBtnClicked = () => {
     if (this.state.nextbtnvisible){
       console.log("clicked");
+      const action_param = {
+        second_shooter_paid_by: this.state.value == 0 ? 'paid' : 'classic',
+        stage: 2
+      }
+      this.props.dispatch(actions.secondShooterDetail(action_param))
+    }
+  }
+
+  componentDidUpdate(prevState, prevProps){
+    if(this.props.weddingpayreq.stage==2){
       const param = {
         customer: this.state.customer
       }
-      this.props.navigation.navigate("weddingpaysec", param);
+      this.props.navigation.navigate("weddingpayconfirmone", param);
     }
-    
-    
   }
 
   render() {
@@ -129,7 +139,8 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  
+  weddingpayreq: state.weddingPaymentRequestReducer.weddingpayreq
+
 })
 
 export default connect(mapStateToProps)(WeddingPayConfirm)

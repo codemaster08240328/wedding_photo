@@ -1,38 +1,14 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Picker } from 'react-native'
+import { View, Text, StyleSheet, TextInput } from 'react-native'
 import { Icon } from 'react-native-elements'
-import RNPickerSelect from 'react-native-picker-select';
-import LogoComponent from '../../../components/LogoComponent'
-import PropTypes from 'prop-types'
-import actions from '../../../redux/payrequest/action'
-
 import { connect } from 'react-redux'
+import _ from 'lodash' 
+import actions from '../../../redux/payrequest/action'
+import LogoComponent from '../../../components/LogoComponent'
 
 import { colors } from '../../../settings/constant'
 
-const items = [
-  {
-    label: '1 Additional Hour',
-    value: 1
-  },
-  {
-    label: '2 Additional Hours',
-    value: 2
-  },
-  {
-    label: '3 Additional Hours',
-    value: 3
-  },
-  {
-    label: '4 Additional Hours',
-    value: 4
-  },
-  {
-    label: '5 Additional Hours',
-    value: 5
-  }
-]
-class WeddingPaySec extends Component {
+class WeddingPayConfirmOne extends Component {
 
   constructor(props) {
     super(props)
@@ -40,27 +16,31 @@ class WeddingPaySec extends Component {
     this.state = {
       nextbtnvisible: true,
       customer: this.props.navigation.getParam('customer'),
-      value: 0
+      name: '',
+      email: ''
     }
     this.nextBtnClicked = this.nextBtnClicked.bind(this)
   }
 
   nextBtnClicked = () => {
     if (this.state.nextbtnvisible){
+      console.log("clicked");
       const action_param = {
-        additional_hours: this.state.value,
-        stage: 5
+        second_shooter_name: this.state.name,
+        second_shooter_email: this.state.email,
+        stage: 3
       }
       this.props.dispatch(actions.secondShooterDetail(action_param))
+      
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if(this.props.weddingpayreq.stage == 5){
+  componentDidUpdate(prevState, prevProps){
+    if(this.props.weddingpayreq.stage==3){
       const param = {
         customer: this.state.customer
       }
-      this.props.navigation.navigate("weddingpaythir", param);
+      this.props.navigation.navigate("weddingpayconfirmsec", param);
     }
   }
 
@@ -121,20 +101,39 @@ class WeddingPaySec extends Component {
           <Text style={{color: colors.fontGrayColor}}>Request Wedding Photoshoot Payment</Text>
         </View>
         <View style={{marginTop: 10, height: 50, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 50}}>
-          <Text style={{fontSize: 17, textAlign: 'center', fontWeight: 'bold'}}>Where there extra hours added at the day of the event?</Text>
+          <Text style={{fontSize: 17, textAlign: 'center', fontWeight: 'bold'}}>Enter Second Shooter Details</Text>
         </View>
         <View style={{paddingHorizontal: 15}}>
-          <Text style={{color: colors.btnColor, textAlign: 'center'}}>(Select this option only if this event had extra hours beyond contracted hours)</Text>
+          <Text style={{color: colors.btnColor,fontSize: 12, textAlign: 'center'}}>
+            Please be sure you are inputting the valid, accurate, and correct spelling of your second shooter's name and e-mail address. This is crucial to ensure your second (and you) get paid on time! If you don't know this information, ASK!
+          </Text>
         </View>
-        <View style={{paddingHorizontal: 10, marginTop: 30}}>
-          <RNPickerSelect
-            placeholder={{
-              label: 'No Additional hours were added',
-              value: 0
+        <View style = {{paddingHorizontal: 10, marginTop: 15}}>
+          <Text style={{marginTop: 10}}>Second Shooter Name</Text>
+          <TextInput
+            onChangeText={(name) => this.setState({name})}
+            style={{
+              marginTop: 5,
+              borderColor: colors.darkBorderColor,
+              borderWidth: 1,
+              borderRadius: 3,
+              padding:5,
+              width: '100%',
+              fontSize: 15
             }}
-            items={items}
-            style={{...pickerSelectStyles}}
-            onValueChange={(value)=>this.setState({value})}
+          />
+          <Text style={{marginTop: 20}}>Second Shooter Email</Text>
+          <TextInput
+            onChangeText={(email) => this.setState({email})}
+            style={{
+              marginTop: 5,
+              borderColor: colors.darkBorderColor,
+              borderWidth: 1,
+              borderRadius: 3,
+              padding:5,
+              width: '100%',
+              fontSize: 15
+            }}
           />
         </View>
       </View>
@@ -156,23 +155,8 @@ const styles = StyleSheet.create({
   }
 })
 
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 16,
-    paddingTop: 13,
-    paddingHorizontal: 10,
-    paddingBottom: 12,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    backgroundColor: 'white',
-    color: 'black',
-  },
-});
-
 const mapStateToProps = (state) => ({
   weddingpayreq: state.weddingPaymentRequestReducer.weddingpayreq
-
 })
 
-export default connect(mapStateToProps)(WeddingPaySec)
+export default connect(mapStateToProps)(WeddingPayConfirmOne)
