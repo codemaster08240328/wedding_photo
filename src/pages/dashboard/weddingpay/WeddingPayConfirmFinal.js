@@ -7,7 +7,23 @@ import actions from '../../../redux/payrequest/action'
 
 import LogoComponent from '../../../components/LogoComponent'
 import { colors } from '../../../settings/constant'
-class WeddingPayFormFinal extends Component {
+const weddingpayreq = {
+  pay_date: "12-12-2018",
+  hours_as_per_contract: 8,
+  additional_hours: 2,
+  first_shooter_total_pay: 440,
+  first_shooter_additional_pay_amt: 110,
+  first_shooter_travel_pay_amt: 10.25,
+  if_second_shooter: "yes",
+  second_shooter_name: 'John Smith',
+  second_shooter_email: 'johnsmith@mail.com',
+  second_shooter_paid_by: 'classic',
+  second_shooter_pay_rate: 20,
+  second_shooter_total_pay: 140,
+  second_shooter_additional_pay_amt: 40
+}
+
+class WeddingPayConfirmFinal extends Component {
   static propTypes = {
     prop: PropTypes
   }
@@ -25,37 +41,82 @@ class WeddingPayFormFinal extends Component {
   }
 
   componentDidMount() {
-    const { weddingpayreq } = this.props
+    // const { weddingpayreq } = this.props
     let listData = []
-    for(let key in weddingpayreq){
+    for(let key in this.props.weddingpayres){
       let obj = {}
       switch(key){
-        case 'if_second_shooter':
+        case 'pay_date':
           obj = Object.assign({}, 
             {
-              key: "Was there a second shooter?",
-              value: weddingpayreq['if_second_shooter']
+              key: "Payment Request Date",
+              value: weddingpayreq['pay_date']
             }
           );
           listData.push(obj)
           break;
-        case 'second_shooter_paid_by':
+        case 'hours_as_per_contract':
           obj = Object.assign({}, 
             {
-              key: "Second Shooter paid by",
-              value: weddingpayreq['second_shooter_paid_by']
+              key: "Hours As Per Contract",
+              value: weddingpayreq['hours_as_per_contract']
+            }
+          );
+          listData.push(obj)
+          break;
+        case 'additional_hours':
+          obj = Object.assign({},
+            { 
+              key: "Additional Hours", 
+              value: weddingpayreq['additional_hours']
+            }
+          );
+          listData.push(obj)        
+          break;
+        case 'first_shooter_total_pay':
+          obj = Object.assign({},
+            {
+              key: "First Shooter Total Pay", 
+              value: '$ ' + weddingpayreq['first_shooter_total_pay']
+            }
+          );
+          listData.push(obj)
+          break;
+        case 'first_shooter_additional_pay_amt':
+          obj = Object.assign({},
+            {
+              key: "First Shooter Additional / Extra Pay", 
+              value: '$ ' + weddingpayreq['first_shooter_additional_pay_amt']
+            }
+          );
+          listData.push(obj)
+          break;
+        case 'first_shooter_travel_pay_amt':
+          obj = Object.assign({},
+            {
+              key: "First Shooter Travel Fees", 
+              value: '$ ' + weddingpayreq['first_shooter_travel_pay_amt']
+            }
+          );
+          listData.push(obj)
+          break;
+        case 'if_second_shooter':
+          obj = Object.assign({},
+            {
+              key: "Second Shooter?", 
+              value: weddingpayreq['if_second_shooter']
             }
           );
           listData.push(obj)
           break;
         case 'second_shooter_name':
           obj = Object.assign({},
-            { 
+            {
               key: "Second Shooter Name", 
               value: weddingpayreq['second_shooter_name']
             }
           );
-          listData.push(obj)        
+          listData.push(obj)
           break;
         case 'second_shooter_email':
           obj = Object.assign({},
@@ -66,65 +127,38 @@ class WeddingPayFormFinal extends Component {
           );
           listData.push(obj)
           break;
+        case 'second_shooter_paid_by':
+          obj = Object.assign({},
+            {
+              key: "Second Shooter Paid By", 
+              value: weddingpayreq['second_shooter_paid_by']
+            }
+          );
+          listData.push(obj)
+          break;
         case 'second_shooter_pay_rate':
           obj = Object.assign({},
             {
-              key: "Second Shooter Pay / Hour", 
-              value: '$ ' + weddingpayreq['second_shooter_pay_rate']
+              key: "Second Shooter Pay Rate", 
+              value: '$ ' + weddingpayreq['second_shooter_pay_rate'] + ' / hour'
             }
           );
           listData.push(obj)
           break;
-        case 'hours_as_per_contract':
+        case 'second_shooter_total_pay':
           obj = Object.assign({},
             {
-              key: "Contracted Hours", 
-              value: weddingpayreq['hours_as_per_contract'] + ' Hours'
+              key: "Second Shooter Total Pay", 
+              value: '$ ' + weddingpayreq['second_shooter_total_pay']
             }
           );
           listData.push(obj)
           break;
-        case 'additional_hours':
+        case 'second_shooter_additional_pay_amt':
           obj = Object.assign({},
             {
-              key: "Extra Hours", 
-              value: weddingpayreq['additional_hours'] + ' Hours'
-            }
-          );
-          listData.push(obj)
-          break;
-        case 'first_shooter_images':
-          obj = Object.assign({},
-            {
-              key: "Primary Shooter Image Count", 
-              value: weddingpayreq['first_shooter_images']
-            }
-          );
-          listData.push(obj)
-          break;
-        case 'second_shooter_images':
-          obj = Object.assign({},
-            {
-              key: "Second Shooter Image Count", 
-              value: weddingpayreq['second_shooter_images']
-            }
-          );
-          listData.push(obj)
-          break;
-        case 'total_images':
-          obj = Object.assign({},
-            {
-              key: "Total Image Count", 
-              value: weddingpayreq['total_images']
-            }
-          );
-          listData.push(obj)
-          break;
-        case 'travel_fees':
-          obj = Object.assign({},
-            {
-              key: "First Shooter Travel Pay", 
-              value: '$ ' + weddingpayreq['travel_fees']
+              key: "Second Shooter Additional / Extra Pay", 
+              value: '$ ' + weddingpayreq['second_shooter_additional_pay_amt']
             }
           );
           listData.push(obj)
@@ -152,24 +186,8 @@ class WeddingPayFormFinal extends Component {
     }
   }
 
-  submit = () => {
-    const second_param = Object.assign({}, this.props.weddingpayreq, {
-      photog_id: this.props.user.photog_id,
-      odr_id: this.state.customer.order_data[0].odr_id,
-      cust_id: this.state.customer.customer_data[0].cust_id,
-      pay_for: "Wedding"
-    })
-   
-    this.props.dispatch(actions.requestWeddingPay(second_param))
-  }
-
-  componentWillReceiveProps(nextProps){
-    if(nextProps.weddingPayResultReducer.success){
-      const param = {
-        customer: this.state.customer
-      }
-      this.props.navigation.navigate('weddingpayconfirmfinal', param)
-    }
+  confirm = () => {
+    this.props.navigation.navigate("dashboard")
   }
 
   _keyExtractor = (item, index) => item.id;
@@ -229,7 +247,12 @@ class WeddingPayFormFinal extends Component {
           <Text style={{color: colors.fontGrayColor}}>Request Wedding Photoshoot Payment</Text>
         </View>
         <View style={{marginTop: 10, height: 30, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 50}}>
-          <Text style={{fontSize: 17, textAlign: 'center', fontWeight: 'bold'}}>Review & Submit For Payment</Text>
+          <Text style={{fontSize: 17, textAlign: 'center', fontWeight: 'bold'}}>Payment Request</Text>
+        </View>
+        <View style={{paddingHorizontal: 10, marginTop: 5}}>
+          <Text style={{color: colors.btnColor,fontSize: 12, textAlign: 'center'}}>
+            Your payment will process in 7 to 14 days, please check your payable.com account for payment status updates.
+          </Text>
         </View>
         <View style = {{marginTop: 5}}>
           <FlatList
@@ -248,20 +271,14 @@ class WeddingPayFormFinal extends Component {
             )}
           />
         </View>
-        <View style={{paddingHorizontal: 10, marginTop: 5}}>
-          <Text style={{color: colors.btnColor,fontSize: 12, textAlign: 'center'}}>
-            Please review all data on the payment form. Please do not submit this form unless All information provided is 100% correct and accurate!!! So often people get paid the incorrect amount and then get frustrated with us when the error was on their part. The data from this form gets sent directly to Payable and the editing staff. Incorrect data can also result in a delay in the bride getting her images, and non of us want that :) Thank you for your careful attention to this matter. The goal is to have everything run as smooth as possible.
-          </Text>
-        </View>
-        <View style={{position: 'absolute', bottom: 0, height: 40, flexDirection: 'row', width: '100%'}}>
+        <View style={{alignItems: 'center', marginTop: 10}}>
           <TouchableOpacity
-            onPress={() => this.submit()}
-            style={{flex: 1, backgroundColor: colors.btnColor, justifyContent: 'center', alignItems: 'center'}}><Text style={{color: 'white'}}>Submit</Text></TouchableOpacity>
-          <TouchableOpacity 
-            onPress={() => this.props.navigation.navigate('weddingpay')}
-            style={{flex: 1, backgroundColor: '#e5404a', justifyContent: 'center', alignItems: 'center'}}><Text style={{color: 'white'}}>Edit</Text></TouchableOpacity>
+            style={{paddingHorizontal: 10, paddingVertical: 5, borderRadius: 15, backgroundColor: colors.btnColor}}
+            onPress={()=>this.confirm()}
+          >
+            <Text style={{color: colors.white}}>Confirm</Text>
+          </TouchableOpacity>
         </View>
-        
       </View>
     )
   }
@@ -284,8 +301,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   weddingpayreq: state.weddingPaymentRequestReducer.weddingpayreq,
   user: state.authReducer.user,
-  weddingPayResultReducer: state.weddingPayResultReducer
-
+  weddingpayres: state.weddingPayResultReducer.weddingpayres,
 })
 
-export default connect(mapStateToProps)(WeddingPayFormFinal)
+export default connect(mapStateToProps)(WeddingPayConfirmFinal)

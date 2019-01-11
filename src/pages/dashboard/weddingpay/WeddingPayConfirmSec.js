@@ -21,7 +21,7 @@ class WeddingPayConfirmSec extends Component {
     super(props)
   
     this.state = {
-      nextbtnvisible: true,
+      nextBtnVisible: true,
       customer: this.props.navigation.getParam('customer'),
       value: 10
     }
@@ -29,7 +29,7 @@ class WeddingPayConfirmSec extends Component {
   }
 
   nextBtnClicked = () => {
-    if (this.state.nextbtnvisible){
+    if (this.state.nextBtnVisible){
       const action_param = {
         second_shooter_pay_rate: this.state.value,
         stage: 4
@@ -55,7 +55,7 @@ class WeddingPayConfirmSec extends Component {
           backbtn 
           {...this.props} 
           nextbtn 
-          nextbtnvisible={this.state.nextbtnvisible}
+          nextBtnVisible={this.state.nextBtnVisible}
           nextBtnClicked={ () => this.nextBtnClicked()}
         />
         <View style={{height:60, padding: 5}}>

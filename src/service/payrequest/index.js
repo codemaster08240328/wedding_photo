@@ -46,8 +46,14 @@ class PayRequestHelper {
         .then((resp)=> resp.json())
         .then(resp=>{
             console.log("resp~~~~~~~`", resp)
-            // return this.handleResponse(resp)
+            return this.handleResponse_(resp)
         });
+  }
+
+  handleResponse_ = response => {
+    if(response.success == 'true'){
+      return response.data[0]
+    }
   }
 
   handleResponse = response => {

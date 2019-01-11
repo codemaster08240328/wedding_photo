@@ -17,7 +17,7 @@ class WeddingPay extends Component {
     super(props)
   
     this.state = {
-      nextbtnvisible: true,
+      nextBtnVisible: true,
       customer: this.props.navigation.getParam('customer'),
       value: ''
     }
@@ -53,7 +53,7 @@ class WeddingPay extends Component {
           backbtn 
           {...this.props} 
           nextbtn 
-          nextbtnvisible={this.state.nextbtnvisible}
+          nextBtnVisible={this.state.nextBtnVisible}
           nextBtnClicked={ () => this.nextBtnClicked()}
         />
         <View style={{height:60, padding: 5}}>

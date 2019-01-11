@@ -14,7 +14,7 @@ class WeddingPayConfirmOne extends Component {
     super(props)
   
     this.state = {
-      nextbtnvisible: true,
+      nextBtnVisible: true,
       customer: this.props.navigation.getParam('customer'),
       name: '',
       email: ''
@@ -23,7 +23,7 @@ class WeddingPayConfirmOne extends Component {
   }
 
   nextBtnClicked = () => {
-    if (this.state.nextbtnvisible){
+    if (this.state.nextBtnVisible){
       console.log("clicked");
       const action_param = {
         second_shooter_name: this.state.name,
@@ -51,7 +51,7 @@ class WeddingPayConfirmOne extends Component {
           backbtn 
           {...this.props} 
           nextbtn 
-          nextbtnvisible={this.state.nextbtnvisible}
+          nextBtnVisible={this.state.nextBtnVisible}
           nextBtnClicked={ () => this.nextBtnClicked()}
         />
         <View style={{height:60, padding: 5}}>

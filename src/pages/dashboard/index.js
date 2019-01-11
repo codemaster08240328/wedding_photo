@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, SectionList, TouchableOpacity } from 'react-native'
+import Expo from 'expo'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SideMenu from 'react-native-side-menu'
@@ -21,7 +22,6 @@ import Modal from 'react-native-modal'
 import Dimensions from 'Dimensions'
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
-
 class DashBoard extends Component {
 
   constructor(props) {
@@ -223,6 +223,23 @@ class DashBoard extends Component {
     // this.props.navigation.navigate('weddingpay', param);
   }
 
+  EngagementPayRequest = (item) => {
+    this._toggleModal(item);
+    
+    console.log('~~~~~~~~` engagement', this.state.selectedItem)
+    const api_param = {
+      cust_id: this.state.selectedItem.customer_data[0].cust_id,
+      odr_id: this.state.selectedItem.order_data[0].odr_id,
+      photog_id: this.props.user.photog_id,
+      pay_for: 'Engagement'
+    }
+    this.props.dispatch(payreqActions.requestEngagementPayment(api_param));
+    // const param = {
+    //   customer: this.state.selectedItem
+    // }
+    // this.props.navigation.navigate('engagementPay', param);
+  }
+
   pressEmailBtn = () => {
     const to = ['tiaan@email.com', 'foo@bar.com']
     email(to, {
@@ -241,16 +258,14 @@ class DashBoard extends Component {
     call(args).catch(console.error);
   }
 
-  pressSMSBtn = () => {
-    console.log('sms button clicked')
-    SendSMS.send({
-      body: 'The default body of the SMS!',
-      recipients: ['123123123', '234234234'],
-      successTypes: ['sent', 'queued'],
-      allowAndroidSendWithoutReadPermission: true
-    }, (completed, cancelled, error) => {
-      console.log('SMS Callback: completed: ' + completed + 'cancelled: '+ cancelled);
-    })
+  pressSMSBtn = async () => {
+    const isAvailable = await Expo.SMS.isAvailableAsync()
+    console.log(isAvailable)
+    if(isAvailable){
+      const { result } = await Expo.SMS.sendSMSAsync(['0123456789', '9876543210'], 'My sample HelloWorld message');
+    }else{
+      alert('This requires your SMS permission');
+    }
   }
 
   renderItemSection(item){
@@ -329,9 +344,9 @@ class DashBoard extends Component {
                         type="entypo"
                         name="location-pin"
                         color={colors.fontGrayColor}
-                        size={18}
+                        size={16}
                       />
-                      <Text style={{color: colors.fontGrayColor, marginRight: 13}}>
+                      <Text style={{color: colors.fontGrayColor, marginRight: 13, fontSize: 10}}>
                         {
                           this.state.selectedItem.customer_data ?
                             this.state.selectedItem.customer_data[0].cust_city + " " + this.state.selectedItem.customer_data[0].cust_state + ", " + this.state.selectedItem.customer_data[0].cust_zip : ""
@@ -342,10 +357,10 @@ class DashBoard extends Component {
                       <Icon
                         name="calendar-o"
                         type="font-awesome"
-                        size={15}
+                        size={12}
                         color={colors.fontGrayColor}
                       />
-                      <Text style={{color: colors.fontGrayColor, marginLeft: 5}}>
+                      <Text style={{color: colors.fontGrayColor, marginLeft: 5, fontSize: 10}}>
                         {
                           this.state.selectedItem.customer_data ?
                             this.state.selectedItem.customer_data[0].cust_wed_date : ''
@@ -353,7 +368,7 @@ class DashBoard extends Component {
                       </Text>
                     </View>
                   </View>
-                  <View style={{flex: 1, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 3, paddingVertical: 1}}>
+                  <View style={{flex: 1, alignItems: 'center', flexDirection: 'row', paddingHorizontal: 3, paddingVertical: 2}}>
                       <View style={{flex:1, paddingHorizontal:3}}>
                         <TouchableOpacity
                           style={{
@@ -368,10 +383,10 @@ class DashBoard extends Component {
                         >
                           <Icon
                             name="call"
-                            size={20}
+                            size={15}
                             color={colors.white}
                           />
-                          <Text style={{color: colors.white, marginLeft: 5}}>CALL</Text>
+                          <Text style={{color: colors.white, marginLeft: 5, fontSize: 12}}>CALL</Text>
                         </TouchableOpacity>
                       </View>
                       <View style={{flex:1, paddingHorizontal:3}}>
@@ -388,10 +403,10 @@ class DashBoard extends Component {
                         >
                           <Icon
                             name="sms"
-                            size={20}
+                            size={15}
                             color={colors.white}
                           />
-                          <Text style={{color: colors.white, marginLeft: 5}}>SMS</Text>
+                          <Text style={{color: colors.white, marginLeft: 5, fontSize: 12}}>SMS</Text>
                         </TouchableOpacity>
                       </View>
                       <View style={{flex:1, paddingHorizontal:3}}>
@@ -408,10 +423,10 @@ class DashBoard extends Component {
                         >
                           <Icon
                             name="email"
-                            size={20}
+                            size={15}
                             color={colors.white}
                           />
-                          <Text style={{color: colors.white, marginLeft: 5}}>EMAIL</Text>
+                          <Text style={{color: colors.white, marginLeft: 5, fontSize: 12}}>EMAIL</Text>
                         </TouchableOpacity>
                       </View>
                   </View>
@@ -427,7 +442,7 @@ class DashBoard extends Component {
                       }}
                       onPress={() => this.MarkNewBookingCallingComplete(this.state.selectedItem)}
                     >
-                      <Text style={{color: colors.white}}>Mark New Booking Call Complete</Text>
+                      <Text style={{color: colors.white, fontSize: 12}}>Mark New Booking Call Complete</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
@@ -442,7 +457,7 @@ class DashBoard extends Component {
                       }}
                       onPress={() => this.MarkPhotoShootCallComplete(this.state.selectedItem)}
                     >
-                      <Text style={{color: colors.white}}>Mark Photoshoot Call Complete</Text>
+                      <Text style={{color: colors.white, fontSize: 12}}>Mark Photoshoot Call Complete</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
@@ -457,7 +472,7 @@ class DashBoard extends Component {
                       }}
                       onPress={() => this.ScheduleEngagement(this.state.selectedItem)}
                     >
-                      <Text style={{color: colors.white}}>Schedule Engagement Date</Text>
+                      <Text style={{color: colors.white, fontSize: 12}}>Schedule Engagement Date</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
@@ -472,7 +487,7 @@ class DashBoard extends Component {
                       }}
                       onPress={() => this.WeddingWorksheet(this.state.selectedItem)}
                     >
-                      <Text style={{color: colors.white}}>View Wedding Worksheet</Text>
+                      <Text style={{color: colors.white, fontSize: 12}}>View Wedding Worksheet</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
@@ -487,7 +502,7 @@ class DashBoard extends Component {
                       }}
                       onPress={()=>this.EngagementWorksheet(this.state.selectedItem)}
                     >
-                      <Text style={{color: colors.white}}>View Engagement Worksheet</Text>
+                      <Text style={{color: colors.white, fontSize: 12}}>View Engagement Worksheet</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
@@ -502,7 +517,7 @@ class DashBoard extends Component {
                       }}
                       onPress={()=>this.WeddingPayRequest(this.state.selectedItem)}
                     >
-                      <Text style={{color: colors.white}}>Request Wedding Pay</Text>
+                      <Text style={{color: colors.white, fontSize: 12}}>Request Wedding Pay</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={{flex: 1, paddingHorizontal: 6, paddingVertical: 1}}>
@@ -515,8 +530,9 @@ class DashBoard extends Component {
                         paddingVertical: 8,
                         borderRadius: 18
                       }}
+                      onPress={() => this.EngagementPayRequest(this.state.selectedItem)}
                     >
-                      <Text style={{color: colors.white}}>Request Engagement Pay</Text>
+                      <Text style={{color: colors.white, fontSize: 12}}>Request Engagement Pay</Text>
                     </TouchableOpacity>
                   </View>
                 </View> 
@@ -539,7 +555,8 @@ class DashBoard extends Component {
           paddingVertical: 10, 
           alignItems: "center", 
           borderBottomWidth: 0.5, 
-          borderColor: colors.lightBorderColor
+          borderColor: colors.lightBorderColor,
+          backgroundColor: "white"
         }}
       >
         <Text>{section.key}</Text>
@@ -558,6 +575,15 @@ class DashBoard extends Component {
       this.props.navigation.navigate('weddingpay', param)
     }else if(!!nextProps.weddingPaymentRequestReducer.message){
         this.refs.toast.show(nextProps.weddingPaymentRequestReducer.message, 2000)
+    }
+
+    if(nextProps.engagementPaymentRequestReducer.success && (Object.keys(nextProps.engagementPayReq).length == 2)){
+      const param = {
+        customer: this.state.selectedItem
+      }
+      this.props.navigation.navigate('engagementPay', param);
+    }else if(!!nextProps.engagementPaymentRequestReducer.message){
+      this.refs.toast.show(nextProps.engagementPaymentRequestReducer.message, 2000)
     }
   }
   
@@ -755,6 +781,8 @@ class DashBoard extends Component {
               renderItem={({item})=>this.renderItemSection(item)}
               renderSectionHeader={({section})=>this.renderHeaderSection(section)}
               sections={data}
+              contentContainerStyle={{paddingBottom: 80}}
+              ListFooterComponent={<View style={{height: 0, marginBottom: 100}}></View>}
             />
           </View>
         </View>
@@ -781,7 +809,9 @@ const mapStateToProps = (state) => ({
   user: state.authReducer.user,
   dashReducer: state.dashReducer,
   weddingPaymentRequestReducer: state.weddingPaymentRequestReducer,
-  weddingpayreq: state.weddingPaymentRequestReducer.weddingpayreq
+  weddingpayreq: state.weddingPaymentRequestReducer.weddingpayreq,
+  engagementPaymentRequestReducer: state.engagementPaymentRequestReducer,
+  engagementPayReq: state.engagementPaymentRequestReducer.engagementPayReq
 })
 
 

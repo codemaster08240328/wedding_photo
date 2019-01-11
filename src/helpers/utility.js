@@ -50,4 +50,16 @@ export async function notificationRegister(photog_id){
   const result = await NotificationHelper.RegisterDevice(param);
 
 }
+
+/** Date format convert function. From any type to 'December 28, 2018' */
+const month_eng_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const month_eng_long = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+export function getDateObject(param){
+  const dateObj = new Date(param);
+  const month = month_eng_long[dateObj.getMonth()];
+  const date = dateObj.getDate();
+  const year = dateObj.getFullYear();
+  return `${month} ${date}, ${year}`;
+}
   

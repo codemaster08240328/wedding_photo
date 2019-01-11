@@ -1,69 +1,52 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Picker } from 'react-native'
-import { Icon } from 'react-native-elements'
-import RNPickerSelect from 'react-native-picker-select';
-import LogoComponent from '../../../components/LogoComponent'
-import PropTypes from 'prop-types'
-import actions from '../../../redux/payrequest/action'
-
+import { View, Text, StyleSheet, TextInput } from 'react-native'
 import { connect } from 'react-redux'
+import { Icon } from 'react-native-elements'
+import DatePicker from 'react-native-datepicker'
 
+import LogoComponent from '../../../components/LogoComponent'
+
+import actions from '../../../redux/payrequest/action'
 import { colors } from '../../../settings/constant'
 
-const items = [
-  {
-    label: '1 Additional Hour',
-    value: 1
-  },
-  {
-    label: '2 Additional Hours',
-    value: 2
-  },
-  {
-    label: '3 Additional Hours',
-    value: 3
-  },
-  {
-    label: '4 Additional Hours',
-    value: 4
-  },
-  {
-    label: '5 Additional Hours',
-    value: 5
-  }
-]
-class WeddingPaySec extends Component {
-
+class EngageInfo extends Component {
   constructor(props) {
     super(props)
   
     this.state = {
       nextBtnVisible: true,
       customer: this.props.navigation.getParam('customer'),
-      value: 0
+      value: '',
+      date: "",
+      fee: this.props.engagementPayReq['travel_fees'] + ""
     }
     this.nextBtnClicked = this.nextBtnClicked.bind(this)
   }
 
   nextBtnClicked = () => {
-    if (this.state.nextBtnVisible){
-      const action_param = {
-        additional_hours: this.state.value,
-        stage: 5
-      }
-      this.props.dispatch(actions.secondShooterDetail(action_param))
+    console.log("clicked");
+    const action_param = {
+      engagement_date: this.state.date,
+      travel_fees: this.state.fee,
+      stage: 1
     }
+    this.props.dispatch(actions.nextStep(action_param))
+    // const param = {
+    //   customer: this.state.customer
+    // }
+    // this.props.navigation.navigate("imgUpload", param)
+
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if(this.props.weddingpayreq.stage == 5){
+  componentDidUpdate(prevProps){
+    if(this.props.engagementPayReq.stage == 1){
       const param = {
         customer: this.state.customer
       }
-      this.props.navigation.navigate("weddingpaythir", param);
+      this.props.navigation.navigate("imgUpload", param)
     }
   }
-
+  
   render() {
     return (
       <View style={styles.container}>
@@ -71,7 +54,7 @@ class WeddingPaySec extends Component {
           backbtn 
           {...this.props} 
           nextbtn 
-          nextBtnVisible={this.state.nextBtnVisible}
+          nextBtnVisible={!!this.state.date ? true : false}
           nextBtnClicked={ () => this.nextBtnClicked()}
         />
         <View style={{height:60, padding: 5}}>
@@ -118,24 +101,38 @@ class WeddingPaySec extends Component {
             alignItems: 'center'
           }}
         >
-          <Text style={{color: colors.fontGrayColor}}>Request Wedding Photoshoot Payment</Text>
+          <Text style={{color: colors.fontGrayColor}}>Request Engagement Photoshoot Payment</Text>
         </View>
-        <View style={{marginTop: 10, height: 50, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 50}}>
-          <Text style={{fontSize: 17, textAlign: 'center', fontWeight: 'bold'}}>Where there extra hours added at the day of the event?</Text>
+        <View style={{height: 50, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontSize: 17, fontWeight: 'bold'}}>Enter Engagement Info</Text>
         </View>
-        <View style={{paddingHorizontal: 15}}>
-          <Text style={{color: colors.btnColor, textAlign: 'center'}}>(Select this option only if this event had extra hours beyond contracted hours)</Text>
-        </View>
-        <View style={{paddingHorizontal: 10, marginTop: 30}}>
-          <RNPickerSelect
-            placeholder={{
-              label: 'No Additional hours were added',
-              value: 0
-            }}
-            items={items}
-            style={{...pickerSelectStyles}}
-            onValueChange={(value)=>this.setState({value})}
-          />
+        <View style={{flex: 1, paddingHorizontal: 10}}>
+          <View>
+            <Text>Engagement Date</Text>
+            <DatePicker
+              date={this.state.date}
+              mode="date"
+              placeholder="select date"
+              format="MM/DD/YYYY"
+              minDate="12/31/2017"
+              maxDate="01/01/2030"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              style={{
+                width: '100%',
+                marginTop: 5
+              }}
+              customStyles={{ ...customStyle }}
+              onDateChange={(date) => this.setState({date})}
+            />
+            <Text style={{marginTop: 10}}>Travel Fees</Text>
+            <TextInput
+              style={styles.input}
+              value={this.state.fee}
+              keyboardType="numeric"
+              onChangeText={(fee) => this.setState({fee})}
+            />
+          </View>
         </View>
       </View>
     )
@@ -148,31 +145,30 @@ const styles = StyleSheet.create({
     flex: 1
   },
   input: {
-    flex: 1,
     borderColor: colors.darkBorderColor,
-    borderRadius: 5,
     borderWidth: 1,
-    paddingLeft: 10
+    paddingLeft: 5,
+    height: 30,
+    marginTop: 5
   }
 })
 
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 16,
-    paddingTop: 13,
-    paddingHorizontal: 10,
-    paddingBottom: 12,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    backgroundColor: 'white',
-    color: 'black',
+const customStyle = StyleSheet.create({
+  dateInput: {
+    flex: 1,
+    height: 30,
+    paddingLeft: 5,
+    borderColor: colors.darkBorderColor,
+    alignItems: 'flex-start'
   },
-});
-
-const mapStateToProps = (state) => ({
-  weddingpayreq: state.weddingPaymentRequestReducer.weddingpayreq
-
+  dateIcon: {
+    display: "none"
+  }
 })
 
-export default connect(mapStateToProps)(WeddingPaySec)
+const mapStateToProps = (state) => ({
+  engagementPaymentRequestReducer: state.engagementPaymentRequestReducer,
+  engagementPayReq: state.engagementPaymentRequestReducer.engagementPayReq
+})
+
+export default connect(mapStateToProps)(EngageInfo)

@@ -60,7 +60,7 @@ class LogoComponent extends Component {
                     onPress={this.props.nextBtnClicked}
                 >
                     <Text 
-                        style={this.props.nextbtnvisible ? {
+                        style={this.props.nextBtnVisible ? {
                             color: 'blue',
                             paddingRight: 5
                         } : {

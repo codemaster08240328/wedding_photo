@@ -22,7 +22,7 @@ class WeddingPayFour extends Component {
     super(props)
   
     this.state = {
-      nextbtnvisible: true,
+      nextBtnVisible: true,
       customer: this.props.navigation.getParam('customer'),
       editable: false,
       text1: 0,
@@ -34,7 +34,7 @@ class WeddingPayFour extends Component {
   }
 
   nextBtnClicked = () => {
-    if (this.state.nextbtnvisible){
+    if (this.state.nextBtnVisible){
       console.log("clicked");
       const action_param = {
         first_shooter_images: this.state.text1,
@@ -63,7 +63,7 @@ class WeddingPayFour extends Component {
           backbtn 
           {...this.props} 
           nextbtn 
-          nextbtnvisible={this.state.nextbtnvisible}
+          nextBtnVisible={this.state.nextBtnVisible}
           nextBtnClicked={ () => this.nextBtnClicked()}
         />
         <View style={{height:60, padding: 5}}>

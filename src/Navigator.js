@@ -34,6 +34,10 @@ import profile from './pages/profile';
 import WeddingPayConfirmOne from './pages/dashboard/weddingpay/WeddingPayConfirmOne';
 import WeddingPayConfirmSec from './pages/dashboard/weddingpay/WeddingPayConfirmSec';
 import WeddingPayFormFinal from './pages/dashboard/weddingpay/WeddingPayFormFinal';
+import WeddingPayConfirmFinal from './pages/dashboard/weddingpay/WeddingPayConfirmFinal';
+import EngageInfo from './pages/dashboard/engagementpay/EngageInfo';
+import ConfImageUpload from './pages/dashboard/engagementpay/ConfImageUpload';
+import ConfirmInfo from './pages/dashboard/engagementpay/ConfirmInfo';
 
 const RootNavigator = createStackNavigator({
 	ProposalList: {
@@ -186,6 +190,12 @@ const RootNavigator = createStackNavigator({
         header: null
       }
     },
+    weddingpayconfirmfinal: {
+      screen: WeddingPayConfirmFinal,
+      navigationOptions: {
+        header: null
+      }
+    },
     weddingpayconfirmone: {
       screen: WeddingPayConfirmOne,
       navigationOptions: {
@@ -242,6 +252,24 @@ const RootNavigator = createStackNavigator({
     },
     profile: {
       screen: profile,
+      navigationOptions: {
+        header: null
+      }
+    },
+    engagementPay: {
+      screen: EngageInfo,
+      navigationOptions: {
+        header: null
+      }
+    },
+    imgUpload: {
+      screen: ConfImageUpload,
+      navigationOptions: {
+        header: null
+      }
+    },
+    engInfoConfirm: {
+      screen: ConfirmInfo,
       navigationOptions: {
         header: null
       }

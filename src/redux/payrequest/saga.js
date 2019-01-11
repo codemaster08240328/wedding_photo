@@ -20,6 +20,24 @@ export function* requestWeddingPayment() {
   })
 }
 
+export function* requestEngagementPayment() {
+  yield takeEvery(actions.ENGAGEMENT_PAYMENT_REQUEST, function*({payload}) {
+    const  param = Object.assign({},payload)
+    const result = yield call(PayRequestHelper.requestWeddingPayment, param)
+    if (result && !result.error) {
+      yield put({
+        type: actions.ENGAGEMENT_PAYMENT_REQUEST_SUCCESS,
+        payload: result
+      })
+    } else {
+      yield put({ 
+        type: actions.ENGAGEMENT_PAYMENT_REQUEST_ERROR,
+        payload:result.error
+      })
+    }
+  })
+}
+
 export function* requestWeddingPay(){
   yield takeEvery(actions.REQUEST_WEDDING_PAY, function*({payload}) {
     const  param = Object.assign({},payload)
@@ -41,6 +59,7 @@ export function* requestWeddingPay(){
 export default function* rootSaga() {
   yield all([
     fork(requestWeddingPayment),
+    fork(requestEngagementPayment),
     fork(requestWeddingPay)
   ])
 }
